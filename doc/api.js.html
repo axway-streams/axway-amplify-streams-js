@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Streamdata.io Source: /home/slave/workspace/JavascriptSDK_Compile/streamdata-js-sdk/src/api.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	
+	<link type="text/css" rel="stylesheet" href="styles/site.spacelab.css">
+	
+</head>
+
+<body>
+<div class="container-fluid">
+	<div class="navbar navbar-fixed-top navbar-inverse">
+		<div class="navbar-inner">
+			<a class="brand" href="index.html">Streamdata.io</a>
+			<ul class="nav">
+				
+				<li class="dropdown">
+					<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b
+						class="caret"></b></a>
+
+					<ul class="dropdown-menu ">
+						
+						<li>
+							<a href="Streamdata.html">Streamdata</a>
+						</li>
+						
+						<li>
+							<a href="StreamdataError.html">StreamdataError</a>
+						</li>
+						
+						<li>
+							<a href="StreamdataEventSource.html">StreamdataEventSource</a>
+						</li>
+						
+
+					</ul>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+
+		
+			<div class="span12">
+				
+				<div id="main">
+					
+
+
+		<h1 class="page-title">Source: /home/slave/workspace/JavascriptSDK_Compile/streamdata-js-sdk/src/api.js</h1>
+    
+    <section>
+        <article>
+            <pre class="sunlight-highlight-javascript linenums">/**
+ * @fileOverview Streamdata.io JavaScript SDK
+ * @author Motwin
+ * @version 1.0
+ */
+
+/**
+ * &lt;p>StreamdataError provides error details when an error is thrown while processing a request or continuous query.&lt;/p>
+ * 
+ * &lt;p>Cannot be used directly.&lt;/p>
+ * 
+ * @constructor
+ */
+var StreamdataError = function() {};
+
+/**
+ * Returns true if error is fatal.
+ * @return {boolean} true if error is fatal.
+ */
+StreamdataError.prototype.isFatal = function() { return false; };
+
+/**
+ * Returns true if error is from server side.
+ * @return {boolean} true if error is from server side.
+ */
+StreamdataError.prototype.isServer = function() { return false; };
+
+/**
+ * Returns true if error is from client side.
+ * @return {boolean} true if error is from client side.
+ */
+StreamdataError.prototype.isClient = function() { return false; };
+
+/**
+ * Returns true if error is a timeout.
+ * @return {boolean} true if error is a timeout.
+ */
+StreamdataError.prototype.isTimeout = function() { return false; };
+
+/**
+ * Returns the message that explains the cause of the error.
+ * @return {string} the message that explains the cause of the error.
+ */
+StreamdataError.prototype.getMessage = function() { return ""; };
+
+/**
+ * Returns the error object.
+ * @return {(Object|undefined)} the error object from the server (error object sent by the server) or from the client (JavaScript exception thrown).
+ */
+StreamdataError.prototype.getError = function() { return null; };
+
+/**
+ * &lt;p>The StreamdataEventSource object is the main entry point to establish a connection to a REST service URL.&lt;/p>
+ *
+ * &lt;p>Use streamdataio.createEventSource(url) to create new instance.&lt;/p>
+ *
+ * @constructor
+ */
+function StreamdataEventSource() {}
+
+/**
+ * &lt;p>Open StreamdataEventSource to the server.&lt;/p>
+ *
+ * &lt;p>The StreamdataEventSource will auto reconnect if the connection is lost until close() is called.&lt;/p>
+ *
+ * @returns {StreamdataEventSource}
+ */
+StreamdataEventSource.prototype.open = function() { return this; };
+
+/**
+ * &lt;p>Register a callback called when the client application opened sucessfully a StreamdataEventSource.&lt;p>
+ *
+ * @example
+ * event.onOpen(function() {
+ *   // callback code
+ * });
+ *
+ * @param {Function} callback the function to call.
+ * @returns {StreamdataEventSource}
+ */
+StreamdataEventSource.prototype.onOpen = function(callback) { return this; };
+
+/**
+ * &lt;p>Register a callback called  when the client application failed to establish connection to the server.&lt;/p>
+ *
+ * @example
+ * event.onError(function(aError) {
+ *   // callback code
+ *   // aError.getMessage();
+ * });
+ * @param {Function} callback the function to notify.
+ * @param {aError} callback.aError the StreamdataError sent by the server in case of error.
+ * @returns {StreamdataEventSource}
+ */
+StreamdataEventSource.prototype.onError = function(callback) { return this; };
+
+/**
+ * &lt;p>Register a callback called  when the client application received initial data from the server.&lt;/p>
+ *
+ * @example
+ * event.onData(function(data) {
+ *   // callback code
+ * });
+ * @param {Function} callback the function to notify.
+ * @param {data} callback.data the Json object sent by the server containing initial data in Json format.
+ * @returns {StreamdataEventSource}
+ */
+StreamdataEventSource.prototype.onData = function(callback) { return this; };
+
+/**
+ * &lt;p>Register a callback called  when the client application received incremental update data from the server.&lt;/p>
+ *
+ * @example
+ * event.onPatch(function(patch) {
+ *   // callback code
+ * });
+ * @param {Function} callback the function to notify.
+ * @param {patch} callback.patch the Json object sent by the server containing incremental update data in Json patch format.
+ * @returns {StreamdataEventSource}
+ */
+StreamdataEventSource.prototype.onPatch = function(callback) { return this; };
+
+/**
+ * &lt;p>Register a callback called  when the client application received monitor data from the server.&lt;/p>
+ *
+ * @example
+ * event.onMonitor(function(monitor) {
+ *   // callback code
+ * });
+ * @param {Function} callback the function to notify.
+ * @param {monitor} callback.monitor the Json object sent by the server containing monitor data in Json format.
+ * @returns {StreamdataEventSource}
+ */
+StreamdataEventSource.prototype.onMonitor = function(callback) { return this; };
+
+/**
+ * &lt;p>Unregister a callback called when the client application opened sucessfully a StreamdataEventSource.&lt;p>
+ *
+ * @example
+ * var callback = function() {
+ *   // callback code
+ * };
+ * event.onOpen(callback); // register
+ * event.offOpen(callback); // unregister
+ *
+ * @param {Function} callback the function to call.
+ * @returns {StreamdataEventSource}
+ */
+StreamdataEventSource.prototype.offOpen = function(callback) { return this; };
+
+/**
+ * &lt;p>Unregister a callback called  when the client application failed to establish connection to the server.&lt;/p>
+ *
+ * @example
+ * var callback = function(aEvent) {
+ *   // callback code
+ * };
+ * event.onError(callback); // register
+ * event.offError(callback); // unregister
+ *
+ * @param {Function} callback the function to notify.
+ * @returns {StreamdataEventSource}
+ */
+StreamdataEventSource.prototype.offError = function(callback) { return this; };
+
+/**
+ * &lt;p>Unregister a callback called  when the client application received initial data from the server.&lt;/p>
+ *
+ * @example
+ * var callback = function(aEvent) {
+ *   // callback code
+ * };
+ * event.onData(callback); // register
+ * event.offData(callback); // unregister
+ *
+ * @param {Function} callback the function to notify.
+ * @returns {StreamdataEventSource}
+ */
+StreamdataEventSource.prototype.offData = function(callback) { return this; };
+
+/**
+ * &lt;p>Unregister a callback called  when the client application received incremental update data from the server.&lt;/p>
+ *
+ * @example
+ * var callback = function(aEvent) {
+ *   // callback code
+ * };
+ * event.onPatch(callback); // register
+ * event.offPatch(callback); // unregister
+ *
+ * @param {Function} callback the function to notify.
+ * @returns {StreamdataEventSource}
+ */
+StreamdataEventSource.prototype.offPatch = function(callback) { return this; };
+
+/**
+ * &lt;p>Unregister a callback called  when the client application received monitor data from the server.&lt;/p>
+ *
+ * @example
+ * var callback = function(aEvent) {
+ *   // callback code
+ * };
+ * event.onMonitor(callback); // register
+ * event.offMonitor(callback); // unregister
+ *
+
+ * @param {Function} callback the function to notify.
+ * @returns {StreamdataEventSource}
+ */
+StreamdataEventSource.prototype.offMonitor = function(callback) { return this; };
+
+/**
+ * &lt;p>Streamdata.io SDK&lt;/p>
+ * 
+ * &lt;p>Streamdata.io SDK provides a way to connect to remote server and monitor the connection state.
+ * This is achieved with the streamdataio.createEventSource(url), which is the central point of all Streamdata SDK API.
+ * The StreamdataEventSource handles connection to the remote server, and provides mechanism to monitor the connection state.&lt;/p>
+ * 
+ * &lt;p>A singleton instance is provided as a "streamdata" global variable.&lt;/p>
+ * 
+ * @constructor
+ */
+function Streamdata() {}
+
+/**
+* &lt;p>Create a new instance of the StreamDataEventSource prototype.&lt;/p>
+*
+* &lt;p>The StreamDataEventSource is the main entry point for establishing Server Sent Event connection to a targeted REST service.&lt;/p>
+*
+* @param {String} url The targeted REST URI is formatted as follow:
+* &lt;pre>&lt;code>
+* protocol://url(:port)(/localpath(?queryparameters))
+* &lt;/code>&lt;/pre>
+* @param {Array} headers Any specific headers that have to be added to the request.
+*
+* @returns {StreamDataEventSource}
+*/
+ Streamdata.prototype.createEventSource = function(url, headers) { return new StreamDataEventSource(url, headers); };
+
+/**
+ * &lt;p>Streamdata.io SDK&lt;/p>
+ * 
+ * &lt;p>Streamdata.io SDK provides a way to connect to remote server and monitor the connection state.
+ * This is achieved with a call to :
+ * &lt;pre>&lt;code>
+ *  streamdataio.createEventSource(url)
+ * &lt;pre>&lt;code>
+ * The streamdataio JavaScript Object is the central point of all Streamdata SDK API.
+ * The StreamdataEventSource handles connection to the remote server, and provides mechanism to monitor the connection state.&lt;/p>
+ */
+var streamdataio = new Streamdata();</pre>
+        </article>
+    </section>
+
+
+
+
+
+				</div>
+
+				<div class="clearfix"></div>
+				<footer>
+					
+					Something
+					<br />
+					
+					
+		<span class="copyright">
+		@Copyrights Motwin 2015
+		</span>
+					<br />
+					
+		<span class="jsdoc-message">
+		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a>
+		on Thu Mar 19 2015 15:03:43 GMT+0100 (CET) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		</span>
+				</footer>
+			</div>
+
+			
+			<br clear="both">
+		</div>
+
+	</div>
+	<script src="scripts/sunlight.js"></script>
+	<script src="scripts/sunlight.javascript.js"></script>
+	<script src="scripts/sunlight-plugin.doclinks.js"></script>
+	<script src="scripts/sunlight-plugin.linenumbers.js"></script>
+	<script src="scripts/sunlight-plugin.menu.js"></script>
+	<script src="scripts/jquery.min.js"></script>
+	<script src="scripts/jquery.scrollTo.js"></script>
+	<script src="scripts/jquery.localScroll.js"></script>
+	<script src="scripts/bootstrap-dropdown.js"></script>
+	<script src="scripts/toc.js"></script>
+
+
+	<script>  Sunlight.highlightAll({lineNumbers:true,  showMenu: true, enableDoclinks :true}); </script>
+
+	<script>
+		$( function () {
+			$( "#toc" ).toc( {
+				selectors   : "h1,h2,h3,h4",
+				showAndHide : false,
+				scrollTo    : 60
+			} );
+			$( "#toc>ul" ).addClass( "nav nav-pills nav-stacked" );
+			$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+
+		} );
+	</script>
+
+	
+
+</body>
+</html>

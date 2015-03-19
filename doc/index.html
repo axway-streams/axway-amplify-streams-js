@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Streamdata.io Index</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	
+	<link type="text/css" rel="stylesheet" href="styles/site.spacelab.css">
+	
+</head>
+
+<body>
+<div class="container-fluid">
+	<div class="navbar navbar-fixed-top navbar-inverse">
+		<div class="navbar-inner">
+			<a class="brand" href="index.html">Streamdata.io</a>
+			<ul class="nav">
+				
+				<li class="dropdown">
+					<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b
+						class="caret"></b></a>
+
+					<ul class="dropdown-menu ">
+						
+						<li>
+							<a href="Streamdata.html">Streamdata</a>
+						</li>
+						
+						<li>
+							<a href="StreamdataError.html">StreamdataError</a>
+						</li>
+						
+						<li>
+							<a href="StreamdataEventSource.html">StreamdataEventSource</a>
+						</li>
+						
+
+					</ul>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+
+		
+		<div class="span8">
+			
+				<div id="main">
+					
+
+
+	
+	<span class="page-title">Index</span>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+    <section>
+        <article><h1 id="streamdata-io-javascript-sdk">Streamdata.io Javascript SDK</h1>
+<hr>
+<h1 id="introduction">Introduction</h1>
+<p><strong>Streamdata.io</strong> is a real-time cache proxy allowing you to poll standard public REST APIs and push updates to clients.
+But wait, there is more. Streamdata.io keeps an history of modifications that occur on the data between two pollings.
+This way, Streamdata.io is able to give you the list of modifications which happened since last time you fetched the data.</p>
+<p>In other words, Streamdata.io is the perfect cache to dramatically reduce the bandwidth consumption to transfer data that
+change both rarely and frequently.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Incremental data update: replacing polling by push is not enough to minimize data streams. That&#39;s why Streamdata.io pushes only the part that has changed.</li>
+<li>Server-Sent-Events: updates are pushed to the client using SSE protocols. By providing fallback mechanisms Streamdata.io can also work with older browsers.</li>
+<li>API Cache: to reduce server load and latency, Streamdata.io has an integrated cache mechanism.</li>
+</ul>
+<p>This Javascript SDK facilitates the usage of Streamdata.io.</p>
+<p>Follow this quick start guide to easily integrate Streamdata.io into your application.</p>
+<h1 id="getting-started">Getting Started</h1>
+<h2 id="1-add-sdk-to-your-application">1. add SDK to your application</h2>
+<p>Add reference to the streamdataio.js file in your application code. Usually this is done using a script html tag into your main page:</p>
+<pre><code class="lang-html">&lt;script src=&quot;/js/streamdataio.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>By doing this you&#39;ll get access in your JavaScript code to the <strong>streamdataio</strong> Object which is the central point of all Streamdata SDK API.</p>
+<h2 id="2-create-a-streamdataeventsource-object">2. create a StreamDataEventSource Object</h2>
+<p>Create a StreamDataEventSource object into your JavaScript code.</p>
+<pre><code class="lang-javascript">    var myEvent = streamdataio.createEventSource(&quot;http://mysite.com/myRestService&quot;);
+</code></pre>
+<p>The StreamDataEventSource is the main entry point for establishing  a data stream connection to the given URL. </p>
+<p>It uses standard HTTP Server Sent Event to get the data you required through Streamdata.io proxy. </p>
+<h2 id="3-add-callbacks-to-handle-data-reception">3. add callbacks to handle data reception</h2>
+<p>Streamdata.io SDK handles data from the targeted REST service as JSON objects.</p>
+<p>When the StreamDataEventSource object is opened, the initial set of data is returned (called the <strong>snapshot</strong>) as it would be with a standard call to the service URL. The SDK returns it through the <strong>onData</strong> callback.</p>
+<p>The following updates of this initial set will come in the Json patch format through the <strong>onPatch</strong> callback;</p>
+<h3 id="3-1-predefined-callback-method">3.1 predefined callback method</h3>
+<pre><code class="lang-javascript">    var myDataCallback = function(data) {
+      // do whatever you want with snapshot data
+      // snapshot is provided by the sdk as a Json object
+    };
+
+    var myPatchCallback =function(data) {
+      // do whatever you want patch data
+      // patch is provided by the sdk as a Json object
+    }; 
+    myEvent.onData(myDataCallback);
+    myEvent.onPatch(myPatchCallback);
+</code></pre>
+<h3 id="3-2-direct-callback-definition">3.2 direct callback definition</h3>
+<p>You can chain callback definition and direcly define callback functions  </p>
+<pre><code class="lang-javascript">    myEvent.onData(function(data){
+        // do whatever you want with snapshot data
+    }).onPatch(function(data){
+        // do whatever you want with patch data
+    });
+</code></pre>
+<h2 id="4-open-the-streamdataeventsource">4. open the StreamDataEventSource</h2>
+<pre><code class="lang-javascript">    myEvent.open();
+</code></pre>
+<h1 id="examples">Examples</h1>
+<h2 id="1-simple-javascript-source-code-integration">1. simple Javascript source code integration</h2>
+<p>Here is a complete example of how to use the different callbacks of the Streamdata.io SDK. </p>
+<p>You can copy/paste this piece of code in a HTML page and test it.</p>
+<p>Each callback will be described in further details in the Public API JavaScript doc section.</p>
+<pre><code class="lang-javascript">&lt;!-- include streamdataio library --&gt;
+&lt;script src=&quot;/js/streamdataio.min.js&quot; /&gt;
+
+&lt;!-- use json-patch-duplex library for applying patches --&gt;
+&lt;script src=&quot;https://github.com/Starcounter-Jack/JSON-Patch/blob/master/dist/json-patch-duplex.min.js&quot; /&gt;
+
+&lt;script&gt;
+/* jshint devel:true */
+(function() {
+  var event = null;
+  var stocks = [];
+
+  function connect() {
+    // create the StreamdataEventSource Object
+    event = streamdataio.createEventSource(&quot;http://myRestservice.com/stocks&quot;);
+
+    event
+     .onOpen(function() {
+       console.log(&quot;StremadataEventSource connected.&quot;)
+     })
+     .onData(function(data) {
+       // json object stored locally.
+       stocks = data;
+     })
+     .onPatch(function(patch) {
+       // use jsonpatch library to apply the patch (patch)
+       // to the original snapshot (stocks)
+       jsonpatch.apply(stocks, patch);
+     })
+     .onError(function(error) {
+       // displays the error message
+       console.log(error.getMessage());
+     });
+
+    // open the data stream to the REST service through streamdata.io proxy
+    event.open();
+
+  };
+
+  function disconnect() {
+    if (event) {
+      event.close();
+      event = null;
+    }
+  };
+
+})();
+&lt;/script&gt;
+</code></pre>
+<h2 id="2-example-projects">2. example projects</h2>
+<p>You&#39;ll find on GitHub the following projects which are integrating Streamdata.io SDK within simple example applications.</p>
+<h3 id="jquery-example">jQuery example</h3>
+<p>A simple jQuery integration of market data with Streamdata.io SDK.</p>
+<p><a href="https://github.com/streamdataio/streamdata-sample-apps/tree/master/stockmarket">Stock Market</a></p>
+<h3 id="2-2-angular-js-example">2.2 Angular.js example</h3>
+<p>The same market data example using Angular.js </p>
+<p><a href="https://github.com/streamdataio/streamdata-sample-apps/tree/master/stockmarket-angularr">Stock Market Angular</a></p>
+<h3 id="2-2-twitter-example">2.2 twitter example</h3>
+<p>A sample to demonstate how to integrate a twitter timeline with Streamdata.io SDK.</p>
+<p><a href="https://github.com/streamdataio/streamdata-sample-apps/tree/master/twitter">Twitter</a></p>
+<h1 id="authentication">Authentication</h1>
+<p>Running an application in production through Streamdata.io proxy requires an authentication mechanism.</p>
+<p>When registering on <a href="http://streamdata.io">Streamdata.io web Site</a>, you&#39;ll be provided with a key pair for your application.</p>
+<p>This will allow Streamdata.io proxy to identify that a specific request comes from your application.</p>
+<p>This key pair must be provided to the SDK in order to be able to use the Streamdata.io proxy.</p>
+<h2 id="1-provide-key-pair-in-source-code">1. Provide key pair in source code</h2>
+<pre><code class="lang-javascript">
+    // setup key pair
+    streamdataio.Pk = &quot;NTZlMDY1NmEtYTQzYS00MGRkLTljN2UtYmM1MGZlMGRiNGFk&quot;;
+    streamdataio.pk = &quot;NWIzMDExOTEtZWY0MC00OWNlLThmNGYtY2ExMDJjOTc2YmUxODFiZDU1NmUtMTQxNi00NzNhLTg0ZDAtYWU5NjYxMGYzNDdi&quot;;
+
+    // instantiate an eventSource
+    event = streamdataio.createEventSource(&quot;http://myRestservice.com/stocks&quot;);
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>:
+You need to set the values once.
+They will be used for all subsequent StreamdataEventSource creation.</p>
+<p><strong>Important Note</strong>:
+You need to be aware that this method is useful for development purpose and tests but is not safe to go to production with.
+Your key pair must be kept secret.</p>
+</blockquote>
+<h2 id="2-key-pair-external-storage">2. Key pair external storage</h2>
+<p>You can store your key pair in a file using the following Json format :</p>
+<pre><code class="lang-javascript">
+    { 
+        &quot;Pk&quot;: &quot;NTZlMDY1NmEtYTQzYS00MGRkLTljN2UtYmM1MGZlMGRiNGFk&quot;,
+        &quot;pk&quot;: &quot;NWIzMDExOTEtZWY0MC00OWNlLThmNGYtY2ExMDJjOTc2YmUxODFiZDU1NmUtMTQxNi00NzNhLTg0ZDAtYWU5NjYxMGYzNDdi&quot;
+    }
+</code></pre>
+<p>This file must be available from a secure area of the server which is hosting the application. 
+For example, it should be stored in an area accessible only if the user is logged in.</p>
+<p>You can easily set the relative path to the file containing the key pair by using the keyFile property of the streamdataio object:</p>
+<pre><code class="lang-javascript">
+    // setup key pair
+    streamdataio.keyFile = &quot;/security/resources/mykeyfile.json&quot;;
+
+    // instantiate an eventSource
+    event = streamdataio.createEventSource(&quot;http://myRestservice.com/stocks&quot;);
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>:
+The default location for this file is set to &#39;/streamdataio.json&#39;.</p>
+</blockquote>
+<p>This solution has two advantages:</p>
+<ul>
+<li>the key pair is never set in the source code of your application</li>
+<li>this ease the process of renewing the key pair for a given application</li>
+</ul>
+<blockquote>
+<p><strong>Recommendation</strong>:
+We strongly recommend to always use https with applications using Streamdata.io
+This avoids any opportunity for an attacker to intercept the flow of data.</p>
+</blockquote>
+</article>
+    </section>
+
+
+
+
+
+
+
+
+	<h1 class="page-title">Index</h1>
+<section>
+
+<header>
+    <h2>
+    api.js
+    </h2>
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        
+            <div class="description">Streamdata.io JavaScript SDK</div>
+        
+
+        
+<dl class="details">
+    
+
+    
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version"><ul class="dummy"><li>1.0</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Motwin</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api.js.html">/home/slave/workspace/JavascriptSDK_Compile/streamdata-js-sdk/src/api.js</a>, <a href="api.js.html#sunlight-1-line-1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+				</div>
+
+				<div class="clearfix"></div>
+				<footer>
+					
+					Something
+					<br />
+					
+					
+		<span class="copyright">
+		@Copyrights Motwin 2015
+		</span>
+					<br />
+					
+		<span class="jsdoc-message">
+		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a>
+		on Thu Mar 19 2015 15:03:43 GMT+0100 (CET) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		</span>
+				</footer>
+			</div>
+
+			
+			<div class="span3">
+				<div id="toc"></div>
+			</div>
+			
+			<br clear="both">
+		</div>
+
+	</div>
+	<script src="scripts/sunlight.js"></script>
+	<script src="scripts/sunlight.javascript.js"></script>
+	<script src="scripts/sunlight-plugin.doclinks.js"></script>
+	<script src="scripts/sunlight-plugin.linenumbers.js"></script>
+	<script src="scripts/sunlight-plugin.menu.js"></script>
+	<script src="scripts/jquery.min.js"></script>
+	<script src="scripts/jquery.scrollTo.js"></script>
+	<script src="scripts/jquery.localScroll.js"></script>
+	<script src="scripts/bootstrap-dropdown.js"></script>
+	<script src="scripts/toc.js"></script>
+
+
+	<script>  Sunlight.highlightAll({lineNumbers:true,  showMenu: true, enableDoclinks :true}); </script>
+
+	<script>
+		$( function () {
+			$( "#toc" ).toc( {
+				selectors   : "h1,h2,h3,h4",
+				showAndHide : false,
+				scrollTo    : 60
+			} );
+			$( "#toc>ul" ).addClass( "nav nav-pills nav-stacked" );
+			$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+
+		} );
+	</script>
+
+	
+
+</body>
+</html>
