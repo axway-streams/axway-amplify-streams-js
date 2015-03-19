@@ -4,7 +4,7 @@ Streamdata Javascript SDK package containing SDK, documentation and sample appli
 The SDK will allow you to use <a href="http://streamdata.io">streamdata.io</a> Proxy to get data from various sources, and use them in your application.
 In this directory, you will find 
 - a minified version of the SDK (streamdataio.min.js)
-- the documentation that will help you understand how it works
+- the documentation that will help you understand how it works (doc)
 - some sample projects to show you how to use this SDK within a Javascript application, using your favorite JS stack
   - stockmarket sample shows how to get data from a demo data source returning simulated market data, and bind them to a simple UI using JQuery
   - stockmarket-angular is another version of stockmarket projet using AngularJS
