@@ -1,8 +1,8 @@
 {
-  "name": "streamdata-js",
-  "version": "v1.0.0-beta.2",
+  "name": "streamdataio-js",
+  "version": "v1.0.0-beta.3",
   "main": "streamdataio.min.js",
-  "homepage": "https://github.com/streamdataio/streamdata-js",
+  "homepage": "https://github.com/streamdataio/streamdataio-js",
   "authors": [
     "Motwin"
   ],
