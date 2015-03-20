@@ -21,9 +21,6 @@
     "bower_components",
     "test"
   ],
-  "dependencies": {
-    "cryptojslib": "https://github.com/sytelus/CryptoJS.git#v3.1.2",
-    "event-source-polyfill": "~0.0.3"
-  },
+  "dependencies": {},
   "devDependencies": {}
 }
