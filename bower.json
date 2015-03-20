@@ -1,0 +1,29 @@
+{
+  "name": "streamdata-js",
+  "version": "v1.0.0-beta.2",
+  "main": "streamdataio.min.js",
+  "homepage": "https://github.com/streamdataio/streamdata-js",
+  "authors": [
+    "Motwin"
+  ],
+  "description": "Javascript SDK for Streamdata.io",
+  "keywords": [
+    "streamdata",
+    "streamdata.io",
+    "push",
+    "sse",
+    "server-sent-event"
+  ],
+  "license": "Apache 2 License",
+  "private": true,
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {
+    "cryptojslib": "https://github.com/sytelus/CryptoJS.git#v3.1.2",
+    "event-source-polyfill": "~0.0.3"
+  },
+  "devDependencies": {}
+}
