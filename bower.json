@@ -15,7 +15,7 @@
     "server-sent-event"
   ],
   "license": "Apache 2 License",
-  "private": true,
+  "private": false,
   "ignore": [
     "node_modules",
     "bower_components",
