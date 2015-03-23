@@ -140,21 +140,26 @@ var StreamDataBox = React.createClass({
         streamdata.onPatch(function (patch) {
             console.log('Received patch:' + JSON.stringify(patch));
 
-            // add isNew property to highlight changes
-            var oldDatas = currentSDBox.state.data.map(function(item, index) {
+            // apply json patch
+            jsonpatch.apply(currentSDBox.state.data, patch);
+
+            // add areNew property to highlight changes
+            currentSDBox.state.data.map(function(item, index) {
                 item.areNew = new Array();
-                return item;
             });
             patch.forEach(function(item) {
                 var index = parseInt(item.path.substring(1, item.path.indexOf('/', 1)));
                 var attribute = item.path.substring(item.path.indexOf('/', 1) + 1);
                 // we keep only first level attribute
                 if(attribute.indexOf('/') != -1) attribute = attribute.substring(0,attribute.indexOf('/'));
-                oldDatas[index].areNew.push(attribute);
+                switch(item.op) {
+                    case "add":
+                    case "replace":
+                        currentSDBox.state.data[index].areNew.push(attribute);
+                        break;
+                }
             });
 
-            // apply json patch
-            jsonpatch.apply(currentSDBox.state.data, patch);
             currentSDBox.setState({data: currentSDBox.state.data});
         });
 
