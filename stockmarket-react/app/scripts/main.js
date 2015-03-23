@@ -116,7 +116,7 @@ var StreamDataBox = React.createClass({
     connect: function() {
 
         // create the Streamdata source
-        streamdata = streamdataio.createEventSource(this.state.url, this.state.headers);
+        streamdata = streamdataio.createEventSource(this.state.url, [this.state.headers]);
 
         streamdata.streamdataConfig.PROTOCOL = 'https://';
         streamdata.streamdataConfig.HOST = 'proxy.streamdata.io';
