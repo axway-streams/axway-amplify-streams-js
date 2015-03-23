@@ -7,6 +7,7 @@
 
     vm.init  = function() {
       vm.url = 'http://motwindemo-stockmarket.rhcloud.com/app/stockmarket/prices';
+      vm.headers = '';
       vm.isConnected = false;
       vm.errorMsg = null;
     };
@@ -19,7 +20,6 @@
 
       if (angular.isDefined(vm.headers) && vm.headers.length > 0) {
         headers = [vm.headers];
-
       }
 
       // create the Streamdata source
@@ -38,7 +38,7 @@
       // add a callback when data is sent by streamdata.io
       streamdata.onData(function(data) {
         $log.info('Received data: ' + JSON.stringify(data));
-        $scope.stocks = data;
+        $scope.datas = data;
         $scope.$digest();
       });
 
@@ -47,7 +47,7 @@
         $log.info('Received path:' + JSON.stringify(patch));
 
         // apply the json-patch to the array of values
-        jsonpatch.apply($scope.stocks, patch);
+        jsonpatch.apply($scope.datas, patch);
         $scope.$digest();
       });
 
@@ -82,13 +82,13 @@
   };
 
   function ItemController($scope, $timeout) {
-    $scope.isActive = false;
-    $scope.$watch('element.price', function() {
-        $scope.isActive = true;
+    $scope.$watch('cellValue', function() {
+        console.log($scope);
+        $scope.$parent.isActive = true;
 
         $timeout(function() {
-          $scope.isActive = false;
-        }, 1000);
+          $scope.$parent.isActive = false;
+        }, 2000);
     });
   };
 
