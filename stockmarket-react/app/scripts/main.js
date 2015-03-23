@@ -97,6 +97,19 @@ var DataLine = React.createClass({
     }
 });
 
+var ErrorMessage = React.createClass({
+    componentDidMount: function() {
+        setTimeout(function() {React.unmountComponentAtNode(document.getElementById('error'))}, 3000);
+    },
+    render: function() {
+        return (
+          <div className="row">
+            <div id="error" className="alert alert-danger text-center" role="alert">{this.props.errorMsg}</div>
+          </div>
+        );
+    }
+});
+
 var streamdata;
 
 var StreamDataBox = React.createClass({
@@ -147,7 +160,7 @@ var StreamDataBox = React.createClass({
 
         // add a callback on error
         streamdata.onError(function (error) {
-            console.log("Error : " + error);
+            React.render(<ErrorMessage errorMsg={error.G}/>, document.getElementById('error'));
             currentSDBox.setState({isConnected: false});
         });
 
