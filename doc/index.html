@@ -85,8 +85,7 @@
 <hr>
 <h1 id="introduction">Introduction</h1>
 <p><strong>Streamdata.io</strong> is a real-time cache proxy allowing you to poll standard public REST APIs and push updates to clients.
-But wait, there is more. Streamdata.io keeps an history of modifications that occur on the data between two pollings.
-This way, Streamdata.io is able to give you the list of modifications which happened since last time you fetched the data.</p>
+But wait, there is more : Streamdata.io keeps an history of modifications that occur on the data between two pollings ! This way, Streamdata.io is able to give you the list of modifications which happened since last time you fetched the data.</p>
 <p>In other words, Streamdata.io is the perfect cache to dramatically reduce the bandwidth consumption to transfer data that
 change both rarely and frequently.</p>
 <h2 id="features">Features</h2>
@@ -98,22 +97,27 @@ change both rarely and frequently.</p>
 <p>This Javascript SDK facilitates the usage of Streamdata.io.</p>
 <p>Follow this quick start guide to easily integrate Streamdata.io into your application.</p>
 <h1 id="getting-started">Getting Started</h1>
-<h2 id="1-add-sdk-to-your-application">1. add SDK to your application</h2>
+<h2 id="1-add-sdk-to-your-application">1. Add SDK to your application</h2>
 <p>Add reference to the streamdataio.js file in your application code. Usually this is done using a script html tag into your main page:</p>
 <pre><code class="lang-html">&lt;script src=&quot;/js/streamdataio.js&quot;&gt;&lt;/script&gt;
 </code></pre>
 <p>By doing this you&#39;ll get access in your JavaScript code to the <strong>streamdataio</strong> Object which is the central point of all Streamdata SDK API.</p>
-<h2 id="2-create-a-streamdataeventsource-object">2. create a StreamDataEventSource Object</h2>
+<h2 id="2-create-a-streamdataeventsource-object">2. Create a StreamDataEventSource Object</h2>
 <p>Create a StreamDataEventSource object into your JavaScript code.</p>
 <pre><code class="lang-javascript">    var myEvent = streamdataio.createEventSource(&quot;http://mysite.com/myRestService&quot;);
 </code></pre>
 <p>The StreamDataEventSource is the main entry point for establishing  a data stream connection to the given URL. </p>
 <p>It uses standard HTTP Server Sent Event to get the data you required through Streamdata.io proxy. </p>
-<h2 id="3-add-callbacks-to-handle-data-reception">3. add callbacks to handle data reception</h2>
+<p>If your API requires specific headers, simply pass them as an array on the event source creation, and Streamdata.io will forward them to your Information System.</p>
+<pre><code class="lang-javascript">    var headers = [];
+    // add whatever header required by your API
+    var myEvent = streamdataio.createEventSource(&quot;http://mysite.com/myRestService&quot;, headers);
+</code></pre>
+<h2 id="3-add-callbacks-to-handle-data-reception">3. Add callbacks to handle data reception</h2>
 <p>Streamdata.io SDK handles data from the targeted REST service as JSON objects.</p>
 <p>When the StreamDataEventSource object is opened, the initial set of data is returned (called the <strong>snapshot</strong>) as it would be with a standard call to the service URL. The SDK returns it through the <strong>onData</strong> callback.</p>
 <p>The following updates of this initial set will come in the Json patch format through the <strong>onPatch</strong> callback;</p>
-<h3 id="3-1-predefined-callback-method">3.1 predefined callback method</h3>
+<h3 id="3-1-predefined-callback-method">3.1 Predefined callback method</h3>
 <pre><code class="lang-javascript">    var myDataCallback = function(data) {
       // do whatever you want with snapshot data
       // snapshot is provided by the sdk as a Json object
@@ -126,7 +130,7 @@ change both rarely and frequently.</p>
     myEvent.onData(myDataCallback);
     myEvent.onPatch(myPatchCallback);
 </code></pre>
-<h3 id="3-2-direct-callback-definition">3.2 direct callback definition</h3>
+<h3 id="3-2-direct-callback-definition">3.2 Direct callback definition</h3>
 <p>You can chain callback definition and direcly define callback functions  </p>
 <pre><code class="lang-javascript">    myEvent.onData(function(data){
         // do whatever you want with snapshot data
@@ -134,11 +138,11 @@ change both rarely and frequently.</p>
         // do whatever you want with patch data
     });
 </code></pre>
-<h2 id="4-open-the-streamdataeventsource">4. open the StreamDataEventSource</h2>
+<h2 id="4-open-the-streamdataeventsource">4. Open the StreamDataEventSource</h2>
 <pre><code class="lang-javascript">    myEvent.open();
 </code></pre>
 <h1 id="examples">Examples</h1>
-<h2 id="1-simple-javascript-source-code-integration">1. simple Javascript source code integration</h2>
+<h2 id="1-simple-javascript-source-code-integration">1. Simple Javascript source code integration</h2>
 <p>Here is a complete example of how to use the different callbacks of the Streamdata.io SDK. </p>
 <p>You can copy/paste this piece of code in a HTML page and test it.</p>
 <p>Each callback will be described in further details in the Public API JavaScript doc section.</p>
@@ -191,17 +195,17 @@ change both rarely and frequently.</p>
 })();
 &lt;/script&gt;
 </code></pre>
-<h2 id="2-example-projects">2. example projects</h2>
+<h2 id="2-example-projects">2. Example projects</h2>
 <p>You&#39;ll find on GitHub the following projects which are integrating Streamdata.io SDK within simple example applications.</p>
 <h3 id="jquery-example">jQuery example</h3>
 <p>A simple jQuery integration of market data with Streamdata.io SDK.</p>
-<p><a href="https://github.com/streamdataio/streamdata-sample-apps/tree/master/stockmarket">Stock Market</a></p>
+<p><a href="https://github.com/streamdataio/streamdataio-js/tree/master/stockmarket">Stock Market</a></p>
 <h3 id="2-2-angular-js-example">2.2 Angular.js example</h3>
 <p>The same market data example using Angular.js </p>
-<p><a href="https://github.com/streamdataio/streamdata-sample-apps/tree/master/stockmarket-angular">Stock Market Angular</a></p>
+<p><a href="https://github.com/streamdataio/streamdataio-js/tree/master/stockmarket-angular">Stock Market Angular</a></p>
 <h3 id="2-2-twitter-example">2.2 twitter example</h3>
 <p>A sample to demonstate how to integrate a twitter timeline with Streamdata.io SDK.</p>
-<p><a href="https://github.com/streamdataio/streamdata-sample-apps/tree/master/twitter">Twitter</a></p>
+<p><a href="https://github.com/streamdataio/streamdataio-js/tree/master/twitter">Twitter</a></p>
 <h1 id="authentication">Authentication</h1>
 <p>Running an application in production through Streamdata.io proxy requires an authentication mechanism.</p>
 <p>When registering on <a href="http://streamdata.io">Streamdata.io web Site</a>, you&#39;ll be provided with a key pair for your application.</p>
@@ -374,7 +378,7 @@ This avoids any opportunity for an attacker to intercept the flow of data.</p>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a>
-		on Mon Mar 23 2015 11:50:04 GMT+0100 (CET) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Wed Mar 25 2015 16:04:00 GMT+0100 (CET) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>
