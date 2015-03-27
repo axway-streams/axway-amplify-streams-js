@@ -1,22 +1,18 @@
 # streamdata-js
-Streamdata Javascript SDK package containing SDK, documentation and sample applications
+streamdata.io Javascript SDK package containing SDK, documentation and sample applications
 
-The SDK will allow you to use <a href="http://streamdata.io">streamdata.io</a> Proxy to get data from various sources, and use them in your application.
-In this directory, you will find 
+The SDK enables to use the <a href="http://streamdata.io">streamdata.io proxy</a> to get data pushed from various sources and to use them in your application.
+
+In this directory, you will find:
 - a minified version of the SDK (streamdataio.min.js)
 - the documentation that will help you understand how it works (doc)
-- some sample projects to show you how to use this SDK within a Javascript application, using your favorite JS stack
+- some sample projects that show how to use this SDK within a Javascript application, using your favorite JS stack
   - stockmarket sample shows how to get data from a demo data source returning simulated market data, and bind them to a simple UI using JQuery
   - stockmarket-angular is another version of stockmarket projet using AngularJS
-  - twitter show how to use Twitter API, and pass a specific OAuth header to streamdata.io proxy
+  - twitter showr how to use Twitter API, and pass a specific OAuth header to streamdata.io proxy
  
-For both sample, after cloning the git repository, you can run 
-- ```npm install```
-- ```bower install```
-- ```gulp serve```
+To run a sample and understand how it works, clone the git repository, open the index.html of the sample in your browser (Chrome, Firefox, Safari) and browse the code!
 
-to run the sample, and browse the code to understand how it works.
-
-If you have any question of feedback, feel free to ask : <a href="mailto://support@streamdata.io">support@streamdata.io</a>
+If you have any questions or feedbacks, feel free to ask: <a href="mailto://support@streamdata.io">support@streamdata.io</a>
 
 Enjoy !

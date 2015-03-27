@@ -6,19 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
     <title>Streamdata.io Twitter</title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="favicon.ico" />
 
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- endbuild -->
-
-    <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
 
-    <!-- build:js scripts/vendor/modernizr.js -->
-    <script src="../bower_components/modernizr/modernizr.js"></script>
-    <!-- endbuild -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   </head>
   <body>
     <!--[if lt IE 10]>
@@ -44,7 +36,7 @@
         <div class="form-group">
           <label for="inputHeader" class="col-sm-2 control-laber">Twitter Authorization Header</label>
           <div class="col-sm-10">
-            <textarea id="inputHeader" class="form-control" rows="3"></textarea>
+            <textarea id="inputHeader" placeholder="Add your Twitter Authorization Header for the Twitter URL here..." class="form-control" rows="3"></textarea>
           </div>
         </div>
 
@@ -69,7 +61,7 @@
       </div>
 
       <div class="footer">
-        <p>♥ from the Streamdata.io team</p>
+        <p>♥ from the <a href="http://streamdata.io/" target="_blank">streamdata.io</a> team</p>
       </div>
     </div>
 
@@ -83,19 +75,10 @@
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
 
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../bower_components/fast-json-patch/src/json-patch-duplex.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fast-json-patch/0.5.1/json-patch-duplex.min.js"></script>
 
-        <!-- build:js scripts/plugins.js -->
-        <!-- endbuild -->
-
-        <!-- build:js scripts/main.js -->
-        <script src="scripts/streamdataio.min.js"></script>
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
+    <script src="scripts/streamdataio.min.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>
