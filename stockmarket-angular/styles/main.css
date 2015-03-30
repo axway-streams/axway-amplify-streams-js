@@ -5035,7 +5035,7 @@ tbody.collapse.in {
   display: inline-block;
 }
 .breadcrumb > li + li:before {
-  content: "/ ";
+  content: "/ ";
   padding: 0 5px;
   color: #ccc;
 }
@@ -7152,11 +7152,45 @@ body {
     border-bottom: 0;
   }
 }
-/*
-  Allow angular.js to be loaded in body, hiding cloaked elements until
-  templates compile.  The !important is important given that there may be
-  other selectors that are more specific or come later and might alter display.
- */
-[ng\:cloak], [ng-cloak], .ng-cloak {
-  display: none !important;
+ins {
+  color: #4cae4c;
+  text-decoration: inherit;
+  font-weight: bold;
+}
+
+del {
+  display: none;
+}
+
+pre {
+  padding: 1px;
+  margin: 0px;
+}
+
+.json-string {
+  color: green;
+}
+
+.json-number {
+  color: darkorange;
+}
+
+.json-boolean {
+  color: blue;
+}
+
+.json-null {
+  color: magenta;
+}
+
+.json-key {
+  color: black;
+}
+
+.nav-tabs {
+  border-bottom: 0px;
+}
+
+.disabled {
+  pointer-events: none;
 }

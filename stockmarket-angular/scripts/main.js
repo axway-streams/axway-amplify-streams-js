@@ -9,9 +9,36 @@
     vm.limitNbPatch = 100;
     vm.headers = [];
 
+    this.popupPk = {
+      content: 'Public key used for authentication, if you don\'t have one go to <a href="#">Sign In</a>',
+      options: {
+        title: null,
+        placement: 'left',
+        html: true,
+        delay: { show: 0, hide: 1500 }
+      }
+    };
+    this.popuppk = {
+      content: 'Private key used for authentication, if you don\'t have one go to <a href="#">Sign In</a>',
+      options: {
+        title: null,
+        placement: 'left',
+        html: true,
+        delay: { show: 0, hide: 1500 }
+      }
+    };
+    this.popupHeaders = {
+      content: 'HTTP headers can be added in case of need but it\'s not required',
+      options: {
+        title: null,
+        placement: 'right',
+        html: false,
+        delay: { show: 0, hide: 0 }
+      }
+    };
+
     vm.init  = function() {
       vm.url = 'http://motwindemo-stockmarket.rhcloud.com/app/stockmarket/prices';
-      vm.addHeader();
       vm.isConnected = false;
       vm.errorMsg = null;
     };
@@ -44,11 +71,16 @@
         headers = vm.headersToArray(vm.headers);
       }
 
+      // setup key pair
+      // you can store your key pair in a json file instead, more details in documentation
+      streamdataio.Pk = vm.Pk;
+      streamdataio.pk = vm.pk;
+
       // create the Streamdata source
       streamdata = streamdataio.createEventSource(vm.url, headers);
 
       streamdata.streamdataConfig.PROTOCOL = 'https://';
-      streamdata.streamdataConfig.HOST = 'proxy.streamdata.io';
+      streamdata.streamdataConfig.HOST = 'streamdata.motwin.net';
       streamdata.streamdataConfig.PORT = '';
 
       // add a callback when the connection is opened
@@ -65,7 +97,12 @@
         //$log.info('Received data: ' + JSON.stringify(data));
         $scope.datasStringify = diffUsingJS("", JSON.stringify(data, null, 2));
         $scope.patchStringify = "";
-        $scope.datasArray = castToArray(data);
+        if(Object.prototype.toString.call(data) === '[object Array]' ) {
+            $scope.datasArray = data;
+            vm.setTab(1);
+        } else {
+            vm.setTab(2);
+        }
         $scope.datas = data;
         $scope.$digest();
       });
@@ -80,7 +117,6 @@
             vm.isPatching = true;
             $scope.$digest();
             $timeout(function() {
-                vm.isPatching = true;
                 //$log.info('Received path:' + JSON.stringify(patch));
 
                 var oldDatas = JSON.stringify($scope.datas, null, 2);
@@ -89,7 +125,9 @@
                 jsonpatch.apply($scope.datas, patch);
 
                 // render Array
-                $scope.datasArray = castToArray($scope.datas);
+                if(Object.prototype.toString.call($scope.datas) === '[object Array]' ) {
+                    $scope.datasArray = $scope.datas;
+                }
                 // render Patched JSON document
                 $scope.datasStringify = diffUsingJS(oldDatas, JSON.stringify($scope.datas, null, 2));
                 // render JSON Patch Operations
@@ -138,7 +176,7 @@
 
     vm.initDatas = function() {
         $scope.datasStringify = "<p/>";
-        $scope.patchStringify = "<p/>";
+        $scope.patchStringify = "";
         $scope.datasArray = [];
     };
 
@@ -150,6 +188,16 @@
           vm.errorMsg = null;
         }, 3000);
     }
+
+    vm.tab = 1;
+
+    vm.setTab = function (tabId) {
+        vm.tab = tabId;
+    };
+
+    vm.isSet = function (tabId) {
+        return vm.tab === tabId;
+    };
 
     vm.init();
 
@@ -208,14 +256,6 @@
        });
   }
 
-  function castToArray(obj) {
-    if(Object.prototype.toString.call(obj) === '[object Array]' ) {
-        return obj;
-    } else {
-        return [obj];
-    }
-  }
-
   function ItemController($scope, $timeout) {
     $scope.$watch('cellValue', function() {
         $scope.$parent.isActive = true;
@@ -230,17 +270,6 @@
     .module('app', ['ngSanitize'])
     .controller('AppController', ['$scope', '$log', '$timeout', AppController])
     .controller('ItemController', ['$scope', '$timeout', ItemController])
-    .controller('TabController', function () {
-        this.tab = 1;
-
-        this.setTab = function (tabId) {
-            this.tab = tabId;
-        };
-
-        this.isSet = function (tabId) {
-            return this.tab === tabId;
-        };
-    })
     .directive('bindHtmlUnsafe', function( $parse, $compile ) {
         return function( $scope, $element, $attrs ) {
             var compile = function( newHTML ) {
@@ -255,6 +284,35 @@
                 compile(newHTML);
             });
 
+        };
+    })
+    .directive('popup', function() {
+        return {
+          restrict: 'A',
+          require: 'ngModel',
+          scope: {
+            ngModel: '=',
+            options: '=popup'
+          },
+          link: function(scope, element) {
+            scope.$watch('ngModel', function(val) {
+              element.attr('data-content', val);
+            });
+
+            var options = scope.options || {} ;
+
+            var title = options.title || null;
+            var placement = options.placement || 'right';
+            var html = options.html || false;
+            var delay = options.delay ? angular.toJson(options.delay) : null;
+            var trigger = options.trigger || 'hover';
+
+            element.attr('title', title);
+            element.attr('data-placement', placement);
+            element.attr('data-html', html);
+            element.attr('data-delay', delay);
+            element.popover({ trigger: trigger });
+          }
         };
     });
 })();
