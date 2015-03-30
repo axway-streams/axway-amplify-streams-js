@@ -11,7 +11,7 @@
 	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
 
 	
-	<link type="text/css" rel="stylesheet" href="styles/site.spacelab.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.streamdataio.css">
 	
 </head>
 
@@ -19,7 +19,12 @@
 <div class="container-fluid">
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="navbar-inner">
-			<a class="brand" href="index.html">Streamdata.io</a>
+			<a class="brand" href="http://streamdata.io"><img src="img/logo.png" style="height: 42px; margin-top: 3px; margin-bottom: 3px;"></a>
+			<ul class="nav">
+			  <li class="dropdown">
+        	<a href="index.html">Readme</a>
+        </li>
+			</ul>
 			<ul class="nav">
 				
 				<li class="dropdown">
@@ -65,6 +70,10 @@
  * @fileOverview Streamdata.io JavaScript SDK
  * @author Motwin
  * @version 1.0
+ *
+ * @see Streamdata
+ * @see StreamdataError
+ * @see StreamdataEventSource
  */
 
 /**
@@ -134,7 +143,7 @@ StreamdataEventSource.prototype.open = function() { return this; };
  * &lt;p>Register a callback called when the client application opened sucessfully a StreamdataEventSource.&lt;p>
  *
  * @example
- * event.onOpen(function() {
+ * eventSource.onOpen(function() {
  *   // callback code
  * });
  *
@@ -147,7 +156,7 @@ StreamdataEventSource.prototype.onOpen = function(callback) { return this; };
  * &lt;p>Register a callback called  when the client application failed to establish connection to the server.&lt;/p>
  *
  * @example
- * event.onError(function(aError) {
+ * eventSource.onError(function(aError) {
  *   // callback code
  *   // aError.getMessage();
  * });
@@ -161,7 +170,7 @@ StreamdataEventSource.prototype.onError = function(callback) { return this; };
  * &lt;p>Register a callback called  when the client application received initial data from the server.&lt;/p>
  *
  * @example
- * event.onData(function(data) {
+ * eventSource.onData(function(data) {
  *   // callback code
  * });
  * @param {Function} callback the function to notify.
@@ -174,7 +183,7 @@ StreamdataEventSource.prototype.onData = function(callback) { return this; };
  * &lt;p>Register a callback called  when the client application received incremental update data from the server.&lt;/p>
  *
  * @example
- * event.onPatch(function(patch) {
+ * eventSource.onPatch(function(patch) {
  *   // callback code
  * });
  * @param {Function} callback the function to notify.
@@ -187,7 +196,7 @@ StreamdataEventSource.prototype.onPatch = function(callback) { return this; };
  * &lt;p>Register a callback called  when the client application received monitor data from the server.&lt;/p>
  *
  * @example
- * event.onMonitor(function(monitor) {
+ * eventSource.onMonitor(function(monitor) {
  *   // callback code
  * });
  * @param {Function} callback the function to notify.
@@ -203,8 +212,8 @@ StreamdataEventSource.prototype.onMonitor = function(callback) { return this; };
  * var callback = function() {
  *   // callback code
  * };
- * event.onOpen(callback); // register
- * event.offOpen(callback); // unregister
+ * eventSource.onOpen(callback); // register
+ * eventSource.offOpen(callback); // unregister
  *
  * @param {Function} callback the function to call.
  * @returns {StreamdataEventSource}
@@ -218,8 +227,8 @@ StreamdataEventSource.prototype.offOpen = function(callback) { return this; };
  * var callback = function(aEvent) {
  *   // callback code
  * };
- * event.onError(callback); // register
- * event.offError(callback); // unregister
+ * eventSource.onError(callback); // register
+ * eventSource.offError(callback); // unregister
  *
  * @param {Function} callback the function to notify.
  * @returns {StreamdataEventSource}
@@ -233,8 +242,8 @@ StreamdataEventSource.prototype.offError = function(callback) { return this; };
  * var callback = function(aEvent) {
  *   // callback code
  * };
- * event.onData(callback); // register
- * event.offData(callback); // unregister
+ * eventSource.onData(callback); // register
+ * eventSource.offData(callback); // unregister
  *
  * @param {Function} callback the function to notify.
  * @returns {StreamdataEventSource}
@@ -248,8 +257,8 @@ StreamdataEventSource.prototype.offData = function(callback) { return this; };
  * var callback = function(aEvent) {
  *   // callback code
  * };
- * event.onPatch(callback); // register
- * event.offPatch(callback); // unregister
+ * eventSource.onPatch(callback); // register
+ * eventSource.offPatch(callback); // unregister
  *
  * @param {Function} callback the function to notify.
  * @returns {StreamdataEventSource}
@@ -263,8 +272,8 @@ StreamdataEventSource.prototype.offPatch = function(callback) { return this; };
  * var callback = function(aEvent) {
  *   // callback code
  * };
- * event.onMonitor(callback); // register
- * event.offMonitor(callback); // unregister
+ * eventSource.onMonitor(callback); // register
+ * eventSource.offMonitor(callback); // unregister
  *
 
  * @param {Function} callback the function to notify.
@@ -291,9 +300,7 @@ function Streamdata() {}
 * &lt;p>The StreamDataEventSource is the main entry point for establishing Server Sent Event connection to a targeted REST service.&lt;/p>
 *
 * @param {String} url The targeted REST URI is formatted as follow:
-* &lt;pre>&lt;code>
-* protocol://url(:port)(/localpath(?queryparameters))
-* &lt;/code>&lt;/pre>
+* &lt;pre>&lt;code>protocol://url(:port)(/localpath(?queryparameters))&lt;/code>&lt;/pre>
 * @param {Array} headers Any specific headers that have to be added to the request.
 *
 * @returns {StreamDataEventSource}
@@ -305,9 +312,8 @@ function Streamdata() {}
  * 
  * &lt;p>Streamdata.io SDK provides a way to connect to remote server and monitor the connection state.
  * This is achieved with a call to :
- * &lt;pre>&lt;code>
- *  streamdataio.createEventSource(url)
- * &lt;pre>&lt;code>
+ * &lt;pre>&lt;code>streamdataio.createEventSource(url)&lt;pre>&lt;code>
+ *
  * The streamdataio JavaScript Object is the central point of all Streamdata SDK API.
  * The StreamdataEventSource handles connection to the remote server, and provides mechanism to monitor the connection state.&lt;/p>
  */
@@ -324,18 +330,15 @@ var streamdataio = new Streamdata();</pre>
 				<div class="clearfix"></div>
 				<footer>
 					
-					Something
-					<br />
-					
 					
 		<span class="copyright">
-		@Copyrights Motwin 2015
+		Connect to <a href="http://streamdata.io/" target="_blank">streamdata.io</a> - @Copyrights Motwin 2015
 		</span>
 					<br />
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a>
-		on Thu Mar 26 2015 16:10:04 GMT+0100 (CET) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Mon Mar 30 2015 15:58:29 GMT+0200 (CEST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>

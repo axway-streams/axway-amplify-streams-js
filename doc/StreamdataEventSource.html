@@ -11,7 +11,7 @@
 	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
 
 	
-	<link type="text/css" rel="stylesheet" href="styles/site.spacelab.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.streamdataio.css">
 	
 </head>
 
@@ -19,7 +19,12 @@
 <div class="container-fluid">
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="navbar-inner">
-			<a class="brand" href="index.html">Streamdata.io</a>
+			<a class="brand" href="http://streamdata.io"><img src="img/logo.png" style="height: 42px; margin-top: 3px; margin-bottom: 3px;"></a>
+			<ul class="nav">
+			  <li class="dropdown">
+        	<a href="index.html">Readme</a>
+        </li>
+			</ul>
 			<ul class="nav">
 				
 				<li class="dropdown">
@@ -74,7 +79,7 @@
     
         
 <dt>
-    <h4 class="name" id="StreamdataEventSource"><span class="type-signature"></span>new StreamdataEventSource<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name streamdataio-method" id="StreamdataEventSource"><span class="type-signature"></span>new StreamdataEventSource<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -114,11 +119,6 @@
 
     
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">/home/slave/workspace/JavascriptSDK_Compile/src/api.js</a>, <a href="api.js.html#sunlight-1-line-59">line 59</a>
-    </li></ul></dd>
     
 
     
@@ -163,7 +163,7 @@
         <dl>
             
 <dt>
-    <h4 class="name" id="offData"><span class="type-signature"></span>offData<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
+    <h4 class="name streamdataio-method" id="offData"><span class="type-signature"></span>offData<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
     
     
 </dt>
@@ -251,11 +251,6 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">/home/slave/workspace/JavascriptSDK_Compile/src/api.js</a>, <a href="api.js.html#sunlight-1-line-179">line 179</a>
-    </li></ul></dd>
-    
 
     
 
@@ -300,8 +295,8 @@
     <pre class="sunlight-highlight-javascript">var callback = function(aEvent) {
   // callback code
 };
-event.onData(callback); // register
-event.offData(callback); // unregister</pre>
+eventSource.onData(callback); // register
+eventSource.offData(callback); // unregister</pre>
 
 
     
@@ -310,7 +305,7 @@ event.offData(callback); // unregister</pre>
         
             
 <dt>
-    <h4 class="name" id="offError"><span class="type-signature"></span>offError<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
+    <h4 class="name streamdataio-method" id="offError"><span class="type-signature"></span>offError<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
     
     
 </dt>
@@ -398,11 +393,6 @@ event.offData(callback); // unregister</pre>
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">/home/slave/workspace/JavascriptSDK_Compile/src/api.js</a>, <a href="api.js.html#sunlight-1-line-164">line 164</a>
-    </li></ul></dd>
-    
 
     
 
@@ -447,8 +437,8 @@ event.offData(callback); // unregister</pre>
     <pre class="sunlight-highlight-javascript">var callback = function(aEvent) {
   // callback code
 };
-event.onError(callback); // register
-event.offError(callback); // unregister</pre>
+eventSource.onError(callback); // register
+eventSource.offError(callback); // unregister</pre>
 
 
     
@@ -457,7 +447,7 @@ event.offError(callback); // unregister</pre>
         
             
 <dt>
-    <h4 class="name" id="offMonitor"><span class="type-signature"></span>offMonitor<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
+    <h4 class="name streamdataio-method" id="offMonitor"><span class="type-signature"></span>offMonitor<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
     
     
 </dt>
@@ -545,11 +535,6 @@ event.offError(callback); // unregister</pre>
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">/home/slave/workspace/JavascriptSDK_Compile/src/api.js</a>, <a href="api.js.html#sunlight-1-line-210">line 210</a>
-    </li></ul></dd>
-    
 
     
 
@@ -594,8 +579,8 @@ event.offError(callback); // unregister</pre>
     <pre class="sunlight-highlight-javascript">var callback = function(aEvent) {
   // callback code
 };
-event.onMonitor(callback); // register
-event.offMonitor(callback); // unregister</pre>
+eventSource.onMonitor(callback); // register
+eventSource.offMonitor(callback); // unregister</pre>
 
 
     
@@ -604,7 +589,7 @@ event.offMonitor(callback); // unregister</pre>
         
             
 <dt>
-    <h4 class="name" id="offOpen"><span class="type-signature"></span>offOpen<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
+    <h4 class="name streamdataio-method" id="offOpen"><span class="type-signature"></span>offOpen<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
     
     
 </dt>
@@ -692,11 +677,6 @@ event.offMonitor(callback); // unregister</pre>
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">/home/slave/workspace/JavascriptSDK_Compile/src/api.js</a>, <a href="api.js.html#sunlight-1-line-149">line 149</a>
-    </li></ul></dd>
-    
 
     
 
@@ -741,8 +721,8 @@ event.offMonitor(callback); // unregister</pre>
     <pre class="sunlight-highlight-javascript">var callback = function() {
   // callback code
 };
-event.onOpen(callback); // register
-event.offOpen(callback); // unregister</pre>
+eventSource.onOpen(callback); // register
+eventSource.offOpen(callback); // unregister</pre>
 
 
     
@@ -751,7 +731,7 @@ event.offOpen(callback); // unregister</pre>
         
             
 <dt>
-    <h4 class="name" id="offPatch"><span class="type-signature"></span>offPatch<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
+    <h4 class="name streamdataio-method" id="offPatch"><span class="type-signature"></span>offPatch<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
     
     
 </dt>
@@ -839,11 +819,6 @@ event.offOpen(callback); // unregister</pre>
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">/home/slave/workspace/JavascriptSDK_Compile/src/api.js</a>, <a href="api.js.html#sunlight-1-line-194">line 194</a>
-    </li></ul></dd>
-    
 
     
 
@@ -888,8 +863,8 @@ event.offOpen(callback); // unregister</pre>
     <pre class="sunlight-highlight-javascript">var callback = function(aEvent) {
   // callback code
 };
-event.onPatch(callback); // register
-event.offPatch(callback); // unregister</pre>
+eventSource.onPatch(callback); // register
+eventSource.offPatch(callback); // unregister</pre>
 
 
     
@@ -898,7 +873,7 @@ event.offPatch(callback); // unregister</pre>
         
             
 <dt>
-    <h4 class="name" id="onData"><span class="type-signature"></span>onData<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
+    <h4 class="name streamdataio-method" id="onData"><span class="type-signature"></span>onData<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
     
     
 </dt>
@@ -1035,11 +1010,6 @@ event.offPatch(callback); // unregister</pre>
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">/home/slave/workspace/JavascriptSDK_Compile/src/api.js</a>, <a href="api.js.html#sunlight-1-line-108">line 108</a>
-    </li></ul></dd>
-    
 
     
 
@@ -1081,7 +1051,7 @@ event.offPatch(callback); // unregister</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">event.onData(function(data) {
+    <pre class="sunlight-highlight-javascript">eventSource.onData(function(data) {
   // callback code
 });</pre>
 
@@ -1092,7 +1062,7 @@ event.offPatch(callback); // unregister</pre>
         
             
 <dt>
-    <h4 class="name" id="onError"><span class="type-signature"></span>onError<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
+    <h4 class="name streamdataio-method" id="onError"><span class="type-signature"></span>onError<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
     
     
 </dt>
@@ -1229,11 +1199,6 @@ event.offPatch(callback); // unregister</pre>
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">/home/slave/workspace/JavascriptSDK_Compile/src/api.js</a>, <a href="api.js.html#sunlight-1-line-95">line 95</a>
-    </li></ul></dd>
-    
 
     
 
@@ -1275,7 +1240,7 @@ event.offPatch(callback); // unregister</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">event.onError(function(aError) {
+    <pre class="sunlight-highlight-javascript">eventSource.onError(function(aError) {
   // callback code
   // aError.getMessage();
 });</pre>
@@ -1287,7 +1252,7 @@ event.offPatch(callback); // unregister</pre>
         
             
 <dt>
-    <h4 class="name" id="onMonitor"><span class="type-signature"></span>onMonitor<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
+    <h4 class="name streamdataio-method" id="onMonitor"><span class="type-signature"></span>onMonitor<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
     
     
 </dt>
@@ -1424,11 +1389,6 @@ event.offPatch(callback); // unregister</pre>
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">/home/slave/workspace/JavascriptSDK_Compile/src/api.js</a>, <a href="api.js.html#sunlight-1-line-134">line 134</a>
-    </li></ul></dd>
-    
 
     
 
@@ -1470,7 +1430,7 @@ event.offPatch(callback); // unregister</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">event.onMonitor(function(monitor) {
+    <pre class="sunlight-highlight-javascript">eventSource.onMonitor(function(monitor) {
   // callback code
 });</pre>
 
@@ -1481,7 +1441,7 @@ event.offPatch(callback); // unregister</pre>
         
             
 <dt>
-    <h4 class="name" id="onOpen"><span class="type-signature"></span>onOpen<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
+    <h4 class="name streamdataio-method" id="onOpen"><span class="type-signature"></span>onOpen<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
     
     
 </dt>
@@ -1569,11 +1529,6 @@ event.offPatch(callback); // unregister</pre>
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">/home/slave/workspace/JavascriptSDK_Compile/src/api.js</a>, <a href="api.js.html#sunlight-1-line-81">line 81</a>
-    </li></ul></dd>
-    
 
     
 
@@ -1615,7 +1570,7 @@ event.offPatch(callback); // unregister</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">event.onOpen(function() {
+    <pre class="sunlight-highlight-javascript">eventSource.onOpen(function() {
   // callback code
 });</pre>
 
@@ -1626,7 +1581,7 @@ event.offPatch(callback); // unregister</pre>
         
             
 <dt>
-    <h4 class="name" id="onPatch"><span class="type-signature"></span>onPatch<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
+    <h4 class="name streamdataio-method" id="onPatch"><span class="type-signature"></span>onPatch<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
     
     
 </dt>
@@ -1763,11 +1718,6 @@ event.offPatch(callback); // unregister</pre>
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">/home/slave/workspace/JavascriptSDK_Compile/src/api.js</a>, <a href="api.js.html#sunlight-1-line-121">line 121</a>
-    </li></ul></dd>
-    
 
     
 
@@ -1809,7 +1759,7 @@ event.offPatch(callback); // unregister</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">event.onPatch(function(patch) {
+    <pre class="sunlight-highlight-javascript">eventSource.onPatch(function(patch) {
   // callback code
 });</pre>
 
@@ -1820,7 +1770,7 @@ event.offPatch(callback); // unregister</pre>
         
             
 <dt>
-    <h4 class="name" id="open"><span class="type-signature"></span>open<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
+    <h4 class="name streamdataio-method" id="open"><span class="type-signature"></span>open<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
     
     
 </dt>
@@ -1860,11 +1810,6 @@ event.offPatch(callback); // unregister</pre>
 
     
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api.js.html">/home/slave/workspace/JavascriptSDK_Compile/src/api.js</a>, <a href="api.js.html#sunlight-1-line-68">line 68</a>
-    </li></ul></dd>
     
 
     
@@ -1925,18 +1870,15 @@ event.offPatch(callback); // unregister</pre>
 				<div class="clearfix"></div>
 				<footer>
 					
-					Something
-					<br />
-					
 					
 		<span class="copyright">
-		@Copyrights Motwin 2015
+		Connect to <a href="http://streamdata.io/" target="_blank">streamdata.io</a> - @Copyrights Motwin 2015
 		</span>
 					<br />
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a>
-		on Thu Mar 26 2015 16:10:04 GMT+0100 (CET) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Mon Mar 30 2015 15:58:29 GMT+0200 (CEST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>
