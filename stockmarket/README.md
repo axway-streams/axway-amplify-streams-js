@@ -8,4 +8,4 @@ Simply run the sample, and browse the code to understand how it works.
 
 If you have any question of feedback, feel free to ask : <a href="mailto://support@streamdata.io">support@streamdata.io</a>
 
-Enjoy !
+Enjoy!
