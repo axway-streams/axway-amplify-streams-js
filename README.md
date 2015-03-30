@@ -15,4 +15,4 @@ To run a sample and understand how it works, clone the git repository, open the 
 
 If you have any questions or feedbacks, feel free to ask: <a href="mailto://support@streamdata.io">support@streamdata.io</a>
 
-Enjoy !
+Enjoy!
