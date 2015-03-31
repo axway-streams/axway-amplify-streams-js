@@ -55,7 +55,7 @@
     vm.headersToArray = function() {
         var out = [];
         vm.headers.forEach(function(header) {
-            out[header.name] = header.value;
+            out.push(header.name+":"+header.value);
         });
         return out;
     }
@@ -72,6 +72,8 @@
       }
 
       // setup key pair
+      // Key pair is saved in session storage _Pk key, to eanable key pair change we reset this session storage key
+      window.sessionStorage._Pk = undefined;
       // you can store your key pair in a json file instead, more details in documentation
       streamdataio.Pk = vm.Pk;
       streamdataio.pk = vm.pk;
@@ -94,7 +96,7 @@
 
       // add a callback when data is sent by streamdata.io
       streamdata.onData(function(data) {
-        //$log.info('Received data: ' + JSON.stringify(data));
+        $log.info('Received data: ' + JSON.stringify(data));
         $scope.datasStringify = diffUsingJS("", JSON.stringify(data, null, 2));
         $scope.patchStringify = "";
         if(Object.prototype.toString.call(data) === '[object Array]' ) {
@@ -117,7 +119,7 @@
             vm.isPatching = true;
             $scope.$digest();
             $timeout(function() {
-                //$log.info('Received path:' + JSON.stringify(patch));
+                $log.info('Received path:' + JSON.stringify(patch));
 
                 var oldDatas = JSON.stringify($scope.datas, null, 2);
 
@@ -208,7 +210,6 @@
     // skip html tags
     str_input = str_input.replace(/<(?:.|\n)*?>/gm, '');
     str_output = str_output.replace(/<(?:.|\n)*?>/gm, '');
-    console.log(str_input);
   	return "<p>"+diffString(str_input,str_output)+"</p>";
   }
 

@@ -52,7 +52,7 @@
                     <label class="col-sm-3 control-label">Specific headers</label>
                     <div class="col-sm-8">
                         <button style="width: 24px;height: 24px;padding: 0px;font-weight: bold;"
-                                ng-click="controller.addHeader()">+</button>
+                                ng-click="controller.addHeader()" type="button">+</button>
                         <img src="img/info.png" ng-model="controller.popupHeaders.content" popup="controller.popupHeaders.options">
                         </img>
                     </div>
@@ -138,7 +138,7 @@
           (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
           function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
           e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-          e.src='//www.google-analytics.com/analytics.js';
+          e.src='http://www.google-analytics.com/analytics.js';
           r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
           ga('create','UA-XXXXX-X');ga('send','pageview');
         </script>
