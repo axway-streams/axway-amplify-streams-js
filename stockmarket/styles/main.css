@@ -1414,8 +1414,8 @@ a:hover, a:focus {
 }
 a:focus {
   outline: thin dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
+  /*outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;*/
 }
 
 figure {
@@ -4366,7 +4366,7 @@ tbody.collapse.in {
 }
 .nav > li > a:hover, .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  /*background-color: #eeeeee;*/
 }
 .nav > li.disabled > a {
   color: #777777;
@@ -5035,7 +5035,7 @@ tbody.collapse.in {
   display: inline-block;
 }
 .breadcrumb > li + li:before {
-  content: "/ ";
+  content: "/ ";
   padding: 0 5px;
   color: #ccc;
 }
@@ -7090,6 +7090,7 @@ body {
 /* Custom page header */
 .header {
   border-bottom: 1px solid #e5e5e5;
+  text-align: center;
   /* Make the masthead heading the same height as the navigation */
 }
 .header h3 {
@@ -7104,6 +7105,7 @@ body {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
+  margin-top: 80px;
 }
 
 .container-narrow > hr {
@@ -7151,4 +7153,46 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+ins {
+  color: #4cae4c;
+  text-decoration: inherit;
+  font-weight: bold;
+}
+
+del {
+  display: none;
+}
+
+pre {
+  padding: 1px;
+  margin: 0px;
+}
+
+.json-string {
+  color: green;
+}
+
+.json-number {
+  color: darkorange;
+}
+
+.json-boolean {
+  color: blue;
+}
+
+.json-null {
+  color: magenta;
+}
+
+.json-key {
+  color: black;
+}
+
+.nav-tabs {
+  border-bottom: 0px;
+}
+
+.disabled {
+  pointer-events: none;
 }

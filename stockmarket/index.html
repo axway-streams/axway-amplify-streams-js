@@ -1,78 +1,179 @@
 <!doctype html>
 <html class="no-js" lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-    <title>Streamdata.io Stock-Market</title>
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="shortcut icon" href="favicon.ico" />
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+        <title>Streamdata.io Stock-Market</title>
+        <link rel="shortcut icon" href="favicon.ico" />
 
-    <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/diffview.css">
+        <link rel="stylesheet" href="styles/jquery-ui.css">
+    </head>
+    <body ng-app="app">
+        <!--[if lt IE 10]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-  </head>
-  <body>
-    <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+        <div class="container">
+            <div class="header">
+                <img src="img/logo.png"/>
+                <h3 class="text-muted">Stock-Market JQuery / UnderscoreJS demo</h3>
+            </div>
+            <div class="row">
+                <div id="error" class="alert alert-danger text-center" role="alert"></div>
+            </div>
 
-    <div class="container">
-      <div class="header">
-        <h3 class="text-muted">Stock-Market Streamdata.io JQuery demo</h3>
-      </div>
+            <form class="form-horizontal" name="streamdataForm" style="margin-bottom: 30px;">
+                <div class="form-group">
+                    <label for="inputUrl" class="col-sm-3 control-label">URL</label>
+                    <div class="col-sm-9">
+                        <input id="inputUrl" class="form-control" placeholder="Your JSON API Url" type="url" value="http://motwindemo-stockmarket.rhcloud.com/app/stockmarket/prices"
+                               required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPublicKey" class="col-sm-3 control-label">Public Key</label>
+                    <div class="col-sm-8">
+                        <input id="inputPublicKey" class="form-control" placeholder="Your public key" type="text"
+                               required value="ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz">
+                    </div>
+                    <img src="img/info.png" class="col-sm-1" style="width: inherit; margin-top: 5px;"
+                            data-content="Public key used for authentication, if you don\'t have one go to <a href='#'>Sign In</a>"
+                            data-html="true" data-toggle="popover" data-trigger="hover"
+                            data-delay='{ "show": "0", "hide": "1500" }' data-placement="left"/>
+                </div>
+                <div class="form-group">
+                    <label for="inputPrivateKey" class="col-sm-3 control-label">Private Key</label>
+                    <div class="col-sm-8">
+                        <input id="inputPrivateKey" class="form-control" placeholder="Your private key" type="text"
+                               required value="MmIyMzBlZGMtOGYyNi00OGY2LWI2YTYtZmY1OTFlMzY1NjNiYjNhMzc3NWMtMzMwMC00YmMzLWI0NGYtMmM1ZmU4MDAzMGFh">
+                    </div>
+                    <img src="img/info.png" class="col-sm-1" style="width: inherit; margin-top: 5px;"
+                         data-content="Private key used for authentication, if you don\'t have one go to <a href='#'>Sign In</a>"
+                         data-html="true" data-toggle="popover" data-trigger="hover"
+                         data-delay='{ "show": "0", "hide": "1500" }' data-placement="left"/>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Specific headers</label>
+                    <div class="col-sm-8">
+                        <button id="btnAddHeader" style="width: 24px;height: 24px;padding: 0px;font-weight: bold;"
+                                type="button">+
+                        </button>
+                        <img src="img/info.png"
+                             data-content="HTTP headers can be added in case of need but it's not required"
+                             data-toggle="popover" data-trigger="hover"/>
+                    </div>
+                </div>
+                <div id="headersInputCtn"></div>
+            </form>
 
-      <div class="row">
-        <div id="error" class="alert alert-danger text-center hide" role="alert"></div>
-      </div>
-      <form class="form-horizontal">
-        <div class="form-group">
-          <label for="inputUrl" class="col-sm-2 control-label">URL</label>
-          <div class="col-sm-10">
-            <input id="inputUrl" class="form-control" placeholder="Your JSON API Url"
-                   value="http://motwindemo-stockmarket.rhcloud.com/app/stockmarket/prices" required>
-          </div>
+
+            <div class="pull-right">
+                <button id="connect" type="button" class="btn btn-success" style="margin-right: 25px;">Connect</button>
+                <button id="disconnect" type="button" class="btn btn-danger" style="margin-right: 25px;">
+                    Disconnect</button>
+                <div style="background-repeat: no-repeat; height: 27px; width: 15px; margin-top: 10px; float: right;">
+                    <img id="patchSpinner" src="img/spinner.gif"/>
+                </div>
+            </div>
+
+            <section>
+                <div id="datasTab" style="margin-top: 70px;">
+                    <ul class="nav nav-tabs">
+                        <li><a href="#datasArray">Array</a>
+                        </li>
+                        <li>
+                            <a href="#datasJson">Patched JSON document</a>
+                        </li>
+                        <li>
+                            <a href="#datasPatch">JSON Patch Operations</a>
+                        </li>
+                    </ul>
+
+                    <!-- Patched JSON Array -->
+                    <div class="row" style="overflow: auto;" id="datasArray">
+                    </div>
+
+                    <!-- Patched JSON Document -->
+                    <div class="row" style="height: 500px" id="datasJson">
+                        <pre style="height: 100%;"></pre>
+                    </div>
+
+                    <!-- JSON Patch Operations -->
+                    <div class="row" style="height: 500px" id="datasPatch">
+                        <pre id="patchCtn" style="height: 100%;"></pre>
+                    </div>
+                </div>
+            </section>
+
+            <div class="footer">
+                <p>♥ from the <a href="http://streamdata.io/" target="_blank">streamdata.io</a> team</p>
+            </div>
         </div>
-          <div class="form-group">
-              <label for="inputHeaders" class="col-sm-2 control-label">Specific headers</label>
-              <div class="col-sm-10">
-                  <textarea id="inputHeaders" class="form-control">
-                  </textarea>
-              </div>
-          </div>
 
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-6">
-            <button id="connect" type="button" class="btn btn-success">Connect</button>
-            <button id="disconnect" type="button" class="btn btn-danger">Disconnect</button>
-          </div>
-        </div>
-      </form>
+        <script type="text/html" id="datasArrayTpl">
+            <table class="table table-striped table-bordered table-hover table-condensed">
+                <tr>
+                    <% _.each(datasHeaders,function(header,key,list){ %>
+                    <th><%= header %></th>
+                    <% }) %>
+                </tr>
+                <% _.each(datas,function(data,key,list){ %>
+                <tr>
+                    <% _.each(data,function(value,key,list){ %>
+                        <% if (key != 'areNew') { %>
+                            <td class="<%= data.areNew && data.areNew.indexOf(key) == -1 ? '' : 'success' %>"><%= value
+                                %></td>
+                        <% } %>
+                    <% }) %>
+                </tr>
+                <% }) %>
+            </table>
+        </script>
 
-      <div class="row">
-        <table id="stocks" class="table table-striped">
-        </table>
-      </div>
+        <script type="text/html" id="headersInputTpl">
+            <% _.each(headers,function(header,key,list){ %>
+            <div class="form-group">
+                <div class="col-sm-5">
+                    <input class="form-control inputKeyHeader" data-index="<%= key %>" placeholder="Key"
+                           value="<%= header.key %>"></input>
+                </div>
+                <div class="col-sm-5">
+                    <input class="form-control inputValueHeader" data-index="<%= key %>" placeholder="Value"
+                           value="<%= header.value %>"></input>
+                </div>
+                <div class="col-sm-2">
+                    <button data-index="<%= key %>"
+                            style="margin-top: 6px;padding: 0px;width: 23px; border-radius: 20px;"
+                            class="btn btn-danger btnRemoveHeader" type="button">✕</button>
+                </div>
+            </div>
+            <% }) %>
+        </script>
 
-      <div class="footer">
-        <p>♥ from the <a href="http://streamdata.io/" target="_blank">streamdata.io</a> team</p>
-      </div>
-    </div>
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+          (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+          function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+          e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+          e.src='http://www.google-analytics.com/analytics.js';
+          r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+          ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='//www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fast-json-patch/0.5.1/json-patch-duplex.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.0/underscore-min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fast-json-patch/0.5.1/json-patch-duplex.min.js"></script>
+        <script src="scripts/difflib.js"></script>
+        <script src="scripts/diffview.js"></script>
 
-    <script src="scripts/streamdataio.min.js"></script>
-    <script src="scripts/main.js"></script>
-</body>
+        <script src="scripts/streamdataio.min.js"></script>
+        <script src="scripts/main.js"></script>
+    </body>
 </html>

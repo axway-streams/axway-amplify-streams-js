@@ -96,7 +96,7 @@
 
       // add a callback when data is sent by streamdata.io
       streamdata.onData(function(data) {
-        $log.info('Received data: ' + JSON.stringify(data));
+        //$log.info('Received data: ' + JSON.stringify(data));
         $scope.datasStringify = diffUsingJS("", JSON.stringify(data, null, 2));
         $scope.patchStringify = "";
         if(Object.prototype.toString.call(data) === '[object Array]' ) {
@@ -204,14 +204,6 @@
     vm.init();
 
   };
-
-  function compareDatas(str_input, str_output)
-  {
-    // skip html tags
-    str_input = str_input.replace(/<(?:.|\n)*?>/gm, '');
-    str_output = str_output.replace(/<(?:.|\n)*?>/gm, '');
-  	return "<p>"+diffString(str_input,str_output)+"</p>";
-  }
 
   function diffUsingJS(base, newTxt, viewType) {
     viewType = viewType || 1;
