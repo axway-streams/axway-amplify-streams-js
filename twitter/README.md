@@ -1,7 +1,7 @@
 # streamdataio-js/twitter
 This sample application shows how to get a Twitter timeline with the <a href="http://streamdata.io" target="_blank">streamdata.io</a> Javascript SDK and JQuery.
 
-The streamdata.io SDK enables to use streamdata.io to get data pushed from various sources and use them in your application.
+The streamdata.io SDK allows the use of streamdata.io to get data pushed from various sources and use them in your application.
 
 To run the sample, open the index.html in your browser (Chrome, Firefox, Safari).
 
@@ -18,6 +18,6 @@ You will also be asked to fill in your Twitter OAuth signature (as a HTTP header
 
 Note that Twitter limits the number of API requests (see <a href="https://dev.twitter.com/rest/public/rate-limiting" target="_blank">Twitter doc</a> for more information). So, you might reach this limit after a while.
 
-If you have any questions or feedbacks, feel free to ask: <a href="mailto://support@streamdata.io">support@streamdata.io</a>
+If you have any questions or feedback, feel free to ask: <a href="mailto://support@streamdata.io">support@streamdata.io</a>
 
 Enjoy!
