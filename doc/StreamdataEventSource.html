@@ -87,9 +87,9 @@
     
     
     <div class="description">
-        <p>The StreamdataEventSource object is the main entry point to establish a connection to a REST service URL.</p>
+        <p>The <code>StreamdataEventSource</code> object is the main entry point to establish a connection to a targeted JSON REST service URL.</p>
 
-<p>Use streamdataio.createEventSource(url,headers) to create new instance.</p>
+<p>Use <code>streamdataio.createEventSource(url[,headers])</code> to create new instance.</p>
     </div>
     
 
@@ -171,7 +171,7 @@
     
     
     <div class="description">
-        <p>Unregister a callback called  when the client application received initial data from the server.</p>
+        <p>Unregister a callback called  when the client application received initial data (snapshot) from the server.</p>
     </div>
     
 
@@ -313,7 +313,7 @@ eventSource.offData(callback); // unregister</pre>
     
     
     <div class="description">
-        <p>Unregister a callback called  when the client application failed to establish connection to the server.</p>
+        <p>Unregister a callback called when the client application experienced an error.</p>
     </div>
     
 
@@ -597,7 +597,7 @@ eventSource.offMonitor(callback); // unregister</pre>
     
     
     <div class="description">
-        <p>Unregister a callback called when the client application opened sucessfully a StreamdataEventSource.<p>
+        <p>Unregister a callback called when the client application opened sucessfully a <code>StreamdataEventSource</code>.<p>
     </div>
     
 
@@ -739,7 +739,7 @@ eventSource.offOpen(callback); // unregister</pre>
     
     
     <div class="description">
-        <p>Unregister a callback called  when the client application received incremental update data from the server.</p>
+        <p>Unregister a callback called  when the client application received incremental update data (patch) from the server.</p>
     </div>
     
 
@@ -881,7 +881,7 @@ eventSource.offPatch(callback); // unregister</pre>
     
     
     <div class="description">
-        <p>Register a callback called  when the client application received initial data from the server.</p>
+        <p>Register a callback called  when the client application received initial data (snapshot) from the server.</p>
     </div>
     
 
@@ -973,7 +973,7 @@ eventSource.offPatch(callback); // unregister</pre>
 
             
 
-            <td class="description last">the Json object sent by the server containing initial data in Json format.</td>
+            <td class="description last">the Json object sent by the server containing initial data (snapshot) in Json format.</td>
         </tr>
 
 	
@@ -1070,7 +1070,7 @@ eventSource.offPatch(callback); // unregister</pre>
     
     
     <div class="description">
-        <p>Register a callback called  when the client application failed to establish connection to the server.</p>
+        <p>Register a callback called when the client application experienced an error.</p>
     </div>
     
 
@@ -1162,7 +1162,7 @@ eventSource.offPatch(callback); // unregister</pre>
 
             
 
-            <td class="description last">the StreamdataError sent by the server in case of error.</td>
+            <td class="description last">the <code>StreamdataError</code> received in case of error.</td>
         </tr>
 
 	
@@ -1449,7 +1449,7 @@ eventSource.offPatch(callback); // unregister</pre>
     
     
     <div class="description">
-        <p>Register a callback called when the client application opened sucessfully a StreamdataEventSource.<p>
+        <p>Register a callback called when the client application opened successfully a <code>StreamdataEventSource</code>.<p>
     </div>
     
 
@@ -1589,7 +1589,7 @@ eventSource.offPatch(callback); // unregister</pre>
     
     
     <div class="description">
-        <p>Register a callback called  when the client application received incremental update data from the server.</p>
+        <p>Register a callback called  when the client application received incremental update data (patch) from the server.</p>
     </div>
     
 
@@ -1681,7 +1681,7 @@ eventSource.offPatch(callback); // unregister</pre>
 
             
 
-            <td class="description last">the Json object sent by the server containing incremental update data in Json patch format.</td>
+            <td class="description last">the Json object sent by the server containing incremental update data (patch) in Json patch format.</td>
         </tr>
 
 	
@@ -1778,9 +1778,9 @@ eventSource.offPatch(callback); // unregister</pre>
     
     
     <div class="description">
-        <p>Open StreamdataEventSource to the server.</p>
+        <p>Open <code>StreamdataEventSource</code> connection to the URL.</p>
 
-<p>The StreamdataEventSource will auto reconnect if the connection is lost until close() is called.</p>
+<p>The <code>StreamdataEventSource</code> will auto reconnect if the connection is lost until <code>close()</code> is called.</p>
     </div>
     
 
@@ -1872,13 +1872,13 @@ eventSource.offPatch(callback); // unregister</pre>
 					
 					
 		<span class="copyright">
-		Connect to <a href="http://streamdata.io/" target="_blank">streamdata.io</a> - @Copyrights Motwin 2015
+		Connect to <a href="http://streamdata.io/" target="_blank">streamdata.io</a> - @Copyright Motwin 2015
 		</span>
 					<br />
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a>
-		on Tue Mar 31 2015 15:24:49 GMT+0200 (CEST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Wed Apr 01 2015 16:48:05 GMT+0200 (CEST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>
