@@ -1,7 +1,7 @@
 # streamdata-js
 <a href="http://streamdata.io" target="_blank">streamdata.io</a> Javascript SDK package containing SDK, documentation and sample applications.
 
-The SDK enables to use the streamdata.io proxy to get data pushed from various sources and to use them in your application.
+The SDK allows the use of the streamdata.io proxy to get data pushed from various sources and to use them in your application.
 
 In this directory, you will find:
 - a minified version of the SDK (streamdataio.min.js)
@@ -13,6 +13,6 @@ In this directory, you will find:
  
 To run a sample and understand how it works, clone the git repository, open the index.html of the sample in your browser (Chrome, Firefox, Safari) and browse the code!
 
-If you have any questions or feedbacks, feel free to ask: <a href="mailto://support@streamdata.io">support@streamdata.io</a>
+If you have any questions or feedback, feel free to ask: <a href="mailto://support@streamdata.io">support@streamdata.io</a>
 
 Enjoy!
