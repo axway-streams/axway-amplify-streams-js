@@ -1,11 +1,11 @@
-# streamdata-js/stockmarket-angular
-Sample application with Streamdata Javascript SDK and JQuery
+# streamdata-js/stockmarket
+This sample application shows how to use the <a href="http://streamdata.io" target="_blank">streamdata.io</a> Javascript SDK with JQuery.
 
-The SDK will allow you to use <a href="http://streamdata.io">streamdata.io</a> Proxy to get data from various sources, and use them in your application.
-This sample show you how to use this SDK within a Javascript application using JQuery.
- 
-Simply run the sample, and browse the code to understand how it works.
+The streamdata.io SDK allows the use of streamdata.io to get data pushed from various sources and use them in your application.
 
-If you have any question of feedback, feel free to ask : <a href="mailto://support@streamdata.io">support@streamdata.io</a>
+To run the sample, open the index.html in your browser (Chrome, Firefox, Safari).
+You will be asked to fill in a public and a private key. To get them, connect to the <a href="https://portal.streamdata.io/" target="_blank">streamdata.io portal</a> and follow the guidelines.
+
+If you have any questions or feedback, feel free to ask: <a href="mailto://support@streamdata.io">support@streamdata.io</a>
 
 Enjoy!

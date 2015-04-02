@@ -77,9 +77,9 @@
  */
 
 /**
- * &lt;p>StreamdataError provides error details when an error is thrown while processing a request or continuous query.&lt;/p>
+ * &lt;p>&lt;code>StreamdataError&lt;/code> provides error details when an error is thrown while processing a Server Sent Event.&lt;/p>
  * 
- * &lt;p>Cannot be used directly.&lt;/p>
+ * &lt;p>This object is provided by the &lt;code>onError&lt;/code> callback.&lt;/p>
  * 
  * @constructor
  */
@@ -122,25 +122,25 @@ StreamdataError.prototype.getMessage = function() { return ""; };
 StreamdataError.prototype.getError = function() { return null; };
 
 /**
- * &lt;p>The StreamdataEventSource object is the main entry point to establish a connection to a REST service URL.&lt;/p>
+ * &lt;p>The &lt;code>StreamdataEventSource&lt;/code> object is the main entry point to establish a connection to a targeted JSON REST service URL.&lt;/p>
  *
- * &lt;p>Use streamdataio.createEventSource(url,headers) to create new instance.&lt;/p>
+ * &lt;p>Use &lt;code>streamdataio.createEventSource(url[,headers])&lt;/code> to create new instance.&lt;/p>
  *
  * @constructor
  */
 function StreamdataEventSource() {}
 
 /**
- * &lt;p>Open StreamdataEventSource to the server.&lt;/p>
+ * &lt;p>Open &lt;code>StreamdataEventSource&lt;/code> connection to the URL.&lt;/p>
  *
- * &lt;p>The StreamdataEventSource will auto reconnect if the connection is lost until close() is called.&lt;/p>
+ * &lt;p>The &lt;code>StreamdataEventSource&lt;/code> will auto reconnect if the connection is lost until &lt;code>close()&lt;/code> is called.&lt;/p>
  *
  * @returns {StreamdataEventSource}
  */
 StreamdataEventSource.prototype.open = function() { return this; };
 
 /**
- * &lt;p>Register a callback called when the client application opened sucessfully a StreamdataEventSource.&lt;p>
+ * &lt;p>Register a callback called when the client application opened successfully a &lt;code>StreamdataEventSource&lt;/code>.&lt;p>
  *
  * @example
  * eventSource.onOpen(function() {
@@ -153,7 +153,7 @@ StreamdataEventSource.prototype.open = function() { return this; };
 StreamdataEventSource.prototype.onOpen = function(callback) { return this; };
 
 /**
- * &lt;p>Register a callback called  when the client application failed to establish connection to the server.&lt;/p>
+ * &lt;p>Register a callback called when the client application experienced an error.&lt;/p>
  *
  * @example
  * eventSource.onError(function(aError) {
@@ -161,33 +161,33 @@ StreamdataEventSource.prototype.onOpen = function(callback) { return this; };
  *   // aError.getMessage();
  * });
  * @param {Function} callback the function to notify.
- * @param {aError} callback.aError the StreamdataError sent by the server in case of error.
+ * @param {aError} callback.aError the &lt;code>StreamdataError&lt;/code> received in case of error.
  * @returns {StreamdataEventSource}
  */
 StreamdataEventSource.prototype.onError = function(callback) { return this; };
 
 /**
- * &lt;p>Register a callback called  when the client application received initial data from the server.&lt;/p>
+ * &lt;p>Register a callback called  when the client application received initial data (snapshot) from the server.&lt;/p>
  *
  * @example
  * eventSource.onData(function(data) {
  *   // callback code
  * });
  * @param {Function} callback the function to notify.
- * @param {data} callback.data the Json object sent by the server containing initial data in Json format.
+ * @param {data} callback.data the Json object sent by the server containing initial data (snapshot) in Json format.
  * @returns {StreamdataEventSource}
  */
 StreamdataEventSource.prototype.onData = function(callback) { return this; };
 
 /**
- * &lt;p>Register a callback called  when the client application received incremental update data from the server.&lt;/p>
+ * &lt;p>Register a callback called  when the client application received incremental update data (patch) from the server.&lt;/p>
  *
  * @example
  * eventSource.onPatch(function(patch) {
  *   // callback code
  * });
  * @param {Function} callback the function to notify.
- * @param {patch} callback.patch the Json object sent by the server containing incremental update data in Json patch format.
+ * @param {patch} callback.patch the Json object sent by the server containing incremental update data (patch) in Json patch format.
  * @returns {StreamdataEventSource}
  */
 StreamdataEventSource.prototype.onPatch = function(callback) { return this; };
@@ -206,7 +206,7 @@ StreamdataEventSource.prototype.onPatch = function(callback) { return this; };
 StreamdataEventSource.prototype.onMonitor = function(callback) { return this; };
 
 /**
- * &lt;p>Unregister a callback called when the client application opened sucessfully a StreamdataEventSource.&lt;p>
+ * &lt;p>Unregister a callback called when the client application opened sucessfully a &lt;code>StreamdataEventSource&lt;/code>.&lt;p>
  *
  * @example
  * var callback = function() {
@@ -221,7 +221,7 @@ StreamdataEventSource.prototype.onMonitor = function(callback) { return this; };
 StreamdataEventSource.prototype.offOpen = function(callback) { return this; };
 
 /**
- * &lt;p>Unregister a callback called  when the client application failed to establish connection to the server.&lt;/p>
+ * &lt;p>Unregister a callback called when the client application experienced an error.&lt;/p>
  *
  * @example
  * var callback = function(aEvent) {
@@ -236,7 +236,7 @@ StreamdataEventSource.prototype.offOpen = function(callback) { return this; };
 StreamdataEventSource.prototype.offError = function(callback) { return this; };
 
 /**
- * &lt;p>Unregister a callback called  when the client application received initial data from the server.&lt;/p>
+ * &lt;p>Unregister a callback called  when the client application received initial data (snapshot) from the server.&lt;/p>
  *
  * @example
  * var callback = function(aEvent) {
@@ -251,7 +251,7 @@ StreamdataEventSource.prototype.offError = function(callback) { return this; };
 StreamdataEventSource.prototype.offData = function(callback) { return this; };
 
 /**
- * &lt;p>Unregister a callback called  when the client application received incremental update data from the server.&lt;/p>
+ * &lt;p>Unregister a callback called  when the client application received incremental update data (patch) from the server.&lt;/p>
  *
  * @example
  * var callback = function(aEvent) {
@@ -282,36 +282,33 @@ StreamdataEventSource.prototype.offPatch = function(callback) { return this; };
 StreamdataEventSource.prototype.offMonitor = function(callback) { return this; };
 
 /**
- * &lt;p> streamdata.io sdk provides a way to connect to remote server and monitor the connection state.
- * This is achieved with the &lt;code>streamdataio.createEventSource(url)&lt;/code>, which is the central point of all Streamdata SDK API.
- * The StreamdataEventSource handles connection to the remote server, and provides mechanism to monitor the connection state.&lt;/p>
- * 
- * &lt;p>A singleton instance is provided as a "streamdata" global variable.&lt;/p>
+ * &lt;p> streamdata.io sdk provides a way to connect to a remote server and monitor the connection state.
+ * &lt;p>A singleton instance is provided as a &lt;code>streamdataio&lt;/code> global variable and  gives access to the entire streamdata.io SDK API.&lt;/p>
+ * Connecting is achieved with the call to &lt;code>streamdataio.createEventSource(url)&lt;/code>.
+ * This method returns a &lt;code>StreamdataEventSource&lt;/code> object which handles connection to the remote server, and provides mechanism to monitor the connection state.&lt;/p>
  * 
  * @constructor
  */
 function Streamdata() {}
 
 /**
-* &lt;p>Create a new instance of the StreamDataEventSource prototype.&lt;/p>
+* &lt;p>Create a new instance of the &lt;code>StreamDataEventSource&lt;/code> prototype.&lt;/p>
 *
-* &lt;p>The StreamDataEventSource is the main entry point for establishing Server Sent Event connection to a targeted REST service.&lt;/p>
+* &lt;p>The &lt;code>StreamDataEventSource&lt;/code> is the main entry point for establishing Server Sent Event connection to a targeted JSON REST service URL.&lt;/p>
 *
-* @param {String} url The targeted REST URI is formatted as follow:
+* @param {String} url The targeted REST URL is formatted as follow:
 * &lt;pre>&lt;code>protocol://url(:port)(/localpath(?queryparameters))&lt;/code>&lt;/pre>
-* @param {Array} headers Any specific headers that have to be added to the request.
+* @param {Array} headers Optional. Any specific headers that have to be added to the request. It must be an array with the following structure:&lt;code>['Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==']&lt;/code>
 *
 * @returns {StreamDataEventSource}
 */
  Streamdata.prototype.createEventSource = function(url, headers) { return new StreamDataEventSource(url, headers); };
 
 /**
- * &lt;p> streamdata.io sdk provides a way to connect to remote server and monitor the connection state.
- * This is achieved with a call to :
- * &lt;pre>&lt;code>streamdataio.createEventSource(url)&lt;pre>&lt;code>
+ * &lt;p> streamdata.io sdk provides a way to connect to a remote server and monitor the connection state.
+ * &lt;p>A singleton instance is provided as a &lt;code>streamdataio&lt;/code> global variable and  gives access to the entire streamdata.io SDK API.&lt;/p>
+ * Connecting is achieved with the call to &lt;code>streamdataio.createEventSource(url)&lt;/code>.
  *
- * The streamdataio JavaScript Object is the central point of all Streamdata SDK API.
- * The StreamdataEventSource handles connection to the remote server, and provides mechanism to monitor the connection state.&lt;/p>
  */
 var streamdataio = new Streamdata();</pre>
         </article>
@@ -328,13 +325,13 @@ var streamdataio = new Streamdata();</pre>
 					
 					
 		<span class="copyright">
-		Connect to <a href="http://streamdata.io/" target="_blank">streamdata.io</a> - @Copyrights Motwin 2015
+		Connect to <a href="http://streamdata.io/" target="_blank">streamdata.io</a> - @Copyright Motwin 2015
 		</span>
 					<br />
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a>
-		on Tue Mar 31 2015 15:24:49 GMT+0200 (CEST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Wed Apr 01 2015 18:12:00 GMT+0200 (CEST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>
