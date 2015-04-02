@@ -38,7 +38,7 @@
     };
 
     vm.init  = function() {
-      vm.url = 'http://motwindemo-stockmarket.rhcloud.com/app/stockmarket/prices';
+      vm.url = 'http://demo-streamdataio.rhcloud.com/stockmarket/prices';
       vm.isConnected = false;
       vm.errorMsg = null;
     };
