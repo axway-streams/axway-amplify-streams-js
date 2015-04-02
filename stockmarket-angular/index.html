@@ -20,7 +20,7 @@
         <div class="container" ng-controller="AppController as controller">
             <div class="header">
                 <img src="img/logo.png"/>
-                <h3 class="text-muted">Stock-Market AngularJS demo</h3>
+                <h3 class="text-muted">Stock-Market demo with <img src="img/angular.png" style="width: 130px;"/></h3>
             </div>
             <div class="row" ng-cloak>
                 <div id="error" class="alert alert-danger text-center" ng-show="controller.errorMsg != null" role="alert">{{controller.errorMsg}}</div>
@@ -29,7 +29,7 @@
             <form class="form-horizontal" name="streamdataForm" style="margin-bottom: 30px;">
                 <div class="form-group">
                     <label for="inputUrl" class="col-sm-3 control-label">URL</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm-8">
                         <input id="inputUrl" class="form-control" placeholder="Your JSON API Url" type="url" ng-model="controller.url" required>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                     <div class="col-sm-8">
                         <input id="inputPublicKey" class="form-control" placeholder="Your public key" type="text" ng-model="controller.Pk" required>
                     </div>
-                    <img src="img/info.png" class="col-sm-1" style="width: inherit; margin-top: 5px;"
+                    <img src="img/info.png" class="col-sm-1" style="width: inherit; margin-top: 5px; padding-left: 0px;"
                          ng-model="controller.popupPk.content" popup="controller.popupPk.options"/>
                 </div>
                 <div class="form-group">
@@ -46,29 +46,28 @@
                     <div class="col-sm-8">
                         <input id="inputPrivateKey" class="form-control" placeholder="Your private key" type="text" ng-model="controller.pk" required>
                     </div>
-                    <img src="img/info.png" class="col-sm-1" style="width: inherit; margin-top: 5px;"
-                         ng-model="controller.popuppk.content" popup="controller.popuppk.options"/>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Specific headers</label>
-                    <div class="col-sm-8">
-                        <button style="width: 24px;height: 24px;padding: 0px;font-weight: bold;"
-                                ng-click="controller.addHeader()" type="button">+</button>
-                        <img src="img/info.png" ng-model="controller.popupHeaders.content" popup="controller.popupHeaders.options">
+                    <div class="col-sm-8" style="margin-top: 6px;">
+                        <a href="#" ng-click="controller.addHeader()">Add header</a>
+                        <img src="img/info.png" style="padding-left: 10px;"
+                             ng-model="controller.popupHeaders.content" popup="controller.popupHeaders.options">
                         </img>
                     </div>
                 </div>
                 <div class="form-group" ng-repeat="(index, header) in controller.headers">
-                    <div class="col-sm-5">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-4">
                         <input class="form-control" ng-model="header.name" placeholder="Key">
                         </input>
                     </div>
-                    <div class="col-sm-5">
+                    <div class="col-sm-4">
                         <input class="form-control" ng-model="header.value" placeholder="Value">
                         </input>
                     </div>
-                    <div class="col-sm-2">
-                        <button style="margin-top: 6px;padding: 0px;width: 23px; border-radius: 20px;" class="btn btn-danger"
+                    <div class="col-sm-1" style="margin-top: 6px; padding-left: 0px;">
+                        <button style="padding: 0px;width: 23px; border-radius: 20px;" class="btn btn-danger"
                                 ng-click="controller.removeHeader(index)">✕</button>
                     </div>
                 </div>

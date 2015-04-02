@@ -10,16 +10,7 @@
     vm.headers = [];
 
     this.popupPk = {
-      content: 'Public key used for authentication, if you don\'t have one go to <a href="#">Sign In</a>',
-      options: {
-        title: null,
-        placement: 'left',
-        html: true,
-        delay: { show: 0, hide: 1500 }
-      }
-    };
-    this.popuppk = {
-      content: 'Private key used for authentication, if you don\'t have one go to <a href="#">Sign In</a>',
+      content: 'A key pair is required for authentication. <a href="https://portal.streamdata.io">Sign In</a> to get yours.',
       options: {
         title: null,
         placement: 'left',
@@ -28,7 +19,7 @@
       }
     };
     this.popupHeaders = {
-      content: 'HTTP headers can be added in case of need but it\'s not required',
+      content: 'Add any custom HTTP Header (optional)',
       options: {
         title: null,
         placement: 'right',
