@@ -10,7 +10,7 @@
     vm.headers = [];
 
     this.popupPk = {
-      content: 'A key pair is required for authentication. <a href="https://portal.streamdata.io">Sign In</a> to get yours.',
+      content: 'A key pair is required for authentication. <a href="https://portal.streamdata.io" target="_blank">Sign In</a> to get yours.',
       options: {
         title: null,
         placement: 'left',
