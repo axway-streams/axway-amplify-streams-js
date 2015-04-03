@@ -90,7 +90,7 @@ But wait, there is more: streamdata.io keeps an history of modifications that oc
 <h2 id="features">Features</h2>
 <ul>
 <li>Incremental data update: replacing polling by push is not enough to minimize data streams. That&#39;s why streamdata.io pushes only the part that has changed.</li>
-<li><a href="http://www.w3.org/TR/eventsource/" target="_blank">Server Sent Events (SSE)</a>: updates are pushed to the client using SSE protocol. By providing fallback mechanisms streamdata.io can also work with older browsers.</li>
+<li><a href="http://www.w3.org/TR/eventsource/" target="_blank">Server-Sent-Events (SSE)</a>: updates are pushed to the client using SSE protocol. By providing fallback mechanisms streamdata.io can also work with older browsers.</li>
 <li>API Cache: to reduce server load and latency, streamdata.io has an integrated cache mechanism.</li>
 </ul>
 <p>This Javascript SDK facilitates the usage of streamdata.io.</p>
@@ -101,12 +101,12 @@ But wait, there is more: streamdata.io keeps an history of modifications that oc
 <pre><code class="lang-html">&lt;script src=&quot;/js/streamdataio.min.js&quot;&gt;&lt;/script&gt;
 </code></pre>
 <p>By doing this, you access in your JavaScript code to the <code>streamdataio</code> object which is the central point of all streamdata.io SDK API.</p>
-<h2 id="2-create-a-streamdataeventsource-object">2. Create a StreamDataEventSource Object</h2>
+<h2 id="2-use-streamdata-io-to-connect-to-your-api">2. Use streamdata.io to connect to your API</h2>
 <p>Create a <code>StreamDataEventSource</code> object into your JavaScript code.</p>
 <pre><code class="lang-javascript">    var myEventSource = streamdataio.createEventSource(&quot;http://mysite.com/myJsonRestService&quot;);
 </code></pre>
 <p>The <code>StreamDataEventSource</code> is the main entry point for establishing a data stream connection to the given URL. </p>
-<p>It uses standard HTTP Server Sent Events to get the data you required through streamdata.io proxy.</p>
+<p>It uses standard HTTP Server-Sent-Events to get the data you required through streamdata.io proxy.</p>
 <p>If your API requires specific headers, simply pass them as an array on the event source creation, and streamdata.io will forward them to your Information System.</p>
 <p>An optional <code>headers</code> parameter can be passed to the <code>createEventSource</code> method. </p>
 <p>It must be an array with the following structure:</p>
@@ -121,32 +121,22 @@ But wait, there is more: streamdata.io keeps an history of modifications that oc
 
     var myEventSource = streamdataio.createEventSource(url, headers);
 </code></pre>
-<h2 id="3-add-callbacks-to-handle-data-reception">3. Add callbacks to handle data reception</h2>
+<h2 id="3-handle-data-reception">3. Handle data reception</h2>
 <p>streamdata.io SDK handles data from the targeted REST service as JSON objects.</p>
 <p>When the <code>StreamDataEventSource</code> object is opened, the initial set of data is returned as it would be with a standard call to the service URL. This data set is called the <strong>snapshot</strong>. The SDK returns it through the <code>onData</code> callback.</p>
 <p>The updates of this initial set will come subsequently in the <a href="http://tools.ietf.org/html/rfc6902" target="_blank">JSON-Patch</a> format through the <code>onPatch</code> callback. Such a data update is called a <strong>patch</strong>.</p>
-<h3 id="3-1-predefined-callback-method">3.1 Predefined callback method</h3>
-<pre><code class="lang-javascript">    var myDataCallback = function(data) {
-      // do whatever you want with snapshot data
-      // snapshot is provided by the sdk as a Json object
-    };
-
-    var myPatchCallback =function(data) {
-      // do whatever you want patch data
-      // patch is provided by the sdk as a Json object
-    }; 
-    myEventSource.onData(myDataCallback);
-    myEventSource.onPatch(myPatchCallback);
-</code></pre>
-<h3 id="3-2-direct-callback-definition">3.2 Direct callback definition</h3>
-<p>You can chain callback definitions and directly define callback functions</p>
+<p>You can define your callback functions as follows:</p>
 <pre><code class="lang-javascript">    myEventSource.onData(function(data){
-        // do whatever you want with snapshot data
+        // initialize your data with the initial snapshot
     }).onPatch(function(data){
-        // do whatever you want with patch data
+        // update the data with the provided patch
+    }).onError(function(data){
+        // do whatever you need in case of error
+    }).onOpen(function(data){
+        // you can also add custom behavior when the stream is opened
     });
 </code></pre>
-<h2 id="4-open-the-streamdataeventsource">4. Open the StreamDataEventSource</h2>
+<h2 id="4-start-receiving-data">4. Start receiving data</h2>
 <pre><code class="lang-javascript">    myEventSource.open();
 </code></pre>
 <h1 id="examples">Examples</h1>
@@ -209,21 +199,23 @@ But wait, there is more: streamdata.io keeps an history of modifications that oc
 </code></pre>
 <h2 id="2-example-projects">2. Example projects</h2>
 <p>You&#39;ll find on GitHub the following projects which integrates streamdata.io SDK within simple example applications.</p>
-<h3 id="jquery-example">jQuery example</h3>
+<h3 id="2-1-jquery-example">2.1 jQuery example</h3>
 <p>A simple jQuery integration of market data with streamdata.io SDK.</p>
-<p><a href="https://github.com/streamdataio/streamdataio-js/tree/master/stockmarket" target="_blank">Stock Market</a></p>
+<p><a href="https://github.com/streamdataio/streamdataio-js/tree/master/stockmarket-jquery" target="_blank">Stock Market jQuery</a></p>
 <h3 id="2-2-angular-js-example">2.2 Angular.js example</h3>
 <p>The same market data example using Angular.js </p>
 <p><a href="https://github.com/streamdataio/streamdataio-js/tree/master/stockmarket-angular" target="_blank">Stock Market Angular</a></p>
-<h3 id="2-2-twitter-example">2.2 Twitter example</h3>
+<h3 id="2-3-twitter-example">2.3 Twitter example</h3>
 <p>A sample to demonstrate how to integrate a twitter time line with streamdata.io SDK.</p>
 <p><a href="https://github.com/streamdataio/streamdataio-js/tree/master/twitter" target="_blank">Twitter</a></p>
-<h1 id="authentication">Authentication</h1>
+<h1 id="security">Security</h1>
+<h2 id="1-tls-encryption">1. TLS Encryption</h2>
+<p>streamdata.io uses Transport Layer Security (TLS) to encrypt messages while in transport across the Internet. Using TLS ensures that client messages are protected when being sent to and from streamdata.io. This prevents intercepted messages from being viewed by unauthorized parties.</p>
 <p>Running an application in production through streamdata.io proxy requires an authentication mechanism.</p>
 <p>When registering on <a href="http://streamdata.io" target="_blank">streamdata.io web site</a>, you&#39;ll be provided with a unique key pair for your application.</p>
 <p>This allows streamdata.io proxy to identify that a specific request comes from your application.</p>
 <p>This key pair must be provided to the SDK in order to be able to use the streamdata.io proxy.</p>
-<h2 id="1-provide-key-pair-in-source-code">1. Provide key pair in source code</h2>
+<h2 id="2-provide-key-pair-in-source-code">2. Provide key pair in source code</h2>
 <pre><code class="lang-javascript">    // setup key pair
     streamdataio.Pk = &quot;NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1&quot;;
     streamdataio.pk = &quot;NTEtMTQxNiWIzMDEC00OWNlLThmNGYtY2ExMDJxO00NzNhLTgtZWY0MjOTc2YmUxODFiZDU1NmU0ZDAtYWU5NjYxMGYzNDdi&quot;;
@@ -237,7 +229,7 @@ But wait, there is more: streamdata.io keeps an history of modifications that oc
 <p><strong>Important Note</strong>:</p>
 <p>You need to be aware that this method is useful for development purpose and tests but is not safe to go to production with.</p>
 <p>Your key pair must always be kept secret.</p>
-<h2 id="2-key-pair-external-storage">2. Key pair external storage</h2>
+<h2 id="3-key-pair-external-storage">3. Key pair external storage</h2>
 <p>You can store your key pair in a file using the following JSON format:</p>
 <pre><code class="lang-javascript">    {
         &quot;Pk&quot;: &quot;NTZlMDY1NmEtYTQzYS00MGRkLTljN2UtYmM1MGZlMGRiNGFk&quot;,
@@ -263,7 +255,7 @@ For example, it should be stored in an area accessible only if the user is logge
 <p><strong>Recommendation</strong>:</p>
 <p>We strongly recommend to always use https with applications using streamdata.io.</p>
 <p>This prevents any attacker from intercepting the data flow.</p>
-<h2 id="3-session-storage">3. Session storage</h2>
+<h2 id="4-session-storage">4. Session storage</h2>
 <p>You can activate/deactivate the storage of the key pair in the sessionStorage of your browser.</p>
 <p>This will prevent from querying the external storage each time you call <code>open</code> on your <code>StreamdataEventSource</code>.</p>
 <p>Use the <code>sessionStore</code> boolean attribute of the <code>streamdataio</code> object.</p>
@@ -392,7 +384,7 @@ For example, it should be stored in an area accessible only if the user is logge
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a>
-		on Wed Apr 01 2015 18:12:00 GMT+0200 (CEST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Fri Apr 03 2015 11:48:43 GMT+0200 (CEST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>
