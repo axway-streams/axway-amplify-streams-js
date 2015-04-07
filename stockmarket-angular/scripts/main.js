@@ -10,7 +10,8 @@
     vm.headers = [];
 
     this.popupPk = {
-      content: 'A key pair is required for authentication. <a href="https://portal.motwin.net/#/register" target="_blank">Sign Up</a> to get yours.',
+      content: 'A key pair is required for authentication. <a href="https://portal.streamdata.io/#/register"
+      target="_blank">Sign Up</a> to get yours.',
       options: {
         title: null,
         placement: 'left',
