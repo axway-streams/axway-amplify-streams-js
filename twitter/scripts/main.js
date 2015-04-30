@@ -43,7 +43,7 @@ function connect() {
   streamdata = streamdataio.createEventSource(url, header);
 
   streamdata.streamdataConfig.PROTOCOL = 'https://';
-  streamdata.streamdataConfig.HOST =  'proxy.streamdata.io';
+  streamdata.streamdataConfig.HOST =  'streamdata.motwin.net';
   streamdata.streamdataConfig.PORT =  '';
 
   // add a callback when the connection is opened
