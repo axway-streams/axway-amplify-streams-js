@@ -118,7 +118,7 @@ $(document).ready(function() {
             if(patch.length > limitNbPatch) {
                 patch.splice(limitNbPatch,patch.length-limitNbPatch);
 
-                displayError("Too many operations in patch, only " + limitNbPatch + " firsts operations are applyed");
+                displayError("Too many operations in patch, only " + limitNbPatch + " firsts operations are applied");
             }
             if(!isPatching) {
 
