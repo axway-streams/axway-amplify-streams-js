@@ -104,7 +104,7 @@
       streamdata.onPatch(function(patch) {
         if(patch.length > vm.limitNbPatch) {
             patch.splice(vm.limitNbPatch,patch.length-vm.limitNbPatch);
-            vm.displayError("Too many operations in patch, only " + vm.limitNbPatch + " firsts operations are applyed");
+            vm.displayError("Too many operations in patch, only " + vm.limitNbPatch + " firsts operations are applied");
         }
         if(!vm.isPatching) {
             vm.isPatching = true;
