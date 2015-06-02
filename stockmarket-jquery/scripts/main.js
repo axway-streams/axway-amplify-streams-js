@@ -67,8 +67,10 @@ $(document).ready(function() {
         var header = headersToArray();
 
         // setup key pair
-        // Key pair is saved in session storage _Pk key, to enable key pair change we reset this session storage key
-        window.sessionStorage._Pk = undefined;
+        // Key pair is saved in session storage _Pk key, to eanable key pair change we reset this session storage key
+        if (SessionStorage) {
+            SessionStorage._Pk = undefined;
+        }
         // you can store your key pair in a json file instead, more details in documentation
         streamdataio.Pk = $('#inputPublicKey').val();
         streamdataio.pk = $('#inputPrivateKey').val();

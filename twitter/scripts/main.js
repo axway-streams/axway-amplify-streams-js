@@ -39,6 +39,12 @@ function connect() {
 
   }
 
+    // setup key pair
+    // Key pair is saved in session storage _Pk key, to eanable key pair change we reset this session storage key
+    if (SessionStorage) {
+        SessionStorage._Pk = undefined;
+    }
+
   // create the Streamdata source
   streamdata = streamdataio.createEventSource(url, header);
 
