@@ -103,10 +103,12 @@ But wait, there is more: streamdata.io keeps an history of modifications that oc
 <p>By doing this, you access in your JavaScript code to the <code>streamdataio</code> object which is the central point of all streamdata.io SDK API.</p>
 <h2 id="2-use-streamdata-io-to-connect-to-your-api">2. Use streamdata.io to connect to your API</h2>
 <p>Create a <code>StreamDataEventSource</code> object into your JavaScript code.</p>
-<pre><code class="lang-javascript">    var myEventSource = streamdataio.createEventSource(&quot;http://mysite.com/myJsonRestService&quot;);
+<pre><code class="lang-javascript">    var myEventSource = streamdataio.createEventSource(&quot;http://mysite.com/myJsonRestService&quot;,&lt;app_token&gt;);
 </code></pre>
-<p>The <code>StreamDataEventSource</code> is the main entry point for establishing a data stream connection to the given URL. </p>
-<p>It uses standard HTTP Server-Sent-Events to get the data you required through streamdata.io proxy.</p>
+<p>The <code>StreamDataEventSource</code> is the entry point for establishing a data stream connection to the given URL. </p>
+<p>It uses an application <strong>token</strong> to identify and authorize the stream connection to be established.</p>
+<p>To get a valid <strong>token</strong>, please visit <a href="http://streamdata.io" target="_blank">streamdata.io web site</a> to register and create an appication.</p>
+<p>It uses standard HTTP Server-Sent Events to get the data you required through streamdata.io proxy.</p>
 <p>If your API requires specific headers, simply pass them as an array on the event source creation, and streamdata.io will forward them to your Information System.</p>
 <p>An optional <code>headers</code> parameter can be passed to the <code>createEventSource</code> method. </p>
 <p>It must be an array with the following structure:</p>
@@ -119,7 +121,7 @@ But wait, there is more: streamdata.io keeps an history of modifications that oc
     // add whatever header required by your API
     var headers = [&#39;Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==&#39;];
 
-    var myEventSource = streamdataio.createEventSource(url, headers);
+    var myEventSource = streamdataio.createEventSource(url,&lt;app_token&gt;, headers);
 </code></pre>
 <h2 id="3-handle-data-reception">3. Handle data reception</h2>
 <p>streamdata.io SDK handles data from the targeted REST service as JSON objects.</p>
@@ -155,13 +157,12 @@ But wait, there is more: streamdata.io keeps an history of modifications that oc
   var eventSource = null;
   var stocks = [];
 
-  // ADD YOUR API KEY PAIR HERE
-  //     streamdataio.Pk = &quot;&quot;;
-  //     streamdataio.pk = &quot;&quot;;
-
   function connect() {
+    // REPLACE WITH YOUR OWN TOKEN HERE
+    var appToken = &quot;NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1&quot;;
+
     // create the StreamdataEventSource Object
-    eventSource = streamdataio.createEventSource(&quot;http://myRestservice.com/stocks&quot;);
+    eventSource = streamdataio.createEventSource(&quot;http://myRestservice.com/stocks&quot;,appToken);
 
     eventSource
      .onOpen(function() {
@@ -210,60 +211,36 @@ But wait, there is more: streamdata.io keeps an history of modifications that oc
 <p><a href="https://github.com/streamdataio/streamdataio-js/tree/master/twitter" target="_blank">Twitter</a></p>
 <h1 id="security">Security</h1>
 <h2 id="1-tls-encryption">1. TLS Encryption</h2>
-<p>streamdata.io uses Transport Layer Security (TLS) to encrypt messages while in transport across the Internet. Using TLS ensures that client messages are protected when being sent to and from streamdata.io. This prevents intercepted messages from being viewed by unauthorized parties.</p>
-<p>Running an application in production through streamdata.io proxy requires an authentication mechanism.</p>
-<p>When registering on <a href="http://streamdata.io" target="_blank">streamdata.io web site</a>, you&#39;ll be provided with a unique key pair for your application.</p>
-<p>This allows streamdata.io proxy to identify that a specific request comes from your application.</p>
-<p>This key pair must be provided to the SDK in order to be able to use the streamdata.io proxy.</p>
-<h2 id="2-provide-key-pair-in-source-code">2. Provide key pair in source code</h2>
-<pre><code class="lang-javascript">    // setup key pair
-    streamdataio.Pk = &quot;NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1&quot;;
-    streamdataio.pk = &quot;NTEtMTQxNiWIzMDEC00OWNlLThmNGYtY2ExMDJxO00NzNhLTgtZWY0MjOTc2YmUxODFiZDU1NmU0ZDAtYWU5NjYxMGYzNDdi&quot;;
-
-    // instantiate an eventSource
-    var eventSource = streamdataio.createEventSource(&quot;http://myRestservice.com/stocks&quot;);
-</code></pre>
-<p><strong>Note</strong>:</p>
-<p>You need to set the values once.</p>
-<p>They will be used for all subsequent <code>StreamdataEventSource</code> creations.</p>
-<p><strong>Important Note</strong>:</p>
-<p>You need to be aware that this method is useful for development purpose and tests but is not safe to go to production with.</p>
-<p>Your key pair must always be kept secret.</p>
-<h2 id="3-key-pair-external-storage">3. Key pair external storage</h2>
-<p>You can store your key pair in a file using the following JSON format:</p>
-<pre><code class="lang-javascript">    {
-        &quot;Pk&quot;: &quot;NTZlMDY1NmEtYTQzYS00MGRkLTljN2UtYmM1MGZlMGRiNGFk&quot;,
-        &quot;pk&quot;: &quot;NWIzMDExOTEtZWY0MC00OWNlLThmNGYtY2ExMDJjOTc2YmUxODFiZDU1NmUtMTQxNi00NzNhLTg0ZDAtYWU5NjYxMGYzNDdi&quot;
-    }
-</code></pre>
-<p>This file must be available from a secure area of the server which hosts the application.
-For example, it should be stored in an area accessible only if the user is logged in.</p>
-<p>You can easily set the relative path to the file containing the key pair by using the <code>keyFile</code> property of the <code>streamdataio</code> object:</p>
-<pre><code class="lang-javascript">    // setup key pair
-    streamdataio.keyFile = &quot;/security/resources/mykeyfile.json&quot;;
-
-    // instantiate an eventSource
-    var eventSource = streamdataio.createEventSource(&quot;http://myRestservice.com/stocks&quot;);
-</code></pre>
-<p><strong>Note</strong>:</p>
-<p>The default location for this file is set to &#39;/streamdataio.json&#39;.</p>
-<p>This solution has two advantages:</p>
-<ul>
-<li>the key pair is never set in the source code of your application</li>
-<li>this ease the process of renewing the key pair for a given application</li>
-</ul>
+<p>streamdata.io proxy uses Transport Layer Security (TLS) as a default to encrypt messages while in transport across the Internet. </p>
 <p><strong>Recommendation</strong>:</p>
-<p>We strongly recommend to always use https with applications using streamdata.io.</p>
-<p>This prevents any attacker from intercepting the data flow.</p>
-<h2 id="4-session-storage">4. Session storage</h2>
-<p>You can activate/deactivate the storage of the key pair in the sessionStorage of your browser.</p>
-<p>This will prevent from querying the external storage each time you call <code>open</code> on your <code>StreamdataEventSource</code>.</p>
-<p>Use the <code>sessionStore</code> boolean attribute of the <code>streamdataio</code> object.</p>
-<p>The default value is <code>false</code> for the attribute.</p>
-<pre><code class="lang-javascript">    streamdataio.sessionStore = true;
+<p>Even if streamdata.io proxy can be used without TLS encryption, we strongly recommend to always use https (thus TLS) with applications using streamdata.io.</p>
+<p>Using TLS ensures that client messages are protected when being sent to and from streamdata.io. This prevents intercepted messages from being viewed by unauthorized parties.</p>
+<h2 id="2-authentication-with-token">2. Authentication with Token</h2>
+<p>Running an application in production through streamdata.io proxy requires an authentication mechanism.</p>
+<p>When registering on <a href="http://streamdata.io" target="_blank">streamdata.io web site</a>, you&#39;ll be provided with a unique <strong>token</strong> for your application and a <strong>private key</strong>.</p>
+<p>This allows streamdata.io proxy to identify that a specific request comes from your application.</p>
+<p>This <strong>token</strong> must be provided to the SDK in order to be able to use the streamdata.io proxy.</p>
+<pre><code class="lang-javascript">    var appToken = &quot;NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1&quot;;
+    var myEventSource = streamdataio.createEventSource(&quot;http://mysite.com/myJsonRestService&quot;,appToken);
 </code></pre>
-<p><strong>Note</strong>:</p>
-<p>The sessionStorage has the life time of the browser window (tab). Data is deleted when the user closes the window.</p>
+<h2 id="3-authentication-with-signature">3. Authentication with signature</h2>
+<p>streamdata.io SDK offers an optional Hash-based Message Authentication (HMAC) mercanisme to enhance your requests security.</p>
+<p>In order to use it, you&#39;ll first need to add streamdataio_auth javascript auth library to your project :</p>
+<pre><code class="lang-html">&lt;script src=&quot;/js/streamdataio-auth.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>You can then use a signatureStrategy object when creating your StreamDataEventSource as follow:</p>
+<pre><code class="lang-javascript">    // setup headers
+    var headers = [];
+    // setup signatureStrategy
+    var signatureStrategy = AuthStrategy.newSignatureStrategy(&quot;NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1&quot;,&quot;NTEtMTQxNiWIzMDEC00OWNlLThmNGYtY2ExMDJxO00NzNhLTgtZWY0MjOTc2YmUxODFiZDU1NmU0ZDAtYWU5NjYxMGYzNDdi&quot;);
+    // instantiate an eventSource
+    var eventSource = streamdataio.createEventSource(&quot;http://myRestservice.com/stocks&quot;,&quot;NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1&quot;,headers,signatureStrategy);
+</code></pre>
+<p><strong>Important Note</strong>:</p>
+<p>Your signatureStrategy is built using your <strong>token</strong> and <strong>private key</strong>.</p>
+<p>The signatureStrategy will generate a signature specific to your data stream connection request.</p>
+<p>This signature will be validated by streamdata.io proxy before authorizing your request to go through it.</p>
+<p><strong>Your private key must be kept secret</strong>.</p>
 </article>
     </section>
 
@@ -384,7 +361,7 @@ For example, it should be stored in an area accessible only if the user is logge
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a>
-		on Tue Jun 02 2015 11:58:28 GMT+0200 (CEST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Fri Jun 05 2015 16:09:59 GMT+0200 (CEST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>
