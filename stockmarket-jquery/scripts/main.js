@@ -25,9 +25,19 @@ $(document).ready(function() {
     * Form validation
     */
     checkForm();
-    $('#inputUrl, #inputPublicKey, #inputPrivateKey').keyup(checkForm);
+    $('#cbPrivateKey').on('click', checkForm);
+    $('#inputUrl, #inputToken, #inputPrivateKey').keyup(checkForm);
     function checkForm () {
-        var empty = $('#inputUrl').val().length === 0 || $('#inputPublicKey').val().length === 0 || $('#inputPrivateKey').val().length === 0;
+        if($('#cbPrivateKey').is(":checked")){
+            $(".pkdiv").show();
+            $(".pkValue").attr("required", true);
+        }
+        else {
+            $(".pkdiv").hide();
+            $(".pkValue").attr("required", false);
+        }
+
+        var empty = $('#inputUrl').val().length === 0 || $('#inputToken').val().length === 0 || ($('#inputPrivateKey').val().length === 0 && $('#cbPrivateKey').is(":checked") ) ;
         empty ? $('#connect').attr('disabled', 'disabled') : $('#connect').removeAttr('disabled');
     }
 
@@ -66,17 +76,18 @@ $(document).ready(function() {
         var url = $('#inputUrl').val();
         var header = headersToArray();
 
-        // setup key pair
-        // Key pair is saved in session storage _Pk key, to eanable key pair change we reset this session storage key
-        if (SessionStorage) {
-            SessionStorage._Pk = undefined;
+        var Pk = $('#inputToken').val();
+        var pk = $('#inputPrivateKey').val();
+
+        // setup signatureStrategy
+        var signatureStrategy = null;
+        if (AuthStrategy != null) {
+            signatureStrategy = AuthStrategy.newSignatureStrategy(Pk, pk);
         }
-        // you can store your key pair in a json file instead, more details in documentation
-        streamdataio.Pk = $('#inputPublicKey').val();
-        streamdataio.pk = $('#inputPrivateKey').val();
+
 
         // create the Streamdata source
-        streamdata = streamdataio.createEventSource(url, header);
+        streamdata = streamdataio.createEventSource(url, Pk, header,signatureStrategy);
 
         streamdata.streamdataConfig.PROTOCOL = 'https://';
         streamdata.streamdataConfig.HOST = 'streamdata.motwin.net';

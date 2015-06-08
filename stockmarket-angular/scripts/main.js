@@ -72,7 +72,10 @@
 
             // you can store your key pair in a json file instead, more details in documentation
             // setup signatureStrategy
-            var signatureStrategy = AuthStrategy.newSignatureStrategy(vm.Token, vm.pk);
+            var signatureStrategy = null;
+            if (AuthStrategy != null) {
+                signatureStrategy = AuthStrategy.newSignatureStrategy(vm.Token, vm.pk);
+            }
 
             // create the Streamdata source
             streamdata = streamdataio.createEventSource(vm.url, vm.Token, headers, signatureStrategy);
