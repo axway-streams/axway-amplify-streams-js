@@ -80,9 +80,15 @@ $(document).ready(function() {
         var pk = $('#inputPrivateKey').val();
 
         // setup signatureStrategy
-        var signatureStrategy = null;
-        if (AuthStrategy != null) {
-            signatureStrategy = AuthStrategy.newSignatureStrategy(Pk, pk);
+        var signatureStrategy;
+        if (typeof AuthStrategy === 'undefined') {
+            signatureStrategy = null;
+        } else {
+            if (AuthStrategy != null) {
+                signatureStrategy = AuthStrategy.newSignatureStrategy(Pk, pk);
+            } else {
+                signatureStrategy = null;
+            }
         }
 
 

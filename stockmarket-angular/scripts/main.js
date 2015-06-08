@@ -72,13 +72,20 @@
 
             // you can store your key pair in a json file instead, more details in documentation
             // setup signatureStrategy
-            var signatureStrategy = null;
-            if (AuthStrategy != null) {
-                signatureStrategy = AuthStrategy.newSignatureStrategy(vm.Token, vm.pk);
+            // setup signatureStrategy
+            var signatureStrategy;
+            if (typeof AuthStrategy === 'undefined') {
+                signatureStrategy = null;
+            } else {
+                if (AuthStrategy != null) {
+                    signatureStrategy = AuthStrategy.newSignatureStrategy(vm.token, vm.pk);
+                } else {
+                    signatureStrategy = null;
+                }
             }
 
             // create the Streamdata source
-            streamdata = streamdataio.createEventSource(vm.url, vm.Token, headers, signatureStrategy);
+            streamdata = streamdataio.createEventSource(vm.url, vm.token, headers, signatureStrategy);
 
             streamdata.streamdataConfig.PROTOCOL = 'http://';
             streamdata.streamdataConfig.HOST = 'proxy.streamdata.io';
