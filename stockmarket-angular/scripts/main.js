@@ -87,9 +87,9 @@
             // create the Streamdata source
             streamdata = streamdataio.createEventSource(vm.url, vm.token, headers, signatureStrategy);
 
-            streamdata.streamdataConfig.PROTOCOL = 'http://';
-            streamdata.streamdataConfig.HOST = 'proxy.streamdata.io';
-            streamdata.streamdataConfig.PORT = '8080';
+            streamdata.streamdataConfig.PROTOCOL = 'https://';
+            streamdata.streamdataConfig.HOST = 'streamdata.motwin.net';
+            streamdata.streamdataConfig.PORT = '';
 
             // add a callback when the connection is opened
             streamdata.onOpen(function () {
