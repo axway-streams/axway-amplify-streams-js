@@ -77,7 +77,7 @@
             if (typeof AuthStrategy === 'undefined') {
                 signatureStrategy = null;
             } else {
-                if (AuthStrategy != null) {
+                if (vm.signature) {
                     signatureStrategy = AuthStrategy.newSignatureStrategy(vm.token, vm.pk);
                 } else {
                     signatureStrategy = null;

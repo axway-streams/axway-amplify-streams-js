@@ -84,7 +84,7 @@ $(document).ready(function() {
         if (typeof AuthStrategy === 'undefined') {
             signatureStrategy = null;
         } else {
-            if (AuthStrategy != null) {
+            if ($('#cbPrivateKey').is(":checked")) {
                 signatureStrategy = AuthStrategy.newSignatureStrategy(Pk, pk);
             } else {
                 signatureStrategy = null;
