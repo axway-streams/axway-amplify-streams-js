@@ -79,25 +79,21 @@ $(document).ready(function() {
         var Pk = $('#inputToken').val();
         var pk = $('#inputPrivateKey').val();
 
-        // setup signatureStrategy
+        // setup a signatureStrategy
         var signatureStrategy;
         if (typeof AuthStrategy === 'undefined') {
             signatureStrategy = null;
         } else {
             if ($('#cbPrivateKey').is(":checked")) {
+                // signature checkbox is checked: setup a signatureStrategy
                 signatureStrategy = AuthStrategy.newSignatureStrategy(Pk, pk);
             } else {
                 signatureStrategy = null;
             }
         }
 
-
         // create the Streamdata source
         streamdata = streamdataio.createEventSource(url, Pk, header,signatureStrategy);
-
-        streamdata.streamdataConfig.PROTOCOL = 'https://';
-        streamdata.streamdataConfig.HOST = 'streamdata.motwin.net';
-        streamdata.streamdataConfig.PORT = '';
 
         // add a callback when the connection is opened
         streamdata.onOpen(function() {
@@ -284,6 +280,7 @@ $(document).ready(function() {
 
     function disconnect() {
         streamdata.close();
+        datas = [];
         $('#connect').show();
         $('#disconnect').hide();
     };

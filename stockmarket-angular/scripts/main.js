@@ -70,14 +70,12 @@
                 headers = vm.headersToArray(vm.headers);
             }
 
-            // you can store your key pair in a json file instead, more details in documentation
-            // setup signatureStrategy
-            // setup signatureStrategy
             var signatureStrategy;
             if (typeof AuthStrategy === 'undefined') {
                 signatureStrategy = null;
             } else {
                 if (vm.signature) {
+                    // signature checkbox is checked: setup a signatureStrategy
                     signatureStrategy = AuthStrategy.newSignatureStrategy(vm.token, vm.pk);
                 } else {
                     signatureStrategy = null;
@@ -86,10 +84,6 @@
 
             // create the Streamdata source
             streamdata = streamdataio.createEventSource(vm.url, vm.token, headers, signatureStrategy);
-
-            streamdata.streamdataConfig.PROTOCOL = 'https://';
-            streamdata.streamdataConfig.HOST = 'streamdata.motwin.net';
-            streamdata.streamdataConfig.PORT = '';
 
             // add a callback when the connection is opened
             streamdata.onOpen(function () {
