@@ -1,5 +1,6 @@
-# streamdata-js/stockmarket-angular
-This sample application shows how to use the <a href="http://streamdata.io" target="_blank">streamdata.io</a> Javascript SDK with AngularJS.
+# streamdata-js/stockmarket
+
+This sample application shows how to use the <a href="http://streamdata.io" target="_blank">streamdata.io</a> Javascript SDK with JQuery.
 
 The streamdata.io JavaScript SDK allows the use of streamdata.io to get data pushed from various sources and use them in your application.
 
