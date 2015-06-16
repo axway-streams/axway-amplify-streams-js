@@ -3,9 +3,30 @@
     var streamdata = null;
     var tweets = [];
 
+   /*
+    * Form validation
+    */
+    function checkForm () {
+        if($('#cbPrivateKey').is(":checked")){
+            $(".pkdiv").show();
+            $(".privateKeyValue").attr("required", true);
+        }
+        else {
+            $(".pkdiv").hide();
+            $(".privateKeyValue").attr("required", false);
+        }
+
+        var empty = $('#inputUrl').val().length === 0 || $('#inputAppToken').val().length === 0 || ($('#inputPrivateKey').val().length === 0 && $('#cbPrivateKey').is(":checked") ) ;
+        empty ? $('#connect').attr('disabled', 'disabled') : $('#connect').removeAttr('disabled');
+    }
+
     function init() {
         $('#connect').on('click', connect);
+        $('#disconnect').hide();
         $('#disconnect').on('click', disconnect);
+        $('#cbPrivateKey').on('click', checkForm);
+        $('#inputUrl, #inputAppToken, #inputPrivateKey').on('input', checkForm);
+        checkForm();
 
         $(document).ready(function () {
             $('#inputUrl').keyup(function () {
@@ -39,31 +60,29 @@
 
         }
 
-        // ENTER YOUR OWN APPLICATION TOKEN HERE
-        var token = "";
-        // ENTER YOUR OWN APPLICATION PRIVATE KEY HERE
-        var pk = "";
+        var appToken = $('#inputAppToken').val();
+        var privateKey = $('#inputPrivateKey').val();
 
         // setup a signatureStrategy
         var signatureStrategy;
         if (typeof AuthStrategy === 'undefined') {
             signatureStrategy = null;
         } else {
-            if (false) {
+            if ($('#cbPrivateKey').is(":checked")) {
                 // signature checkbox is checked: setup a signatureStrategy
-                signatureStrategy = AuthStrategy.newSignatureStrategy(token, pk);
+                signatureStrategy = AuthStrategy.newSignatureStrategy(appToken, privateKey);
             } else {
                 signatureStrategy = null;
             }
         }
 
-        // create the Streamdata source
-        streamdata = streamdataio.createEventSource(url, token, header, signatureStrategy);
+        // create the streamdata.io source
+        streamdata = streamdataio.createEventSource(url, appToken, header,signatureStrategy);
 
         // add a callback when the connection is opened
         streamdata.onOpen(function () {
-            $('#connect').attr('disabled', 'disabled');
-            $('#disconnect').removeAttr('disabled');
+          $('#disconnect').show();
+          $('#connect').hide();
         });
 
         // add a callback when data is sent by streamdata.io
@@ -106,9 +125,10 @@
     };
 
     function disconnect() {
-        streamdata.close();
-        $('#disconnect').attr('disabled', 'disabled');
-        $('#connect').removeAttr('disabled');
+      streamdata.close();
+      tweets = [];
+      $('#connect').show();
+      $('#disconnect').hide();
     };
 
     function renderTweets(updates) {
