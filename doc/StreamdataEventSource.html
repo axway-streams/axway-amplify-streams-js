@@ -79,7 +79,7 @@
     
         
 <dt>
-    <h4 class="name streamdataio-method" id="StreamdataEventSource"><span class="type-signature"></span>new StreamdataEventSource<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name streamdataio-method" id="StreamdataEventSource"><span class="type-signature"></span>new StreamdataEventSource<span class="signature">(url, token, headers, authStrategy)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -89,7 +89,7 @@
     <div class="description">
         <p>The <code>StreamdataEventSource</code> object is the main entry point to establish a connection to a targeted JSON REST service URL.</p>
 
-<p>Use <code>streamdataio.createEventSource(url[,headers])</code> to create new instance.</p>
+<p>Use <code>streamdataio.createEventSource(url,token[,headers][,authStrategy])</code> to create new instance.</p>
     </div>
     
 
@@ -97,6 +97,132 @@
     
     
     
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Mandatory. The targeted REST URL is formatted as follow:
+<pre><code>protocol://url(:port)(/localpath(?queryparameters))</code></pre></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Mandatory. The application token to authentify the request</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>headers</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Optional. Any specific headers that have to be added to the request. It must be an array with the following structure:<code>['Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==']</code></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>authStrategy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Optional. An object which will enable HMAC signature of the request. You can create this object as follow:
+<pre><code>
+// setup headers
+var headers = [];
+// setup signatureStrategy
+var signatureStrategy = AuthStrategy.newSignatureStrategy("NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1","NTEtMTQxNiWIzMDEC00OWNlLThmNGYtY2ExMDJxO00NzNhLTgtZWY0MjOTc2YmUxODFiZDU1NmU0ZDAtYWU5NjYxMGYzNDdi");
+// instantiate an eventSource
+var eventSource = streamdataio.createEventSource("http://myRestservice.com/stocks","NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1",headers,signatureStrategy);</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
     
     
     
@@ -163,7 +289,7 @@
         <dl>
             
 <dt>
-    <h4 class="name streamdataio-method" id="offData"><span class="type-signature"></span>offData<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
+    <h4 class="name streamdataio-method" id="close"><span class="type-signature"></span>close<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
     
     
 </dt>
@@ -171,7 +297,9 @@
     
     
     <div class="description">
-        <p>Unregister a callback called  when the client application received initial data (snapshot) from the server.</p>
+        <p>Close <code>StreamdataEventSource</code> connection.</p>
+
+<p>The <code>StreamdataEventSource</code> will disconnect and close the connection.</p>
     </div>
     
 
@@ -179,55 +307,6 @@
     
     
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the function to notify.</td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
     
     
     
@@ -289,584 +368,6 @@
 
         
     
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">var callback = function(aEvent) {
-  // callback code
-};
-eventSource.onData(callback); // register
-eventSource.offData(callback); // unregister</pre>
-
-
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name streamdataio-method" id="offError"><span class="type-signature"></span>offError<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Unregister a callback called when the client application experienced an error.</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the function to notify.</td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type"><a href="StreamdataEventSource.html">StreamdataEventSource</a></span>
-
-
-	</dd>
-</dl>
-
-
-        
-    
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">var callback = function(aEvent) {
-  // callback code
-};
-eventSource.onError(callback); // register
-eventSource.offError(callback); // unregister</pre>
-
-
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name streamdataio-method" id="offMonitor"><span class="type-signature"></span>offMonitor<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Unregister a callback called  when the client application received monitor data from the server.</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the function to notify.</td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type"><a href="StreamdataEventSource.html">StreamdataEventSource</a></span>
-
-
-	</dd>
-</dl>
-
-
-        
-    
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">var callback = function(aEvent) {
-  // callback code
-};
-eventSource.onMonitor(callback); // register
-eventSource.offMonitor(callback); // unregister</pre>
-
-
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name streamdataio-method" id="offOpen"><span class="type-signature"></span>offOpen<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Unregister a callback called when the client application opened sucessfully a <code>StreamdataEventSource</code>.<p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the function to call.</td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type"><a href="StreamdataEventSource.html">StreamdataEventSource</a></span>
-
-
-	</dd>
-</dl>
-
-
-        
-    
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">var callback = function() {
-  // callback code
-};
-eventSource.onOpen(callback); // register
-eventSource.offOpen(callback); // unregister</pre>
-
-
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name streamdataio-method" id="offPatch"><span class="type-signature"></span>offPatch<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="StreamdataEventSource.html">StreamdataEventSource</a>}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Unregister a callback called  when the client application received incremental update data (patch) from the server.</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the function to notify.</td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type"><a href="StreamdataEventSource.html">StreamdataEventSource</a></span>
-
-
-	</dd>
-</dl>
-
-
-        
-    
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">var callback = function(aEvent) {
-  // callback code
-};
-eventSource.onPatch(callback); // register
-eventSource.offPatch(callback); // unregister</pre>
-
-
     
 </dd>
 
@@ -1878,7 +1379,7 @@ eventSource.offPatch(callback); // unregister</pre>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a>
-		on Fri May 29 2015 17:08:17 GMT+0200 (CEST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Tue Jun 16 2015 12:08:29 GMT+0200 (CEST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>
