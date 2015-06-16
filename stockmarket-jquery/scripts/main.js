@@ -26,7 +26,7 @@ $(document).ready(function() {
     */
     checkForm();
     $('#cbPrivateKey').on('click', checkForm);
-    $('#inputUrl, #inputToken, #inputPrivateKey').keyup(checkForm);
+    $('#inputUrl, #inputToken, #inputPrivateKey').on('input', checkForm);
     function checkForm () {
         if($('#cbPrivateKey').is(":checked")){
             $(".pkdiv").show();
