@@ -281,6 +281,7 @@ $(document).ready(function() {
     function disconnect() {
         streamdata.close();
         datas = [];
+        $('#datasTab').hide();
         $('#connect').show();
         $('#disconnect').hide();
     };

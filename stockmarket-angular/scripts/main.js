@@ -166,7 +166,7 @@
             streamdata.close();
             vm.isConnected = false;
             vm.isPatching = false;
-            $scope.datasArray = [];
+            vm.initDatas();
         };
 
         vm.setBusyCursor = function (status) {
