@@ -8,4 +8,6 @@ You will be asked to fill in you application Token. To get them, connect to the 
 
 If you have any questions or feedback, feel free to ask: <a href="mailto://support@streamdata.io">support@streamdata.io</a>
 
+This demo is visible online at <a href="http://angular-streamdataiodemo.rhcloud.com/">http://angular-streamdataiodemo.rhcloud.com/</a>
+
 Enjoy!
