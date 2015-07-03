@@ -140,7 +140,7 @@ $(document).ready(function() {
                 isPatching = true;
                 $('#patchSpinner').show();
 
-                console.log('Received path:' + JSON.stringify(patch));
+                console.log('Received patch:' + JSON.stringify(patch));
                 var oldDatas = JSON.stringify(datas, null, 2);
 
                 // apply the json-patch to the array of values

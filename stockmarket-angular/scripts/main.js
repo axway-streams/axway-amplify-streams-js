@@ -119,7 +119,7 @@
                     vm.isPatching = true;
                     $scope.$digest();
                     $timeout(function () {
-                        $log.info('Received path:' + JSON.stringify(patch));
+                        $log.info('Received patch:' + JSON.stringify(patch));
 
                         var oldDatas = JSON.stringify($scope.datas, null, 2);
 
