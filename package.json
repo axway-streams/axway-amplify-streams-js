@@ -22,8 +22,9 @@
     "api",
     "streaming"
   ],
-  "author": "@StreamdataIO",
+  "author": "Streamdataio support@streamdata.io",
   "license": "Apache 2 License",
+  "private" : false,
   "bugs": {
     "url": "https://github.com/streamdataio/streamdataio-js/issues"
   },

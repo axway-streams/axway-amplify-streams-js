@@ -1,10 +1,10 @@
 {
   "name": "streamdataio-js",
-  "version": "v1.0.0-beta.6",
+  "version": "1.0.1-alpha.1",
   "main": "streamdataio.min.js",
   "homepage": "https://github.com/streamdataio/streamdataio-js",
   "authors": [
-    "Motwin"
+    "Streamdataio support@streamdata.io"
   ],
   "description": "Javascript SDK for Streamdata.io",
   "keywords": [
@@ -12,7 +12,9 @@
     "streamdata.io",
     "push",
     "sse",
-    "server-sent-event"
+    "server-sent-event",
+    "api",
+    "streaming"
   ],
   "license": "Apache 2 License",
   "private": false,
