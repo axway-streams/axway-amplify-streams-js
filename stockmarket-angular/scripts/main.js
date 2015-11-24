@@ -37,7 +37,7 @@
             }
         };
         vm.init = function () {
-            vm.url = 'http://demo-streamdataio.rhcloud.com/stockmarket/prices';
+            vm.url = 'http://stockmarket.streamdata.io/prices';
             vm.isConnected = false;
             vm.errorMsg = null;
         };
