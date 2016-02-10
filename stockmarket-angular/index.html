@@ -1,174 +1,212 @@
 <!doctype html>
+<!--
+  ~ Copyright 2016 Streamdata.io
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-        <title>Streamdata.io Stock-Market</title>
-        <link rel="shortcut icon" href="favicon.ico" />
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+  <title>Streamdata.io Stock-Market</title>
+  <link rel="shortcut icon" href="favicon.ico"/>
 
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="styles/diffview.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/diffview.css">
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-    </head>
-    <body ng-app="app">
-    <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+</head>
+<body ng-app="app">
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]-->
 
-    <a href="https://github.com/streamdataio/streamdataio-js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+<a href="https://github.com/streamdataio/streamdataio-js"><img style="position: absolute; top: 0; right: 0; border: 0;"
+                                                               src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67"
+                                                               alt="Fork me on GitHub"
+                                                               data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
 
-        <div class="container" ng-controller="AppController as controller">
-            <div class="header">
-                <img src="img/logo.png"/>
-                <h3 class="text-muted">Stock-Market demo with <img src="img/angular.png" style="width: 130px;"/></h3>
-            </div>
-            <div class="row" ng-cloak>
-                <div id="error" class="alert alert-danger text-center" ng-show="controller.errorMsg != null" role="alert">{{controller.errorMsg}}</div>
-            </div>
+<div class="container" ng-controller="AppController as controller">
+  <div class="header">
+    <img src="img/logo.png"/>
 
-            <form class="form-horizontal" name="streamdataForm" style="margin-bottom: 30px;">
-                <div class="form-group">
-                    <label for="inputUrl" class="col-sm-3 control-label">URL</label>
-                    <div class="col-sm-8">
-                        <input id="inputUrl" class="form-control" placeholder="Your JSON API Url" type="url" ng-model="controller.url" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPublicKey" class="col-sm-3 control-label">Application token</label>
-                    <div class="col-sm-8">
-                        <input id="inputPublicKey" class="form-control" placeholder="Your App Token" type="text" ng-model="controller.token" required>
-                    </div>
-                    <img src="img/info.png" class="col-sm-1" style="width: inherit; margin-top: 5px; padding-left: 0px;"
-                         ng-model="controller.popupPk.content" popup="controller.popupPk.options"/>
-                </div>
-                <div class="form-group">
-                    <label for="inputPrivateKey" class="col-sm-3 control-label">Authenticate with signature (HMAC)</label>
-                    <div class="col-sm-8">
-                        <input type="checkbox" id="signature" name="signature" ng-model="controller.signature" />
-                        <img src="img/info.png" style="padding-left: 10px; margin-top: -20px;"
-                             ng-model="controller.popupSignature.content" popup="controller.popupSignature.options">
-                        </img>
-                    </div>
+    <h3 class="text-muted">Stock-Market demo with <img src="img/angular.png" style="width: 130px;"/></h3>
+  </div>
+  <div class="row" ng-cloak>
+    <div id="error" class="alert alert-danger text-center" ng-show="controller.errorMsg != null" role="alert">
+      {{controller.errorMsg}}
+    </div>
+  </div>
 
-                </div>
-                <div class="form-group" ng-show="controller.signature">
-                    <label for="inputPrivateKey" class="col-sm-3 control-label">Private key for signature</label>
-                    <div class="col-sm-8">
-                        <input id="inputPrivateKey" class="form-control" placeholder="Your private key" type="text" ng-model="controller.pk" ng-required="controller.signature">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Specific headers</label>
-                    <div class="col-sm-8" style="margin-top: 6px;">
-                        <a href="#" ng-click="controller.addHeader()">Add header</a>
-                        <img src="img/info.png" style="padding-left: 10px; margin-top: -20px;"
-                             ng-model="controller.popupHeaders.content" popup="controller.popupHeaders.options">
-                        </img>
-                    </div>
-                </div>
-                <div class="form-group" ng-repeat="(index, header) in controller.headers">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-4">
-                        <input class="form-control" ng-model="header.name" placeholder="Key">
-                        </input>
-                    </div>
-                    <div class="col-sm-4">
-                        <input class="form-control" ng-model="header.value" placeholder="Value">
-                        </input>
-                    </div>
-                    <div class="col-sm-1" style="margin-top: 6px; padding-left: 0px;">
-                        <button style="padding: 0px;width: 23px; border-radius: 20px;" class="btn btn-danger"
-                                ng-click="controller.removeHeader(index)">✕</button>
-                    </div>
-                </div>
-            </form>
+  <form class="form-horizontal" name="streamdataForm" style="margin-bottom: 30px;">
+    <div class="form-group">
+      <label for="inputUrl" class="col-sm-3 control-label">URL</label>
+
+      <div class="col-sm-8">
+        <input id="inputUrl" class="form-control" placeholder="Your JSON API Url" type="url" ng-model="controller.url"
+               required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPublicKey" class="col-sm-3 control-label">Application token</label>
+
+      <div class="col-sm-8">
+        <input id="inputPublicKey" class="form-control" placeholder="Your App Token" type="text"
+               ng-model="controller.token" required>
+      </div>
+      <img src="img/info.png" class="col-sm-1" style="width: inherit; margin-top: 5px; padding-left: 0px;"
+           ng-model="controller.popupPk.content" popup="controller.popupPk.options"/>
+    </div>
+    <div class="form-group">
+      <label for="inputPrivateKey" class="col-sm-3 control-label">Authenticate with signature (HMAC)</label>
+
+      <div class="col-sm-8">
+        <input type="checkbox" id="signature" name="signature" ng-model="controller.signature"/>
+        <img src="img/info.png" style="padding-left: 10px; margin-top: -20px;"
+             ng-model="controller.popupSignature.content" popup="controller.popupSignature.options">
+        </img>
+      </div>
+
+    </div>
+    <div class="form-group" ng-show="controller.signature">
+      <label for="inputPrivateKey" class="col-sm-3 control-label">Private key for signature</label>
+
+      <div class="col-sm-8">
+        <input id="inputPrivateKey" class="form-control" placeholder="Your private key" type="text"
+               ng-model="controller.pk" ng-required="controller.signature">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Specific headers</label>
+
+      <div class="col-sm-8" style="margin-top: 6px;">
+        <a href="#" ng-click="controller.addHeader()">Add header</a>
+        <img src="img/info.png" style="padding-left: 10px; margin-top: -20px;"
+             ng-model="controller.popupHeaders.content" popup="controller.popupHeaders.options">
+        </img>
+      </div>
+    </div>
+    <div class="form-group" ng-repeat="(index, header) in controller.headers">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-4">
+        <input class="form-control" ng-model="header.name" placeholder="Key">
+        </input>
+      </div>
+      <div class="col-sm-4">
+        <input class="form-control" ng-model="header.value" placeholder="Value">
+        </input>
+      </div>
+      <div class="col-sm-1" style="margin-top: 6px; padding-left: 0px;">
+        <button style="padding: 0px;width: 23px; border-radius: 20px;" class="btn btn-danger"
+                ng-click="controller.removeHeader(index)">✕
+        </button>
+      </div>
+    </div>
+  </form>
 
 
-            <div class="pull-right">
-                <button type="button" class="btn btn-success" ng-click="controller.connect()"
-                        ng-show="!controller.isConnected" ng-disabled="streamdataForm.$invalid" style="margin-right: 25px;">Connect</button>
-                <button type="button" class="btn btn-danger" ng-click="controller.disconnect()"
-                        ng-show="controller.isConnected" style="margin-right: 25px;">
-                    Disconnect</button>
-                <div style="background-repeat: no-repeat; height: 27px; width: 15px; margin-top: 10px; float: right;">
-                    <img src="img/spinner.gif" ng-show="controller.isPatching"/>
-                </div>
-            </div>
+  <div class="pull-right">
+    <button type="button" class="btn btn-success" ng-click="controller.connect()"
+            ng-show="!controller.isConnected" ng-disabled="streamdataForm.$invalid" style="margin-right: 25px;">Connect
+    </button>
+    <button type="button" class="btn btn-danger" ng-click="controller.disconnect()"
+            ng-show="controller.isConnected" style="margin-right: 25px;">
+      Disconnect
+    </button>
+    <div style="background-repeat: no-repeat; height: 27px; width: 15px; margin-top: 10px; float: right;">
+      <img src="img/spinner.gif" ng-show="controller.isPatching"/>
+    </div>
+  </div>
 
-            <section ng-show="controller.isConnected">
-                <div>
-                    <ul class="nav nav-tabs">
-                        <li ng-class="{active:controller.isSet(1)}" ng-show="datasArray.length">
-                            <a href ng-click="controller.setTab(1)">Array</a>
-                        </li>
-                        <li ng-class="{active:controller.isSet(2)}" ng-show="datasStringify">
-                            <a href ng-click="controller.setTab(2)">Patched JSON document</a>
-                        </li>
-                        <li ng-class="{active:controller.isSet(3)}" ng-show="patchStringify.length">
-                            <a href ng-click="controller.setTab(3)">JSON Patch Operations</a>
-                        </li>
-                    </ul>
-                </div>
+  <section ng-show="controller.isConnected">
+    <div>
+      <ul class="nav nav-tabs">
+        <li ng-class="{active:controller.isSet(1)}" ng-show="datasArray.length">
+          <a href ng-click="controller.setTab(1)">Array</a>
+        </li>
+        <li ng-class="{active:controller.isSet(2)}" ng-show="datasStringify">
+          <a href ng-click="controller.setTab(2)">Patched JSON document</a>
+        </li>
+        <li ng-class="{active:controller.isSet(3)}" ng-show="patchStringify.length">
+          <a href ng-click="controller.setTab(3)">JSON Patch Operations</a>
+        </li>
+      </ul>
+    </div>
 
-                <!-- Patched JSON Array -->
-                <div class="row" ng-show="controller.isSet(1) && datasArray.length" style="overflow: auto;"
-                     ng-class="{disabled : controller.isPatching}">
-                    <table class="table table-striped table-bordered table-hover table-condensed">
-                        <tr>
-                            <th ng-repeat="(key, value) in datasArray[0]"
-                                ng-bind="key"></th>
-                        </tr>
-                        <tr ng-repeat="(lineKey, lineValue) in datasArray">
-                        <td ng-repeat="(cellKey, cellValue) in lineValue" ng-controller="ItemController"
-                            ng-class="{'success' : isActive}"
-                            ng-bind="cellValue">
-                        </td>
-                        </tr>
-                    </table>
-                </div>
+    <!-- Patched JSON Array -->
+    <div class="row" ng-show="controller.isSet(1) && datasArray.length" style="overflow: auto;"
+         ng-class="{disabled : controller.isPatching}">
+      <table class="table table-striped table-bordered table-hover table-condensed">
+        <tr>
+          <th ng-repeat="(key, value) in datasArray[0]"
+              ng-bind="key"></th>
+        </tr>
+        <tr ng-repeat="(lineKey, lineValue) in datasArray">
+          <td ng-repeat="(cellKey, cellValue) in lineValue" ng-controller="ItemController"
+              ng-class="{'success' : isActive}"
+              ng-bind="cellValue">
+          </td>
+        </tr>
+      </table>
+    </div>
 
-                <!-- Patched JSON Document -->
-                <div class="row" style="height: 500px" ng-show="controller.isSet(2)" ng-class="{disabled : controller.isPatching}">
-                    <pre style="height: 100%;" bind-html-unsafe="datasStringify"></pre>
-                </div>
+    <!-- Patched JSON Document -->
+    <div class="row" style="height: 500px" ng-show="controller.isSet(2)" ng-class="{disabled : controller.isPatching}">
+      <pre style="height: 100%;" bind-html-unsafe="datasStringify"></pre>
+    </div>
 
-                <!-- JSON Patch Operations -->
-                <div class="row" style="height: 500px" ng-show="controller.isSet(3)" ng-class="{disabled : controller.isPatching}">
-                    <pre id="patchCtn" style="height: 100%;" bind-html-unsafe="patchStringify"></pre>
-                </div>
-            </section>
+    <!-- JSON Patch Operations -->
+    <div class="row" style="height: 500px" ng-show="controller.isSet(3)" ng-class="{disabled : controller.isPatching}">
+      <pre id="patchCtn" style="height: 100%;" bind-html-unsafe="patchStringify"></pre>
+    </div>
+  </section>
 
-            <div class="footer">
-                <p>♥ from the <a href="http://streamdata.io/" target="_blank">streamdata.io</a> team</p>
-                <div style="font-size: 0.8em; float: right;">
-                    Icons made by <a href="http://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
-                </div>
-            </div>
-        </div>
+  <div class="footer">
+    <p>♥ from the <a href="http://streamdata.io/" target="_blank">streamdata.io</a> team</p>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
+    <div style="font-size: 0.8em; float: right;">
+      Icons made by <a href="http://www.flaticon.com/authors/google" title="Google">Google</a> from <a
+      href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a
+      href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+    </div>
+  </div>
+</div>
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script>
           (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
           function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
           e=o.createElement(i);r=o.getElementsByTagName(i)[0];
           e.src='http://www.google-analytics.com/analytics.js';
           r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
           ga('create','UA-XXXXX-X');ga('send','pageview');
-        </script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fast-json-patch/0.5.1/json-patch-duplex.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-sanitize.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</script>
 
-        <script src="scripts/difflib.js"></script>
-        <script src="scripts/diffview.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fast-json-patch/0.5.1/json-patch-duplex.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-sanitize.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-        <script src="scripts/streamdataio.min.js"></script>
-        <script src="scripts/streamdataio-auth.min.js"></script>
-        <script src="scripts/main.js"></script>
-    </body>
+<script src="scripts/difflib.js"></script>
+<script src="scripts/diffview.js"></script>
+
+<script src="scripts/streamdataio.min.js"></script>
+<script src="scripts/streamdataio-auth.min.js"></script>
+<script src="scripts/main.js"></script>
+</body>
 </html>
