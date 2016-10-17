@@ -12,8 +12,9 @@ with your streamdata.io token you can get at <a href="https://portal.streamdata.
 
 In a shell terminal, run the commands:
 
-```cd stockmarket-console
-   npm install
+```
+cd stockmarket-console
+npm install
 ```
 
 This will install the streamdata.io JavaScript SDK and a Json-Patch JavaScript library.
