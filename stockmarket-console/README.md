@@ -20,6 +20,7 @@ npm install
 This will install the streamdata.io JavaScript SDK and a Json-Patch JavaScript library.
 
 Then, to run the sample, open the `index.html` in your browser (Chrome, Firefox, Safari, IE > 10) and the web console of the developers tools of your browser.
+
 **You should see data and patches printed in the console** (if the web console has not been open first, you may have missed the first data: in this case, refresh the page or open the web console before the `index.html`).
 
 If you have any questions or feedback, feel free to ask: <a href="mailto://support@streamdata.io">support@streamdata.io</a>
