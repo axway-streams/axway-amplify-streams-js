@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.progress {
+  width:100%;
+  margin-bottom:10px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.header .header-title {
+  display: flex;
+  align-items: center;
+}
+
+/* Content */
+.content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.content .form {
+  width: 50%;
+  padding: 30px;
+}
+.content .form .input-full {
+  width:100%;
+}
+
+.content .form .actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.content .table {
+  padding: 30px;
+}

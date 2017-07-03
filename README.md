@@ -4,7 +4,7 @@
 The SDK allows the use of the streamdata.io proxy to get data pushed from various sources and to use them in your application.
 
 In this directory, you will find:
-- a minified version of the SDK (streamdataio.min.js)
+- a minified version of the SDK for UI (streamdataio-web.min.js) and Node.js (streamdataio-node.min.js)
 - the documentation that helps you to understand how it works (doc)
 - several sample projects that show how to use this SDK within a Javascript application, using your favorite JS stack
   - stockmarket sample shows how to get data from a demo data source returning simulated market data, and bind them to a simple UI using JQuery
