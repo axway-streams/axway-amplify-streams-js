@@ -1,0 +1,17 @@
+{
+  "name": "stockmarket-nodejs",
+  "version": "1.0.0",
+  "description": "Simple node.js app using streamdata.io",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache 2 License",
+  "dependencies": {
+    "streamdataio-js-sdk": "streamdataio/streamdataio-js-sdk#typescript",
+    "streamdataio-js-sdk-auth": "streamdataio/streamdataio-js-sdk-auth#typescript",
+    "fast-json-patch": "^0.5.4"
+  }
+}
