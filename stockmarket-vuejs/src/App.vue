@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <streamdataio></streamdataio>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import Streamdataio from './components/Streamdataio'
 
 export default {
   name: 'app',
   components: {
-    Hello
+    Streamdataio
   }
 }
 </script>

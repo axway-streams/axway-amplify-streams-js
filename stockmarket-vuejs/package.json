@@ -13,7 +13,8 @@
     "fast-json-patch": "^1.2.2",
     "streamdataio-js-sdk": "github:streamdataio/streamdataio-js-sdk#typescript",
     "vue": "^2.3.3",
-    "vue-material": "^0.7.2"
+    "vue-material": "^0.7.2",
+    "bootstrap-vue": "^0.18.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
