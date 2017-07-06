@@ -44,7 +44,7 @@ export default {
   methods: {
     hello: function() {
       this.isConnected = true;
-      this.eventSource = StreamDataIo.createEventSource("http://stockmarket.streamdata.io/prices", "YjAwNDYwYzItN2Y1Mi00YmM5LTk3NmUtN2I4OGNhOGFiMzhj", []);
+      this.eventSource = StreamDataIo.createEventSource("http://stockmarket.streamdata.io/prices", "<YOUR STREAMDATAIO TOKEN>", []);
       this.eventSource.onData(data => {
         // initialize your data with the initial snapshot
         console.log('Received data');
