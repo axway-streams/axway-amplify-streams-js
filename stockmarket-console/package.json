@@ -14,7 +14,7 @@
   "author": "Streamdataio support@streamdata.io",
   "license": "Apache-2.0",
   "dependencies": {
-    "fast-json-patch": "1.1.1",
+    "fast-json-patch": "^2.0.3",
     "streamdataio-js-sdk": "github:streamdataio/streamdataio-js-sdk#typescript"
   },
   "devDependencies": {

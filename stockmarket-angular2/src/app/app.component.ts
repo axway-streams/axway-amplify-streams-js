@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {StreamData, StreamDataError, StreamDataIo} from 'streamdataio-js-sdk';
-import jsonpatch from 'fast-json-patch';
+import {applyPatch} from 'fast-json-patch';
 import {StockMarket} from '../shared/StockMarket';
 
 @Component({
@@ -32,8 +32,9 @@ export class AppComponent {
       .onOpen(() => {
         // you can also add custom behavior when the stream is opened
         console.log('open');
+        this.result = [];
       })
-      .onData((data : StockMarket[]) => {
+      .onData((data: StockMarket[]) => {
         // initialize your data with the initial snapshot
         console.log('--------------- on data ---------------');
         console.log('data: ' + data);
@@ -47,7 +48,7 @@ export class AppComponent {
         //  console.log('patch: %o', patch);
         console.log('patch:');
 
-        jsonpatch.applyPatch(this.result, patch);
+        applyPatch(this.result, patch);
 
         console.log('result patched:');
         console.log('--------------- end on patch ---------------');

@@ -12,6 +12,6 @@
   "dependencies": {
     "streamdataio-js-sdk": "streamdataio/streamdataio-js-sdk#typescript",
     "streamdataio-js-sdk-auth": "streamdataio/streamdataio-js-sdk-auth#typescript",
-    "fast-json-patch": "^0.5.4"
+    "fast-json-patch": "^2.0.3"
   }
 }

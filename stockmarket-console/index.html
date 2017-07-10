@@ -22,7 +22,7 @@
   <body>
     <h1>Hello! Open the web console of your browser to see the results!</h1>
     <script src="node_modules/streamdataio-js-sdk/dist/bundles/streamdataio.min.js"></script>
-    <script src="node_modules/fast-json-patch/dist/json-patch-duplex.min.js"></script>
+    <script src="node_modules/fast-json-patch/dist/fast-json-patch.js"></script>
 
     <script>
       var token = "<YOUR STREAMDATAIO TOKEN>";
@@ -49,7 +49,7 @@
         console.log('patch: %o', patch);
         console.table(patch);
 
-        jsonpatch.apply(result, patch);
+        jsonpatch.applyPatch(result, patch);
 
         console.log('result patched:');
         console.table(result);
