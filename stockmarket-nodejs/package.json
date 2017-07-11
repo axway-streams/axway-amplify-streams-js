@@ -10,8 +10,8 @@
   "author": "",
   "license": "Apache 2 License",
   "dependencies": {
-    "streamdataio-js-sdk": "streamdataio/streamdataio-js-sdk#typescript",
-    "streamdataio-js-sdk-auth": "streamdataio/streamdataio-js-sdk-auth#typescript",
+    "streamdataio-js-sdk": "^2.0.1",
+    "streamdataio-js-sdk-auth": "^2.0.0",
     "fast-json-patch": "^2.0.3"
   }
 }

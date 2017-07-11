@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "fast-json-patch": "^2.0.3",
-    "streamdataio-js-sdk": "github:streamdataio/streamdataio-js-sdk#typescript",
+    "streamdataio-js-sdk": "^2.0.1",
     "vue": "^2.3.3",
     "vue-material": "^0.7.2",
     "bootstrap-vue": "^0.18.0"

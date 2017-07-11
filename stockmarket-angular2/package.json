@@ -28,7 +28,7 @@
     "core-js": "^2.4.1",
     "fast-json-patch": "^2.0.3",
     "rxjs": "^5.4.2",
-    "streamdataio-js-sdk": "github:streamdataio/streamdataio-js-sdk#typescript",
+    "streamdataio-js-sdk": "^2.0.1",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
