@@ -1,0 +1,445 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>streamdata.io SDK</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div id="tsd-brand">
+					<a class="brand" href="http://streamdata.io"><img src="assets/images/streamdataio-logo.png" data-base="."></a>
+				</div>
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">SDK</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> streamdata.io SDK</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="streamdata-io-javascript-sdk">streamdata.io javascript sdk</h1>
+				<hr>
+				<h1 id="introduction">Introduction</h1>
+				<p><strong><a href="http://streamdata.io" target="_blank">streamdata.io</a></strong> is a real-time cache proxy allowing you to poll standard public REST APIs and push updates to clients.
+				But wait, there is more: streamdata.io keeps an history of modifications that occur on the data between two polling! This way, streamdata.io is able to give you the list of modifications which happened since last time you fetched the data.</p>
+				<p>In other words, streamdata.io is the perfect cache to dramatically reduce the bandwidth consumption to transfer data that change both rarely and frequently.</p>
+				<h2 id="features">Features</h2>
+				<ul>
+					<li>Incremental data update: replacing polling by push is not enough to minimize data streams. That&#39;s why streamdata.io pushes only the part that has changed.</li>
+					<li><a href="http://www.w3.org/TR/eventsource/" target="_blank">Server-Sent-Events (SSE)</a>: updates are pushed to the client using SSE protocol. By providing fallback mechanisms streamdata.io can also work with older browsers.</li>
+					<li>API Cache: to reduce server load and latency, streamdata.io has an integrated cache mechanism.</li>
+				</ul>
+				<p>This Javascript SDK facilitates the usage of streamdata.io.</p>
+				<p>Follow this quick start guide to easily integrate streamdata.io into your application.</p>
+				<h1 id="getting-started">Getting Started</h1>
+				<h2 id="1-get-the-sdk">1. Get the SDK</h2>
+				<h3 id="1-1-prerequisites">1.1 Prerequisites</h3>
+				<p>Having node.js and npm installed on your computer.</p>
+				<h3 id="1-2-option-1-build-sdk-from-source">1.2 Option 1 : Build SDK from source</h3>
+				<p>Then check out the project from git and simply run the following command lines to build the sdk file from source:</p>
+				<pre><code>npm <span class="hljs-keyword">install</span>
+</code></pre><p>This will install npm components for the build.</p>
+				<pre><code>npm <span class="hljs-keyword">run</span><span class="bash"> build</span>
+</code></pre><p>The result of this will be available in the dist/ folder :</p>
+				<ul>
+					<li>dist/bundles<ul>
+							<li>streamdataio.d.ts : typescript definition file</li>
+							<li>streamdataio-web.js and streamdataio-web.min.js : js files for web framework (plain, jquery, angular, vuejs)</li>
+							<li>streamdataio-node.js and streamdataio-node.min.js : js files for node.js </li>
+						</ul>
+					</li>
+					<li>dist/commonjs<ul>
+							<li>SDK compile for commonjs target</li>
+						</ul>
+					</li>
+					<li>dist/es6<ul>
+							<li>SDK compile for es6 target</li>
+						</ul>
+					</li>
+					<li>dist/src<ul>
+							<li>Source files of typescript definition</li>
+						</ul>
+					</li>
+				</ul>
+				<h3 id="1-3-option-2-install-the-sdk-from-npm">1.3 Option 2 : install the SDK from npm</h3>
+				<p>The streamdataio-js-sdk is available through a npm package.</p>
+				<p>You can install it through the following command line :</p>
+				<pre><code>npm <span class="hljs-keyword">install </span>streamdataio-<span class="hljs-keyword">js-sdk </span>--save
+</code></pre><p>Distribution files will be available in node_modules/streamdataio-js-sdk/dist/bundles folder. Use respectively streamdataio.min.js for Web environment or streamdataio-node.min.js for Node.Js environment</p>
+				<h3 id="1-4-option-3-via-cdn">1.4 Option 3 : via CDN</h3>
+				<p>streamdataio JS SDK is available via CDN at the following link :</p>
+				<pre><code>https:<span class="hljs-regexp">//</span>cdn.rawgit.com<span class="hljs-regexp">/streamdataio/</span>streamdataio-js-sdk<span class="hljs-regexp">/master/</span>dist<span class="hljs-regexp">/bundles/</span>streamdataio.min.js
+</code></pre><p>This method must be used only for dev/testing purpose.</p>
+				<h2 id="2-add-sdk-to-your-application">2. Add SDK to your application</h2>
+				<p>Add reference to the streamdataio.min.js file in your application code. Usually this is done by using a script html tag into your main page:</p>
+				<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"streamdataio.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+				<p>By doing this, you access in your JavaScript code to the <code>streamdataio</code> object which is the central point of all streamdata.io SDK API.</p>
+				<h2 id="3-use-streamdata-io-to-connect-to-your-api">3. Use streamdata.io to connect to your API</h2>
+				<p>Create a <code>StreamDataEventSource</code> object into your JavaScript code.</p>
+				<pre><code class="lang-javascript">    <span class="hljs-keyword">var</span> myEvent = streamdataio.createEventSource(<span class="hljs-string">"http://mysite.com/myRestService"</span>,&lt;app_token&gt;);
+</code></pre>
+				<p>The <code>StreamDataEventSource</code> is the entry point for establishing a data stream connection to the given URL.</p>
+				<p>It uses an application <strong>token</strong> to identify and authorize the stream connection to be established.</p>
+				<p>To get a valid <strong>token</strong>, please visit <a href="http://streamdata.io" target="_blank">streamdata.io web site</a> to register and create an application.</p>
+				<p>It uses standard HTTP Server-Sent Events to get the data you required through streamdata.io proxy.</p>
+				<p>If your API requires specific headers, simply pass them as an array on the event source creation, and streamdata.io will forward them to your Information System.</p>
+				<p>An optional <code>headers</code> parameter can be passed to the <code>createEventSource</code> method.</p>
+				<p>It must be an array with the following structure:</p>
+				<pre><code>[<span class="hljs-symbol">'header1:</span> headervalue1', <span class="hljs-symbol">'header2:</span> headervalue2']
+</code></pre><p>Here is an example to add a Basic authorization header to your target API call:</p>
+				<pre><code class="lang-javascript">
+    <span class="hljs-comment">// Your api URL</span>
+    <span class="hljs-keyword">var</span> url = <span class="hljs-string">'http://mysite.com/myJsonRestService'</span>;
+
+    <span class="hljs-comment">// add whatever header required by your API</span>
+    <span class="hljs-keyword">var</span> headers = [<span class="hljs-string">'Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=='</span>];
+
+    <span class="hljs-keyword">var</span> myEventSource = streamdataio.createEventSource(url,&lt;app_token&gt;, headers);
+</code></pre>
+				<h2 id="4-handle-data-reception">4. Handle data reception</h2>
+				<p>streamdata.io SDK handles data from the targeted REST service as JSON objects.</p>
+				<p>When the <code>StreamDataEventSource</code> object is opened, the initial set of data is returned as it would be with a standard call to the service URL. This data set is called the <strong>snapshot</strong>. The SDK returns it through the <code>onData</code> callback.</p>
+				<p>The updates of this initial set will come subsequently in the <a href="http://jsonpatch.com/" target="_blank">JSON-Patch</a> format through the <code>onPatch</code> callback. Such a data update is called a <strong>patch</strong>.</p>
+				<p>You can define your callback functions as follows:</p>
+				<pre><code class="lang-javascript">    myEventSource.onData(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>)</span>{
+        <span class="hljs-comment">// initialize your data with the initial snapshot</span>
+    }).onPatch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">patch</span>)</span>{
+        <span class="hljs-comment">// update the data with the provided patch</span>
+    }).onError(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>)</span>{
+        <span class="hljs-comment">// do whatever you need in case of error</span>
+    }).onOpen(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+        <span class="hljs-comment">// you can also add custom behavior when the stream is opened</span>
+    });
+</code></pre>
+				<h2 id="5-start-receiving-data">5. Start receiving data</h2>
+				<pre><code class="lang-javascript">    myEventSource.open();
+</code></pre>
+				<h1 id="examples">Examples</h1>
+				<h2 id="1-simple-javascript-source-code-integration">1. Simple Javascript source code integration</h2>
+				<p>Here is a complete example of how to use the different callbacks of the streamdata.io SDK.</p>
+				<p>You can copy/paste this piece of code in a HTML page and test it.</p>
+				<p>Each callback will be described in further details in the Public API JavaScript doc section.</p>
+				<pre><code class="lang-javascript">&lt;!-- include streamdataio library --&gt;
+&lt;script src="streamdataio.min.js" /&gt;
+
+&lt;!-- use json-patch-duplex library for applying patches --&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/fast-json-patch/0.5.1/json-patch-duplex.min.js" /&gt;
+
+&lt;script&gt;
+(function() {
+  var eventSource = null;
+  var stocks = [];
+
+  function connect() {
+    // REPLACE WITH YOUR OWN TOKEN HERE
+    var appToken = "NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1";
+
+    // create the StreamdataEventSource Object
+    eventSource = streamdataio.createEventSource("http://myRestservice.com/stocks", appToken);
+
+    eventSource
+     .onOpen(function() {
+       console.log("streamdata Event Source connected.")
+     })
+     .onData(function(data) {
+       // json object stored locally.
+       stocks = data;
+     })
+     .onPatch(function(patch) {
+       // use json patch library to apply the patch (patch)
+       // to the original snapshot (stocks)
+       jsonpatch.apply(stocks, patch);
+     })
+     .onError(function(error) {
+       // displays the error message
+       console.log(error.getMessage());
+     });
+
+    // open the data stream to the REST service through streamdata.io proxy
+    eventSource.open();
+
+  };
+
+  function disconnect() {
+    if (eventSource) {
+      eventSource.close();
+      eventSource = null;
+    }
+  };
+
+  connect();
+})();
+&lt;/script&gt;
+</code></pre>
+				<h2 id="2-example-projects">2. Example projects</h2>
+				<p>You&#39;ll find on GitHub the following projects which integrates streamdata.io SDK within simple example applications.</p>
+				<h3 id="2-1-jquery-example">2.1 jQuery example</h3>
+				<p>A simple jQuery integration of market data with streamdata.io SDK.</p>
+				<p><a href="https://github.com/streamdataio/streamdataio-js/tree/master/stockmarket-jquery" target="_blank">Stock Market jQuery</a></p>
+				<h3 id="2-2-angular-js-example">2.2 Angular.js example</h3>
+				<p>The same market data example using Angular.js</p>
+				<p><a href="https://github.com/streamdataio/streamdataio-js/tree/master/stockmarket-angular" target="_blank">Stock Market AngularJS</a></p>
+				<h3 id="2-3-angular-example">2.3 Angular example</h3>
+				<p>The same market data example using Angular</p>
+				<p><a href="https://github.com/streamdataio/streamdataio-js/tree/master/stockmarket-angular2" target="_blank">Stock Market Angular</a></p>
+				<h3 id="2-4-vuejs-example">2.4 VueJs example</h3>
+				<p>The same market data example using VueJs</p>
+				<p><a href="https://github.com/streamdataio/streamdataio-js/tree/master/stockmarket-vuejs" target="_blank">Stock Market VueJs</a></p>
+				<h3 id="2-4-node-js-example">2.4 Node.js example</h3>
+				<p>The same market data example using node.js</p>
+				<p><a href="https://github.com/streamdataio/streamdataio-js/tree/master/stockmarket-nodejs" target="_blank">Stock Market Node.js</a></p>
+				<h1 id="security">Security</h1>
+				<h2 id="1-tls-encryption">1. TLS Encryption</h2>
+				<p>streamdata.io proxy uses Transport Layer Security (TLS) as a default to encrypt messages while in transport across the Internet.</p>
+				<p><strong>Recommendation</strong>:</p>
+				<p>Even if streamdata.io proxy can be used without TLS encryption, we strongly recommend to always use https (thus TLS) with applications using streamdata.io.</p>
+				<p>Using TLS ensures that client messages are protected when being sent to and from streamdata.io. This prevents intercepted messages from being viewed by unauthorized parties.</p>
+				<h2 id="2-authentication-with-token">2. Authentication with Token</h2>
+				<p>Running an application in production through streamdata.io proxy requires an authentication mechanism.</p>
+				<p>When registering on <a href="http://streamdata.io" target="_blank">streamdata.io web site</a>, you&#39;ll be provided with a unique <strong>token</strong> for your application and a <strong>private key</strong>.</p>
+				<p>This allows streamdata.io proxy to identify that a specific request comes from your application.</p>
+				<p>This <strong>token</strong> must be provided to the SDK in order to be able to use the streamdata.io proxy.</p>
+				<pre><code class="lang-javascript">    <span class="hljs-keyword">var</span> appToken = <span class="hljs-string">"NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1"</span>;
+    <span class="hljs-keyword">var</span> myEventSource = streamdataio.createEventSource(<span class="hljs-string">"http://mysite.com/myJsonRestService"</span>, appToken);
+</code></pre>
+				<h2 id="3-authentication-with-signature">3. Authentication with signature</h2>
+				<p>streamdata.io SDK offers an optional Hash-based Message Authentication (HMAC) mechanism to enhance your requests security.</p>
+				<p>In order to use it, you&#39;ll first need to add streamdataio_auth javascript auth library to your project :</p>
+				<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"/js/streamdataio-auth.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+				<p>This auth javascript library is available :</p>
+				<ul>
+					<li><p>in the github projet <a href="https://github.com/streamdataio/streamdataio-js">https://github.com/streamdataio/streamdataio-js</a></p>
+					</li>
+					<li><p>via npm through the following command line :</p>
+						<pre><code class="lang-html">npm install streamdataio-js-sdk-auth
+</code></pre>
+					</li>
+				</ul>
+				<p>You can then use a signatureStrategy object when creating your StreamDataEventSource as follow:</p>
+				<pre><code class="lang-javascript">    <span class="hljs-comment">// setup headers</span>
+    <span class="hljs-keyword">var</span> headers = [];
+    <span class="hljs-comment">// setup signatureStrategy</span>
+    <span class="hljs-keyword">var</span> signatureStrategy = AuthStrategy.newSignatureStrategy(<span class="hljs-string">"NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1"</span>,<span class="hljs-string">"NTEtMTQxNiWIzMDEC00OWNlLThmNGYtY2ExMDJxO00NzNhLTgtZWY0MjOTc2YmUxODFiZDU1NmU0ZDAtYWU5NjYxMGYzNDdi"</span>);
+    <span class="hljs-comment">// instantiate an eventSource</span>
+    <span class="hljs-keyword">var</span> eventSource = streamdataio.createEventSource(<span class="hljs-string">"http://myRestservice.com/stocks"</span>,<span class="hljs-string">"NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1"</span>,headers,signatureStrategy);
+</code></pre>
+				<p><strong>Important Note</strong>:</p>
+				<p>Your signatureStrategy is built using your <strong>token</strong> and <strong>private key</strong>.</p>
+				<p>The signatureStrategy will generate a signature specific to your data stream connection request.</p>
+				<p>This signature will be validated by streamdata.io proxy before authorizing your request to go through it.</p>
+				<p><strong>Your private key must be kept secret</strong>.</p>
+				<h1 id="compression">Compression</h1>
+				<p>Server-Sent event flow can be compressed on demand using <strong>gzip</strong> or <strong>deflate</strong> methods.</p>
+				<p>To do so, you can use the X-Sd-Compress header this way:</p>
+				<pre><code class="lang-javascript">X-Sd-Compress: <span class="hljs-literal">true</span>
+</code></pre>
+				<p>If this header is not provided, the default behavior is NOT to use compression.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/loglevel.html" class="tsd-kind-icon">Log<wbr>Level</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/eventtype.html" class="tsd-kind-icon">Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/jsonhelper.html" class="tsd-kind-icon">Json<wbr>Helper</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/listeners.html" class="tsd-kind-icon">Listeners</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/logger.html" class="tsd-kind-icon">Logger</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/preconditions.html" class="tsd-kind-icon">Preconditions</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/streamdata.html" class="tsd-kind-icon">Stream<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/streamdataerror.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/streamdataeventsource.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Event<wbr>Source</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/streamdataio.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Io</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/streamdataserver.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Server</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/streamdataurl.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Url</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/urlhelper.html" class="tsd-kind-icon">Url<wbr>Helper</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/dataevent.html" class="tsd-kind-icon">Data<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/errorevent.html" class="tsd-kind-icon">Error<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/event.html" class="tsd-kind-icon">Event</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/listener.html" class="tsd-kind-icon">Listener</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/monitorevent.html" class="tsd-kind-icon">Monitor<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/openevent.html" class="tsd-kind-icon">Open<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/patchevent.html" class="tsd-kind-icon">Patch<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/streamdataauthstrategy.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Auth<wbr>Strategy</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="interfaces/streamdatawindow.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Window</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#streamdatasource" class="tsd-kind-icon">Stream<wbr>Data<wbr>Source</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#defaultstreamdataserver" class="tsd-kind-icon">Default<wbr>Stream<wbr>Data<wbr>Server</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#node" class="tsd-kind-icon">NODE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#createeventsource" class="tsd-kind-icon">create<wbr>Event<wbr>Source</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
