@@ -34,33 +34,24 @@
         <thead>
         <tr>
           <th>title</th>
+          <th>company</th>
+          <th>ticker</th>
           <th>price</th>
-          <th>param1</th>
-          <th>param2</th>
-          <th>param3</th>
-          <th>param4</th>
-          <th>param5</th>
-          <th>param6</th>
-          <th>param7</th>
-          <th>param8</th>
+          <th>volume</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let item of result">
           <td>{{item.title}}</td>
-          <td>{{item.price}}</td>
-          <td>{{item.param1}}</td>
-          <td>{{item.param2}}</td>
-          <td>{{item.param3}}</td>
-          <td>{{item.param4}}</td>
-          <td>{{item.param5}}</td>
-          <td>{{item.param6}}</td>
-          <td>{{item.param7}}</td>
-          <td>{{item.param8}}</td>
+          <td>{{item.company}}</td>
+          <td>{{item.ticker}}</td>
+          <td>{{item.last}}</td>
+          <td>{{item.volume}}</td>
         </tr>
 
         </tbody>
       </table>
+      <h5 style="text-align: right; font-style: italic;">Disclaimer: data is emulated and does not reflect the actual market data.</h5>
     </div>
   </div>
 </div>
