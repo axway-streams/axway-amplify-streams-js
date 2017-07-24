@@ -35,21 +35,20 @@
           <md-table-header>
             <md-table-row>
               <md-table-head>Title</md-table-head>
-              <md-table-head md-numeric>Price</md-table-head>
-              <md-table-head md-numeric>Param1</md-table-head>
-              <md-table-head md-numeric>Param2</md-table-head>
-              <md-table-head md-numeric>Param3</md-table-head>
-              <md-table-head md-numeric>Param4</md-table-head>
-              <md-table-head md-numeric>Param5</md-table-head>
-              <md-table-head md-numeric>Param6</md-table-head>
-              <md-table-head md-numeric>Param7</md-table-head>
-              <md-table-head md-numeric>Param8</md-table-head>
+              <md-table-head>Company</md-table-head>
+              <md-table-head>Ticker</md-table-head>
+              <md-table-head>Price</md-table-head>
+              <md-table-head>Volume</md-table-head>
             </md-table-row>
           </md-table-header>
 
           <md-table-body>
             <md-table-row v-for="(data, index) in tableData" :key="data.title">
-              <md-table-cell v-for="col in data" :key="col.title" md-numeric>{{col}}</md-table-cell>
+              <md-table-cell>{{data.title}}</md-table-cell>
+              <md-table-cell>{{data.company}}</md-table-cell>
+              <md-table-cell>{{data.ticker}}</md-table-cell>
+              <md-table-cell>{{data.last}}</md-table-cell>
+              <md-table-cell>{{data.volume}}</md-table-cell>
             </md-table-row>
           </md-table-body>
         </md-table>
@@ -66,7 +65,7 @@
     name   : 'hello',
     data () {
       return {
-        url        : 'http://stockmarket.streamdata.io/prices',
+        url        : 'http://stockmarket.streamdata.io/v2/prices',
         token      : null,
         tableData  : [],
         streamData : null,
@@ -187,5 +186,9 @@
 
   a {
     color: #42b983;
+  }
+
+  .md-table-head, .md-table-cell {
+    text-align: center;
   }
 </style>
