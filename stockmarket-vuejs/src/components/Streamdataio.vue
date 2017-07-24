@@ -52,6 +52,7 @@
             </md-table-row>
           </md-table-body>
         </md-table>
+        <h5 style="text-align: right; font-style: italic;">Disclaimer: data is emulated and does not reflect the actual market data.</h5>
       </div>
     </div>
   </div>
