@@ -4,10 +4,6 @@ This sample application shows how to use the streamdata.io Javascript SDK with A
 
 The streamdata.io JavaScript SDK allows the use of streamdata.io to get data pushed from various sources and use them in your application.
 
-If you have any questions or feedback, feel free to ask: support@streamdata.io
-
-
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.1.
 
 ## Development server
