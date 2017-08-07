@@ -7,7 +7,7 @@
     const appCtrl = this;
     appCtrl.isPatching = false;
     appCtrl.headers = [];
-    appCtrl.url = 'http://stockmarket.streamdata.io/prices';
+    appCtrl.url = 'http://stockmarket.streamdata.io/v2/prices';
     appCtrl.isConnected = false;
     appCtrl.errorMsg = null;
 

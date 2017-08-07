@@ -141,11 +141,11 @@
   </md-content>
 
   <div class="table" ng-show="appCtrl.isConnected">
-    <div>
+    <div ng-if="appCtrl.datas.length>0">
       <md-progress-linear md-mode="indeterminate"></md-progress-linear>
       <table class="table table-striped table-bordered">
         <tr>
-          <th ng-repeat="(key, value) in appCtrl.datas"
+          <th ng-repeat="(key, value) in appCtrl.datas[0]"
               ng-bind="key"></th>
         </tr>
         <tr ng-repeat="(lineKey, lineValue) in appCtrl.datas">
