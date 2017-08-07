@@ -10,8 +10,9 @@
   "author": "",
   "license": "Apache 2 License",
   "dependencies": {
+    "fast-json-patch": "^2.0.3",
+    "node-print": "0.0.4",
     "streamdataio-js-sdk": "^2.0.1",
-    "streamdataio-js-sdk-auth": "^2.0.0",
-    "fast-json-patch": "^2.0.3"
+    "streamdataio-js-sdk-auth": "^2.0.0"
   }
 }

@@ -18,13 +18,14 @@
 var streamdataio = require('streamdataio-js-sdk/dist/bundles/streamdataio-node');
 var AuthStrategy = require('streamdataio-js-sdk-auth');
 // add json patch dependency
-var JsonPatch = require('fast-json-patch');
+var jsonPatch = require('fast-json-patch');
+var print = require('node-print');
 
 function server()
 {
   // targetUrl is the JSON API you wish to stream
   // you can use this example API which simulates updating stocks prices from a financial market
-  var targetUrl = 'http://stockmarket.streamdata.io/prices';
+  var targetUrl = 'http://stockmarket.streamdata.io/v2/prices';
 
   // appToken is the way Streamdata.io authenticates you as a valid user.
   // you MUST provide a valid token for your request to go through.
@@ -48,7 +49,7 @@ function server()
       console.log("data received");
       // memorize the fresh data set
       result = data;
-
+      print.printTable(result);
     })
     // the streamdata.io specific 'patch' event will be called when a fresh Json patch
     // is pushed by streamdata.io from the API. This patch has to be applied to the
@@ -56,11 +57,11 @@ function server()
     .onPatch(function (patch)
     {
       // display the patch
-      console.log("patch: %o", patch);
+      console.log("patch: ", patch);
       // apply the patch to data using json patch API
-      JsonPatch.apply(result, patch);
+      jsonPatch.applyPatch(result, patch);
       // do whatever you wish with the update data
-      console.log("data: %o", data);
+      print.printTable(result);
 
     })
 
