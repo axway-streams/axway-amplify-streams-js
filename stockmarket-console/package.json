@@ -15,7 +15,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "fast-json-patch": "^2.0.3",
-    "streamdataio-js-sdk": "^2.0.1"
+    "streamdataio-js-sdk": "^2.0.2"
   },
   "devDependencies": {
     "eventsource": "^1.0.4"
