@@ -12,7 +12,7 @@ export class AppComponent {
   // Private
   private streamData: StreamData;
   // Public for bunding
-  token: string = "YmVlODRjMWYtMzJhMS00OTA2LWExNGYtMTdjODI1YzZkNDVh";
+  token: string = "<YOUR STREAMDATA TOKEN>";
   url: string = "http://stockmarket.streamdata.io/v2/prices";
   result: StockMarket[];
 
