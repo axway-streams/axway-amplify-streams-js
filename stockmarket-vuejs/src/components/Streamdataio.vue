@@ -1,20 +1,20 @@
 <template>
   <div class="container">
     <div class="header">
-      <img src="../assets/streamdataio.png" />
+      <img src="../assets/streamdataio.png"/>
       <h3 class="header-title">Stock-Market demo with <img width="100"
-                                                           src="../assets/vuejs.png" />
+                                                           src="../assets/vuejs.png"/>
       </h3>
     </div>
     <div class="content">
-      <h4>An application token is required for authentication. <a href="https://portal.streamdata.io/#/register"
+      <h4>An application subscriber key is required for authentication. <a href="https://portal.streamdata.io/#/register"
                                                                   target="_blank">Sign Up</a> to get yours.</h4>
       <div class="form">
         <md-input-container class="input-full">
           <input mdInput placeholder="URL" name="urlInput" v-model="url" disabled>
         </md-input-container>
         <md-input-container class="input-full">
-          <input mdInput placeholder="Token" name="token" v-model="token" :disabled="isConnected">
+          <input mdInput placeholder="Subscriber Key" name="subscriberKey" v-model="subscriberKey" :disabled="isConnected">
         </md-input-container>
         <div class="actions">
           <div v-if="!isConnected">
@@ -59,56 +59,55 @@
 </template>
 
 <script>
-  import  {StreamDataIo} from 'streamdataio-js-sdk'
+  import {StreamDataIo} from 'streamdataio-js-sdk'
   import * as jsonpatch from 'fast-json-patch'
 
   export default {
-    name   : 'hello',
-    data () {
+    name: 'hello',
+    data() {
       return {
-        url        : 'http://stockmarket.streamdata.io/v2/prices',
-        token      : null,
-        tableData  : [],
-        streamData : null,
+        url: 'http://stockmarket.streamdata.io/v2/prices',
+        subscriberKey: null,
+        tableData: [],
+        subscriber: null,
         isConnected: false
       }
     },
     methods: {
-      connect    : function ()
-      {
-        this.streamData =
-          StreamDataIo.createEventSource(this.url, this.token, []);
-        this.streamData.onData(data =>
-        {
-          // initialize your data with the initial snapshot
-          console.log('Received data');
-          console.table(data);
-          this.tableData = data;
-          console.table(this.tableData);
-        },this).onPatch(patch =>
-        {
-          // update the data with the provided patch// update the data with the provided patch
-          console.log('received patch %o', patch);
-          jsonpatch.applyPatch(this.tableData, patch);
-          console.table(this.tableData);
-        },this).onError(error =>
-        {
-          // do whatever you need in case of error
-          console.log('error: %o', error);
-          this.streamData.close();
-          this.isConnected = false;
-        },this).onOpen(function ()
-        {
-          this.isConnected = true;
-          // you can also add custom behavior when the stream is opened
-          console.log('open');
-        },this);
-        this.streamData.open();
+      connect: function () {
+        this.subscriber = StreamDataIo.subscribeToUrl(this.url, this.subscriberKey);
+        //TODO Should be remove when proxy v2 is in production
+        this.subscriber.proxy = "http://haproxy-integ.streamdata.io";
+        this.subscriber
+          .onData(data => {
+            // initialize your data with the initial snapshot
+            console.log('Received data');
+            console.table(data);
+            this.tableData = data;
+            console.table(this.tableData);
+          }, this)
+          .onPatch(patch => {
+            // update the data with the provided patch// update the data with the provided patch
+            console.log('received patch %o', patch);
+            jsonpatch.applyPatch(this.tableData, patch);
+            console.table(this.tableData);
+          }, this)
+          .onError(error => {
+            // do whatever you need in case of error
+            console.log('error: %o', error);
+            this.subscriber.close();
+            this.isConnected = false;
+          }, this)
+          .onOpen(() => {
+            this.isConnected = true;
+            // you can also add custom behavior when the stream is opened
+            console.log('open');
+          }, this);
+        this.subscriber.open();
       },
-      disconnect : function ()
-      {
-        if (this.streamData) {
-          this.streamData.close();
+      disconnect: function () {
+        if (this.subscriber) {
+          this.subscriber.close();
         }
         this.isConnected = false;
       }

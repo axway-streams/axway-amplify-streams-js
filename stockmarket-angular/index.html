@@ -61,7 +61,7 @@
   </div>
 
   <md-content class="content" class="md-inline-form" layout-padding>
-    <h4>An application token is required for authentication. <a href="https://portal.streamdata.io/#/register"
+    <h4>An application subscriber key is required for authentication. <a href="https://portal.streamdata.io/#/register"
                                                                 target="_blank">Sign Up</a> to get yours.</h4>
     <form class="form" name="streamdataForm">
       <md-input-container class="md-block" flex-gt-sm>
@@ -75,62 +75,22 @@
       </md-input-container>
       <md-input-container class="md-block" flex-gt-sm>
         <div class="input-help-container">
-          <label>Application token</label>
+          <label>Application subscriber key</label>
           <img src="img/info.png"
                ng-model="appCtrl.popupPk.content" popup="appCtrl.popupPk.options" />
         </div>
-        <input id="inputPublicKey" placeholder="Your App Token" type="text"
-               ng-model="appCtrl.token" required ng-disabled="appCtrl.isConnected">
+        <input id="inputPublicKey" placeholder="Your App Subscriber Key" type="text"
+               ng-model="appCtrl.subscriberKey" required ng-disabled="appCtrl.isConnected">
 
       </md-input-container>
-      <md-input-container class="md-block" flex-gt-sm>
-        <div class="switch-help-container">
-          <img src="img/info.png"
-               ng-model="appCtrl.popupSignature.content" popup="appCtrl.popupSignature.options" />
-          <md-switch class="md-primary" name="special" ng-model="appCtrl.signature">
-            Authenticate with signature (HMAC)
-          </md-switch>
-        </div>
-      </md-input-container>
 
-      <md-input-container class="md-block" flex-gt-sm ng-show="appCtrl.signature">
-        <label>Private key for signature</label>
-        <input id="inputPrivateKey" placeholder="Your private key" type="text"
-               ng-model="appCtrl.pk" ng-required="appCtrl.signature">
-      </md-input-container>
-
-      <md-input-container class="md-block" flex-gt-sm>
-        <div class="link-help-container">
-          <label>Specific headers</label>
-          <img src="img/info.png"
-               ng-model="appCtrl.popupHeaders.content" popup="appCtrl.popupHeaders.options" />
-        </div>
-        <a href="#" ng-click="appCtrl.addHeader()">Add header</a>
-      </md-input-container>
-
-      <div class="form-group row" ng-repeat="(index, header) in appCtrl.headers">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-4">
-          <input class="form-control" ng-model="header.name" placeholder="Key">
-          </input>
-        </div>
-        <div class="col-sm-4">
-          <input class="form-control" ng-model="header.value" placeholder="Value">
-          </input>
-        </div>
-        <div class="col-sm-1" style="margin-top: 6px; padding-left: 0px;">
-          <button style="padding: 0px;width: 23px; border-radius: 20px;" class="btn btn-danger"
-                  ng-click="appCtrl.removeHeader(index)">✕
-          </button>
-        </div>
-      </div>
       <div class="actions">
         <md-button class="md-fab" ng-click="appCtrl.connect()"
                    ng-show="!appCtrl.isConnected" ng-disabled="streamdataForm.$invalid">
           <md-icon>play_arrow</md-icon>
         </md-button>
         <md-button class="md-fab" ng-click="appCtrl.disconnect()"
-                   ng-show="appCtrl.isConnected"">
+                   ng-show="appCtrl.isConnected">
           <md-icon>stop</md-icon>
         </md-button>
         <div style="background-repeat: no-repeat; height: 27px; width: 15px; margin-top: 10px; float: right;">
@@ -204,7 +164,6 @@
 
 <script src="node_modules/fast-json-patch/dist/fast-json-patch.js"></script>
 <script src="node_modules/streamdataio-js-sdk/dist/bundles/streamdataio.min.js"></script>
-<script src="node_modules/streamdataio-js-sdk-auth/dist/bundles/streamdataio-auth.min.js"></script>
 <script src="scripts/main.js"></script>
 </body>
 </html>

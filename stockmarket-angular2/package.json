@@ -28,7 +28,7 @@
     "core-js": "^2.4.1",
     "fast-json-patch": "^2.0.3",
     "rxjs": "^5.4.2",
-    "streamdataio-js-sdk": "^2.0.2",
+    "streamdataio-js-sdk": "^2.1.0",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
@@ -49,6 +49,6 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
-    "typescript": "~2.3.3"
+    "typescript": "~2.4.2"
   }
 }

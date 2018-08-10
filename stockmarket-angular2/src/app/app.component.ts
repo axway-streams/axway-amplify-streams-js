@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {StreamData, StreamDataError, StreamDataIo} from 'streamdataio-js-sdk';
 import {applyPatch} from 'fast-json-patch';
+import {StreamDataIo, StreamdataProxyError, StreamdataUrlSubscriber} from 'streamdataio-js-sdk';
 import {StockMarket} from '../shared/StockMarket';
 
 @Component({
@@ -10,25 +10,23 @@ import {StockMarket} from '../shared/StockMarket';
 })
 export class AppComponent {
   // Private
-  private streamData: StreamData;
+  private subscriber: StreamdataUrlSubscriber;
   // Public for bunding
-  token: string = "<YOUR STREAMDATA TOKEN>";
-  url: string = "http://stockmarket.streamdata.io/v2/prices";
+  subscriberKey: string;
+  url: string = 'http://stockmarket.streamdata.io/v2/prices';
   result: StockMarket[];
 
   public connect(): void {
 
-    // If ever you wish to get the whole data instead of patches:
-    // headers = ["Accept: application/json"];
-    let headers = [];
-
     if (this.isConnected) {
-      this.streamData.close();
+      this.subscriber.close();
     }
 
-    this.streamData = StreamDataIo.createEventSource(this.url, this.token, headers);
+    this.subscriber = StreamDataIo.subscribeToUrl(this.url, this.subscriberKey);
+    //TODO Should be remove when proxy v2 is in production
+    this.subscriber.proxy = 'http://haproxy-integ.streamdata.io';
 
-    this.streamData
+    this.subscriber
       .onOpen(() => {
         // you can also add custom behavior when the stream is opened
         console.log('open');
@@ -37,39 +35,38 @@ export class AppComponent {
       .onData((data: StockMarket[]) => {
         // initialize your data with the initial snapshot
         console.log('--------------- on data ---------------');
-        console.log('data: ' + data);
+        console.log('data: %o', data);
         this.result = data;
         console.log('--------------- end on data ---------------');
 
-      }, this)
+      })
       .onPatch((patch) => {
         // update the data with the provided patch// update the data with the provided patch
         console.log('--------------- on patch ---------------');
-        //  console.log('patch: %o', patch);
-        console.log('patch:');
+        console.log('patch: %o', patch);
 
         applyPatch(this.result, patch);
 
         console.log('result patched:');
         console.log('--------------- end on patch ---------------');
 
-      }, this)
-      .onError((error: StreamDataError) => {
+      })
+      .onError((error: StreamdataProxyError) => {
         // do whatever you need in case of error
         console.log('error: %o', error);
-        this.streamData.close();
+        this.subscriber.close();
       });
 
-    this.streamData.open();
+    this.subscriber.open();
   }
 
   public disconnect(): void {
-    this.streamData && this.streamData.close();
-    this.streamData = null;
+    this.subscriber && this.subscriber.close();
+    this.subscriber = null;
   }
 
   public get isConnected(): boolean {
-    return !!this.streamData && this.streamData.isConnected();
+    return this.subscriber && this.subscriber.isConnected();
   }
 
 }

@@ -25,17 +25,20 @@
     <script src="node_modules/fast-json-patch/dist/fast-json-patch.js"></script>
 
     <script>
-      var token = "<YOUR STREAMDATAIO TOKEN>";
-      var url = "http://stockmarket.streamdata.io/v2/prices";
-      var headers = [];
+      // targetUrl is the JSON API you wish to stream
+      // you can use this example API which simulates updating stocks prices from a financial market
+      var targetUrl = 'http://stockmarket.streamdata.io/v2/prices';
 
-      // If ever you wish to get the whole data instead of patches:
-      // headers = ["Accept: application/json"];
+      // subscriber key is the way Streamdata.io authenticates you as a valid user.
+      // you MUST provide a valid key for your request to go through.
+      var subscriberKey = '<YOUR SUBSCRIBER KEY>';
 
-      var eventSource = streamdataio.createEventSource(url, token, headers);
+      var subscriber = streamdataio.subscribeToUrl(targetUrl, subscriberKey);
+      subscriber.proxy = "http://localhost:9080";
+      // subscriber.proxy = new url.URL("http://localhost:9080");
       var result = [];
 
-      eventSource.onData(function(data) {
+      subscriber.onData(function(data) {
         // initialize your data with the initial snapshot
         console.log('--------------- on data ---------------');
         // console.log('data: %o', data);
@@ -58,14 +61,14 @@
       }).onError(function(error){
         // do whatever you need in case of error
         console.log('error: %o', error);
-        eventSource.close();
+        subscriber.close();
 
       }).onOpen(function(){
         // you can also add custom behavior when the stream is opened
         console.log('open');
       });
 
-      eventSource.open();
+      subscriber.open();
     </script>
   </body>
 </html>
