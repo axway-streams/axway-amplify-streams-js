@@ -10,10 +10,10 @@
     <h4>An application token is required for authentication. <a href="https://portal.streamdata.io/#/register" target="_blank">Sign Up</a> to get yours.</h4>
     <div class="form">
       <md-input-container class="input-full">
-        <input mdInput placeholder="URL" name="urlInput" [(value)]="url" disabled>
+        <input mdInput placeholder="URL" name="urlInput" [(ngModel)]="url" disabled>
       </md-input-container>
       <md-input-container class="input-full">
-        <input mdInput placeholder="Token" name="token" [(value)]="token" [disabled]="isConnected">
+        <input mdInput placeholder="Token" name="token" [(ngModel)]="token" [disabled]="isConnected">
       </md-input-container>
       <div class="actions">
         <div [hidden]="isConnected">
