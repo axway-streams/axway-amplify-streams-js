@@ -8,13 +8,28 @@ import {StockMarket} from '../shared/StockMarket';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   // Private
   private streamData: StreamData;
   // Public for bunding
+  dataSource;
   token: string = "<YOUR STREAMDATA TOKEN>";
+  
   url: string = "http://stockmarket.streamdata.io/v2/prices";
   result: StockMarket[];
+
+  columns: Array<any> = [
+    { name: 'title',   label: 'Title' },
+    { name: 'company', label: 'Company' },
+    { name: 'ticker',  label: 'Ticker' },
+    { name: 'source',  label: 'Source' },
+    { name: 'last',    label: 'Last' },
+    { name: 'dt',      label: 'Timestamp' },
+    { name: 'volume',  label: 'Volume' }
+  ];
+
+  displayedColumns: string[] = this.columns.map(column => column.name);
 
   public connect(): void {
 
