@@ -1,23 +1,37 @@
-# Streamdata.io Angular
+# Axway AMPLIFY Streams Angular
 
-This sample application shows how to use the streamdata.io Javascript SDK with Angular.
+This sample application shows how to use the Axway AMPLIFY Streams Javascript SDK with Angular.
 
-The streamdata.io JavaScript SDK allows the use of [streamdata.io](https://streamdata.io) to get data pushed from various sources and use them in your application.
+The Axway AMPLIFY Streams JavaScript SDK allows the use of [Axway AMPLIFY Streams](https://streamdata.io) to get data pushed from various sources and use them in your application.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.1.
 
-## Development server
+## Testing this project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run
 
-In your browser, you will need to enter your streamdata.io token. If you don't have one, you can get it for free at [streamdata.io portal](https://portal.streamdata.io).
+```bash
+$ npm install -g @angular/cli
+$ npm install
+$ ng serve 
+```
+
+Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+In your browser, you will need to enter your Axway AMPLIFY Streams token. If you don't have one, you can get it for free at [Axway AMPLIFY Streams portal](https://portal.streamdata.io).
 
 This demo uses fake market data emulated by our public API : http://stockmarket.streamdata.io/v2/prices
 
-## Further help
+## Contributing
 
-If you have any questions or feedback, feel free to ask: support@streamdata.io
+Please read [Contributing.md](https://github.com/axway-amplify-streams/Common/blob/master/Contributing.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-Enjoy!
+## Team
 
+![alt text][Axwaylogo] Axway Team
 
+[Axwaylogo]: https://github.com/axway-amplify-streams/Common/blob/master/img/AxwayLogoSmall.png  "Axway logo"
+
+## License
+
+[Apache License 2.0](https://github.com/axway-amplify-streams/Common/blob/master/LICENSE)
