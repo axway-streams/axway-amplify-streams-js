@@ -1,8 +1,8 @@
-# Streamdata.io Vue.js
+# Axway AMPLIFY Streams Vue.js
 
-This sample application shows how to use the streamdata.io Javascript SDK with Vue.js.
+This sample application shows how to use the Axway AMPLIFY Streams Javascript SDK with Vue.js.
 
-The streamdata.io JavaScript SDK allows the use of [streamdata.io](https://streamdata.io) to get data pushed from various sources and use them in your application.
+The Axway AMPLIFY Streams JavaScript SDK allows the use of [Axway AMPLIFY Streams](https://streamdata.io) to get data pushed from various sources and use them in your application.
 
 This project was create with [Vue CLI](https://github.com/vuejs/vue-cli) version 2.8.0
 
@@ -26,12 +26,20 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ## Run the demo
 
-After running the server with npm run dev, navigate to localhost:8080. You will need to enter your streamdata.io token. If you don't have one, you can get it for free at [streamdata.io portal](https://portal.streamdata.io).
+After running the server with npm run dev, navigate to localhost:8080. You will need to enter your Axway AMPLIFY Streams token. If you don't have one, you can get it for free at [Axway AMPLIFY Streams portal](https://portal.streamdata.io).
 
 This demo uses fake market data emulated by our public API : http://stockmarket.streamdata.io/v2/prices
 
-## Further help
+## Contributing
 
-If you have any questions or feedback, feel free to ask: support@streamdata.io
+Please read [Contributing.md](https://github.com/axway-amplify-streams/Common/blob/master/Contributing.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-Enjoy!
+## Team
+
+![alt text][Axwaylogo] Axway Team
+
+[Axwaylogo]: https://github.com/axway-amplify-streams/Common/blob/master/img/AxwayLogoSmall.png  "Axway logo"
+
+## License
+
+[Apache License 2.0](https://github.com/axway-amplify-streams/Common/blob/master/LICENSE)
