@@ -1,7 +1,7 @@
 # streamdataio-js
-<a href="http://streamdata.io" target="_blank">streamdata.io</a> Javascript SDK package containing SDK, <a href="https://axway-amplify-streams.github.io/axway-amplify-streams-js/" target="_blank">documentation</a> and sample applications.
+<a href="https://www.axway.com/en/products/api-management/manage-apis/amplify-streams" target="_blank">Streamdata.io by Axway (aka AMPLIFY Streams)</a> Javascript SDK package containing SDK, <a href="https://axway-amplify-streams.github.io/axway-amplify-streams-js/" target="_blank">documentation</a> and sample applications.
 
-The SDK allows the use of the streamdata.io proxy to get data pushed from various sources and to use them in your application.
+The SDK allows the use of the Streams SaaS proxy to get data pushed from various sources and to use them in your application.
 
 In this directory, you will find:
 - a minified version of the SDK for UI (streamdataio-web.min.js) and Node.js (streamdataio-node.min.js)
@@ -12,6 +12,6 @@ In this directory, you will find:
 
 To run a sample and understand how it works, clone the git repository, open the index.html of the sample in your browser (Chrome, Firefox, Safari) and browse the code!
 
-If you have any questions or feedback, feel free to ask: <a href="mailto://support@streamdata.io">support@streamdata.io</a>
+If you have any questions or feedback, feel free to ask: <a href="https://developer.axway.com/">https://developer.axway.com/</a>
 
 Enjoy!
