@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="header">
-      <img src="../assets/streamdataio.png" />
+      <img src="../assets/streamdataio-logo.svg" />
       <h3 class="header-title">Stock-Market demo with <img width="100"
                                                            src="../assets/vuejs.png" />
       </h3>

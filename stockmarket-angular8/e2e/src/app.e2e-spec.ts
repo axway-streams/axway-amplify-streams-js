@@ -7,8 +7,8 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display title message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to stockmarket-angular7!');
+    expect(page.getTitleText()).toContain('Stock Market demo');
   });
 });

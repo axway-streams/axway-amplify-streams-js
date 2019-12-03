@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {StreamData, StreamDataError, StreamDataIo} from 'streamdataio-js-sdk';
 import {applyPatch} from 'fast-json-patch';
 import {StockMarket} from '../shared/StockMarket';
+import {cloneDeep} from 'lodash';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +16,10 @@ export class AppComponent {
   // Public for bunding
   dataSource;
   token: string = "<YOUR STREAMDATA TOKEN>";
-  
+
   url: string = "http://stockmarket.streamdata.io/v2/prices";
   result: StockMarket[];
+  previousResult: StockMarket[];
 
   columns: Array<any> = [
     { name: 'title',   label: 'Title' },
@@ -45,37 +47,43 @@ export class AppComponent {
 
     this.streamData
       .onOpen(() => {
+        console.log('--------------- stream opened ---------------');
         // you can also add custom behavior when the stream is opened
-        console.log('open');
+        this.updatePreviousResult([]);
         this.result = [];
       })
       .onData((data: StockMarket[]) => {
+        console.log('--------------- snapshot received ---------------');
+        this.updatePreviousResult(data);
         // initialize your data with the initial snapshot
-        console.log('--------------- on data ---------------');
-        console.log('data: ' + data);
         this.result = data;
-        console.log('--------------- end on data ---------------');
-
       }, this)
       .onPatch((patch) => {
-        // update the data with the provided patch// update the data with the provided patch
-        console.log('--------------- on patch ---------------');
-        //  console.log('patch: %o', patch);
-        console.log('patch:');
-
+        console.log('--------------- patch received ---------------');
+        this.updatePreviousResult(this.result);
+        // update the data with the provided patch
         applyPatch(this.result, patch);
-
-        console.log('result patched:');
-        console.log('--------------- end on patch ---------------');
-
       }, this)
       .onError((error: StreamDataError) => {
+        console.log('--------------- error received ---------------');
         // do whatever you need in case of error
         console.log('error: %o', error);
         this.streamData.close();
+        console.log('--------------- stream closed ---------------');
       });
 
     this.streamData.open();
+  }
+
+  public updatePreviousResult(value: StockMarket[]): void {
+    // Store values to enable changes indicators
+    this.previousResult = cloneDeep(value);
+
+    setTimeout(() => {
+      // Forgot previous values to disable changes indicators
+      this.previousResult = this.result;
+    }, 1000);
+
   }
 
   public disconnect(): void {
