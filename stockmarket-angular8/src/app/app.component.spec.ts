@@ -47,6 +47,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('a').href).toContain('https://portal.streamatata.io/#/register');
+    expect(compiled.querySelector('a').href).toContain('https://portal.streamdata.io/#/register');
   });
 });
