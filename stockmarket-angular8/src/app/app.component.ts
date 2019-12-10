@@ -25,10 +25,10 @@ export class AppComponent {
     { name: 'title',   label: 'Title' },
     { name: 'company', label: 'Company' },
     { name: 'ticker',  label: 'Ticker' },
-    { name: 'source',  label: 'Source' },
     { name: 'last',    label: 'Last' },
-    { name: 'dt',      label: 'Timestamp' },
-    { name: 'volume',  label: 'Volume' }
+    { name: 'source',  label: 'Source' },
+    { name: 'volume',  label: 'Volume' },
+    { name: 'dt',      label: 'Timestamp' }
   ];
 
   displayedColumns: string[] = this.columns.map(column => column.name);
