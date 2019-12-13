@@ -51,7 +51,7 @@
     "karma-coverage-istanbul-reporter": "^1.4.3",
     "karma-jasmine": "^1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "npm": "^6.9.0",
+    "npm": "^6.13.4",
     "protractor": "~5.1.2",
     "sshpk": "^1.13.2",
     "ts-node": "~3.0.4",
