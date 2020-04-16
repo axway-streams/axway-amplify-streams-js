@@ -42,7 +42,7 @@
     "codelyzer": "~3.0.1",
     "fstream": "^1.0.12",
     "handlebars": "^4.0.14",
-    "https-proxy-agent": "^2.2.0",
+    "https-proxy-agent": "^2.2.3",
     "jasmine-core": "^2.99.1",
     "jasmine-spec-reporter": "^4.1.1",
     "karma": "~1.7.0",
